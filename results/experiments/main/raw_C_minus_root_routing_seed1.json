@@ -1,0 +1,5530 @@
+{
+ "98000001": {
+  "case_id": 1,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 29.909700000189332,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "CO_PAYMENT_APPLIED",
+   "HISTORICAL_OUTLIER",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "roots": [
+   "LOS_BILLING_MISMATCH"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "HISTORICAL_OUTLIER"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   20.074900000054186
+  ],
+  "tasks_created_total": 2
+ },
+ "98000002": {
+  "case_id": 2,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 20.002999999633175,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "RECONCILIATION_RESIDUAL",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "roots": [
+   "RECONCILIATION_RESIDUAL",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "RECONCILIATION_RESIDUAL",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 14,
+  "loop_stage_reused": 2,
+  "loop_unnecessary_executions": 3,
+  "loop_wall_ms": [
+   17.560799999955634,
+   15.295299999706913
+  ],
+  "tasks_created_total": 3
+ },
+ "98000003": {
+  "case_id": 3,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 19.80550000007497,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000004": {
+  "case_id": 4,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 23.955800000294403,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000005": {
+  "case_id": 5,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 22.217000000182452,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000006": {
+  "case_id": 6,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.89789999959612,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "INVALID_ICD_CODE",
+   "NOTE_DX_NOT_CODED",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "roots": [
+   "INVALID_ICD_CODE",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "INVALID_ICD_CODE",
+   "NOTE_DX_NOT_CODED",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "n_first_tasks": 4,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 15,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 4,
+  "loop_wall_ms": [
+   20.780400000148802,
+   19.038299999920127
+  ],
+  "tasks_created_total": 4
+ },
+ "98000007": {
+  "case_id": 7,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.609099999939644,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000008": {
+  "case_id": 8,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.734500000031403,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000009": {
+  "case_id": 9,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.562099999897328,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "CO_PAYMENT_APPLIED",
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "roots": [
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   18.83959999986473
+  ],
+  "tasks_created_total": 2
+ },
+ "98000010": {
+  "case_id": 10,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.8497000000134,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000011": {
+  "case_id": 11,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.46650000000227,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000012": {
+  "case_id": 12,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.934200000017881,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000013": {
+  "case_id": 13,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 16.71409999971729,
+  "first_executed": 11,
+  "findings": [
+   "LATE_FILING"
+  ],
+  "roots": [
+   "LATE_FILING"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_FILING"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   12.320900000304391
+  ],
+  "tasks_created_total": 1
+ },
+ "98000014": {
+  "case_id": 14,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 17.618700000184617,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "LOS_NOT_VERIFIABLE",
+   "MISSING_DISCHARGE_TIME",
+   "PREAUTH_LEAD_TIME_SHORT",
+   "RULE_NOT_EVALUABLE"
+  ],
+  "roots": [
+   "MISSING_DISCHARGE_TIME",
+   "PREAUTH_LEAD_TIME_SHORT"
+  ],
+  "consequences": [
+   "LOS_NOT_VERIFIABLE",
+   "RULE_NOT_EVALUABLE"
+  ],
+  "first_tasks": [
+   "LOS_NOT_VERIFIABLE",
+   "MISSING_DISCHARGE_TIME",
+   "PREAUTH_LEAD_TIME_SHORT",
+   "RULE_NOT_EVALUABLE"
+  ],
+  "n_first_tasks": 4,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 12,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 3,
+  "loop_wall_ms": [
+   28.814499999953114,
+   9.545899999920948
+  ],
+  "tasks_created_total": 4
+ },
+ "98000015": {
+  "case_id": 15,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 15.92080000000351,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.35990000016318
+  ],
+  "tasks_created_total": 1
+ },
+ "98000016": {
+  "case_id": 16,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.183200000185025,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000017": {
+  "case_id": 17,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.924200000223209,
+  "first_executed": 11,
+  "findings": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "BLOCKED",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.302300000195828
+  ],
+  "tasks_created_total": 1
+ },
+ "98000018": {
+  "case_id": 18,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 21.580399999947986,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000019": {
+  "case_id": 19,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 16.948800000136544,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000020": {
+  "case_id": 20,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 16.278199999760545,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000021": {
+  "case_id": 21,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.658199999757926,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "CO_PAYMENT_APPLIED",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000022": {
+  "case_id": 22,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.82899999998699,
+  "first_executed": 11,
+  "findings": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "BLOCKED",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.295299999645067
+  ],
+  "tasks_created_total": 1
+ },
+ "98000023": {
+  "case_id": 23,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 13.116999999965628,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.374799999728566
+  ],
+  "tasks_created_total": 1
+ },
+ "98000024": {
+  "case_id": 24,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 16.245599999820115,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "BLOCKED",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.23270000021148
+  ],
+  "tasks_created_total": 1
+ },
+ "98000025": {
+  "case_id": 25,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.54959999980565,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000026": {
+  "case_id": 26,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 16.682500000115397,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   10.066400000141584
+  ],
+  "tasks_created_total": 1
+ },
+ "98000027": {
+  "case_id": 27,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 24.303799999870535,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000028": {
+  "case_id": 28,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 19.05239999996411,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000029": {
+  "case_id": 29,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 24.254500000097323,
+  "first_executed": 11,
+  "findings": [
+   "READINESS_ITEM_INCOMPLETE",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "READINESS_ITEM_INCOMPLETE",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "READINESS_ITEM_INCOMPLETE",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "BLOCKED",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 5,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   14.64250000026368,
+   8.890699999938079
+  ],
+  "tasks_created_total": 2
+ },
+ "98000030": {
+  "case_id": 30,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 18.556399999852147,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "roots": [
+   "LOS_BILLING_MISMATCH"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   17.7347999997437
+  ],
+  "tasks_created_total": 2
+ },
+ "98000031": {
+  "case_id": 31,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 23.887199999990116,
+  "first_executed": 11,
+  "findings": [
+   "LATE_FILING"
+  ],
+  "roots": [
+   "LATE_FILING"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_FILING"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.00950000004741
+  ],
+  "tasks_created_total": 1
+ },
+ "98000032": {
+  "case_id": 32,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 23.844699999699515,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000033": {
+  "case_id": 33,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 17.28739999998652,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "HISTORICAL_OUTLIER",
+   "LATE_FILING",
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "LATE_FILING",
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "HISTORICAL_OUTLIER"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "LATE_FILING",
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 4,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 3,
+  "corrections": 1,
+  "decisions": 2,
+  "loop_runs": 3,
+  "loop_stage_executions": 12,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   19.09109999996872,
+   9.053799999946932,
+   11.446299999988696
+  ],
+  "tasks_created_total": 4
+ },
+ "98000034": {
+  "case_id": 34,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 21.097899999858782,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "CO_PAYMENT_APPLIED",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "roots": [
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   20.628499999929772
+  ],
+  "tasks_created_total": 2
+ },
+ "98000035": {
+  "case_id": 35,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 28.66459999995641,
+  "first_executed": 11,
+  "findings": [
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   10.80580000007103
+  ],
+  "tasks_created_total": 1
+ },
+ "98000036": {
+  "case_id": 36,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 19.82980000002499,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.702800000264688
+  ],
+  "tasks_created_total": 1
+ },
+ "98000037": {
+  "case_id": 37,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 18.32960000001549,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "CO_PAYMENT_APPLIED",
+   "DEDUCTIBLE_APPLIED"
+  ],
+  "roots": [
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   19.675900000038382
+  ],
+  "tasks_created_total": 2
+ },
+ "98000038": {
+  "case_id": 38,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 15.52899999978763,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   13.439999999718566
+  ],
+  "tasks_created_total": 1
+ },
+ "98000039": {
+  "case_id": 39,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.805600000021514,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000040": {
+  "case_id": 40,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.311800000290532,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000041": {
+  "case_id": 41,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.692600000013044,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000042": {
+  "case_id": 42,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.347000000270782,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   10.826799999904324
+  ],
+  "tasks_created_total": 1
+ },
+ "98000043": {
+  "case_id": 43,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 15.722699999969336,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   11.065400000006775
+  ],
+  "tasks_created_total": 1
+ },
+ "98000044": {
+  "case_id": 44,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.958300000216695,
+  "first_executed": 11,
+  "findings": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "BLOCKED",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.738199999901553
+  ],
+  "tasks_created_total": 1
+ },
+ "98000045": {
+  "case_id": 45,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.844400000129099,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000046": {
+  "case_id": 46,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 17.24380000041492,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "roots": [
+   "LOS_BILLING_MISMATCH"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   18.28190000014729
+  ],
+  "tasks_created_total": 2
+ },
+ "98000047": {
+  "case_id": 47,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 12.90289999997185,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.87300000022151
+  ],
+  "tasks_created_total": 1
+ },
+ "98000048": {
+  "case_id": 48,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 18.36219999995592,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILL_ARITHMETIC_ERROR",
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [
+   "BILL_ARITHMETIC_ERROR"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILL_ARITHMETIC_ERROR"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   18.474399999831803
+  ],
+  "tasks_created_total": 2
+ },
+ "98000049": {
+  "case_id": 49,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 13.80269999981465,
+  "first_executed": 11,
+  "findings": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "roots": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   17.450800000005984
+  ],
+  "tasks_created_total": 1
+ },
+ "98000050": {
+  "case_id": 50,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.133500000298227,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.664799999882234
+  ],
+  "tasks_created_total": 1
+ },
+ "98000051": {
+  "case_id": 51,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 24.942599999576487,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "roots": [
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   20.555399999921065
+  ],
+  "tasks_created_total": 2
+ },
+ "98000052": {
+  "case_id": 52,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 24.316900000030728,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.625600000163104
+  ],
+  "tasks_created_total": 1
+ },
+ "98000053": {
+  "case_id": 53,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 23.337399999945774,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.543400000235124
+  ],
+  "tasks_created_total": 1
+ },
+ "98000054": {
+  "case_id": 54,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.601800000240473,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000055": {
+  "case_id": 55,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 18.84089999975913,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000056": {
+  "case_id": 56,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.981800000034127,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000057": {
+  "case_id": 57,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 18.875600000228587,
+  "first_executed": 11,
+  "findings": [
+   "POLICY_INACTIVE",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "POLICY_INACTIVE",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "POLICY_INACTIVE",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "BLOCKED",
+  "review_actions": 2,
+  "corrections": 0,
+  "decisions": 2,
+  "loop_runs": 2,
+  "loop_stage_executions": 4,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   13.752300000305695,
+   9.149500000148691
+  ],
+  "tasks_created_total": 2
+ },
+ "98000058": {
+  "case_id": 58,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.191400000072463,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.433400000034453
+  ],
+  "tasks_created_total": 1
+ },
+ "98000059": {
+  "case_id": 59,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.726499999847874,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000060": {
+  "case_id": 60,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.792099999998754,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "DEDUCTIBLE_APPLIED",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000061": {
+  "case_id": 61,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 22.066999999879044,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "NOTE_DX_NOT_CODED",
+   "READINESS_ITEM_INCOMPLETE"
+  ],
+  "roots": [
+   "NOTE_DX_NOT_CODED",
+   "READINESS_ITEM_INCOMPLETE"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "NOTE_DX_NOT_CODED",
+   "READINESS_ITEM_INCOMPLETE"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 12,
+  "loop_stage_reused": 9,
+  "loop_unnecessary_executions": 3,
+  "loop_wall_ms": [
+   17.434699999739678,
+   17.81059999984791
+  ],
+  "tasks_created_total": 2
+ },
+ "98000062": {
+  "case_id": 62,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.519900000072084,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000063": {
+  "case_id": 63,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 17.753699999957462,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000064": {
+  "case_id": 64,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.93910000019605,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_CLAIM_DOCUMENT"
+  ],
+  "roots": [
+   "MISSING_CLAIM_DOCUMENT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_CLAIM_DOCUMENT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   16.475400000217633
+  ],
+  "tasks_created_total": 1
+ },
+ "98000065": {
+  "case_id": 65,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 16.575699999975768,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000066": {
+  "case_id": 66,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 20.15640000036001,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.815599999707047
+  ],
+  "tasks_created_total": 1
+ },
+ "98000067": {
+  "case_id": 67,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.415499999813619,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "CO_PAYMENT_APPLIED",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000068": {
+  "case_id": 68,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.042699999663455,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000069": {
+  "case_id": 69,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.346200000090903,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000070": {
+  "case_id": 70,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.065399999912188,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000071": {
+  "case_id": 71,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.296299999889015,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000072": {
+  "case_id": 72,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 40.57460000012725,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   19.79830000027505
+  ],
+  "tasks_created_total": 2
+ },
+ "98000073": {
+  "case_id": 73,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 20.779699999820878,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LATE_FILING",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "roots": [
+   "LATE_FILING",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LATE_FILING",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 10,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   16.7449000000488,
+   8.98060000008627
+  ],
+  "tasks_created_total": 3
+ },
+ "98000074": {
+  "case_id": 74,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 19.586700000218116,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000075": {
+  "case_id": 75,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.1235000000961,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "ROOM_RENT_LIMIT_EXCEEDED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000076": {
+  "case_id": 76,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.931000000411586,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000077": {
+  "case_id": 77,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 19.623499999852356,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000078": {
+  "case_id": 78,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 16.143899999860878,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "roots": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   23.221299999931944
+  ],
+  "tasks_created_total": 1
+ },
+ "98000079": {
+  "case_id": 79,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 20.84969999987152,
+  "first_executed": 11,
+  "findings": [
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.154300000114745
+  ],
+  "tasks_created_total": 1
+ },
+ "98000080": {
+  "case_id": 80,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 24.808000000120956,
+  "first_executed": 11,
+  "findings": [
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   10.02040000003035
+  ],
+  "tasks_created_total": 1
+ },
+ "98000081": {
+  "case_id": 81,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 15.298799999982293,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "DEDUCTIBLE_APPLIED",
+   "LATE_FILING"
+  ],
+  "roots": [
+   "LATE_FILING"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_FILING"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.361199999602832
+  ],
+  "tasks_created_total": 1
+ },
+ "98000082": {
+  "case_id": 82,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 18.221600000288163,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "roots": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   14.974000000165688
+  ],
+  "tasks_created_total": 1
+ },
+ "98000083": {
+  "case_id": 83,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.675600000122358,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "roots": [
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "UNIT_PRICE_ABOVE_TARIFF"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   17.316200000095705
+  ],
+  "tasks_created_total": 2
+ },
+ "98000084": {
+  "case_id": 84,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.202300000102696,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000085": {
+  "case_id": 85,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 19.132700000227487,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "CO_PAYMENT_APPLIED",
+   "DEDUCTIBLE_APPLIED",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000086": {
+  "case_id": 86,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.863799999853654,
+  "first_executed": 11,
+  "findings": [
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 5,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   20.744700000250305,
+   8.693100000073173
+  ],
+  "tasks_created_total": 2
+ },
+ "98000087": {
+  "case_id": 87,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.478899999630812,
+  "first_executed": 11,
+  "findings": [
+   "LATE_FILING",
+   "ROOM_RENT_LIMIT_EXCEEDED"
+  ],
+  "roots": [
+   "LATE_FILING"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_FILING"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.30160000032265
+  ],
+  "tasks_created_total": 1
+ },
+ "98000088": {
+  "case_id": 88,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 13.620000000173604,
+  "first_executed": 11,
+  "findings": [
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.28449999971781
+  ],
+  "tasks_created_total": 1
+ },
+ "98000089": {
+  "case_id": 89,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 13.504500000180997,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.460600000034901
+  ],
+  "tasks_created_total": 1
+ },
+ "98000090": {
+  "case_id": 90,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 15.348299999914161,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "roots": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   27.984899999864865
+  ],
+  "tasks_created_total": 1
+ },
+ "98000091": {
+  "case_id": 91,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.219800000115356,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000092": {
+  "case_id": 92,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.120300000035058,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "LOS_BILLING_MISMATCH",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 10,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   18.171800000345684,
+   8.996300000035262
+  ],
+  "tasks_created_total": 3
+ },
+ "98000093": {
+  "case_id": 93,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.998099999957049,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000094": {
+  "case_id": 94,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 17.516800000066723,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000095": {
+  "case_id": 95,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 16.151299999819457,
+  "first_executed": 11,
+  "findings": [
+   "GENDER_DX_CONFLICT",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "roots": [
+   "GENDER_DX_CONFLICT",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "GENDER_DX_CONFLICT",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 14,
+  "loop_stage_reused": 8,
+  "loop_unnecessary_executions": 4,
+  "loop_wall_ms": [
+   18.20579999957772,
+   17.79179999994085
+  ],
+  "tasks_created_total": 2
+ },
+ "98000096": {
+  "case_id": 96,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.847800000097777,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000097": {
+  "case_id": 97,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.089200000194978,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000098": {
+  "case_id": 98,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.93240000015794,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000099": {
+  "case_id": 99,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.70149999977366,
+  "first_executed": 11,
+  "findings": [
+   "RECONCILIATION_RESIDUAL"
+  ],
+  "roots": [
+   "RECONCILIATION_RESIDUAL"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RECONCILIATION_RESIDUAL"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 2,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   15.25660000015705
+  ],
+  "tasks_created_total": 1
+ },
+ "98000100": {
+  "case_id": 100,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.251000000058411,
+  "first_executed": 11,
+  "findings": [
+   "PREAUTH_LEAD_TIME_SHORT"
+  ],
+  "roots": [
+   "PREAUTH_LEAD_TIME_SHORT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "PREAUTH_LEAD_TIME_SHORT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   10.429999999814754
+  ],
+  "tasks_created_total": 1
+ },
+ "98000101": {
+  "case_id": 101,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.87619999963863,
+  "first_executed": 11,
+  "findings": [
+   "INVALID_ICD_CODE",
+   "NOTE_DX_NOT_CODED",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "INVALID_ICD_CODE",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "first_tasks": [
+   "INVALID_ICD_CODE",
+   "NOTE_DX_NOT_CODED",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 9,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 3,
+  "loop_wall_ms": [
+   18.455100000210223,
+   9.018100000048435
+  ],
+  "tasks_created_total": 3
+ },
+ "98000102": {
+  "case_id": 102,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.534299999970244,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000103": {
+  "case_id": 103,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 16.93719999957466,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000104": {
+  "case_id": 104,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 18.91029999978855,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILL_ARITHMETIC_ERROR",
+   "CO_PAYMENT_APPLIED",
+   "DEDUCTIBLE_APPLIED",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "roots": [
+   "BILL_ARITHMETIC_ERROR",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILL_ARITHMETIC_ERROR",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 16,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   19.94360000026063,
+   19.869899999775953
+  ],
+  "tasks_created_total": 3
+ },
+ "98000105": {
+  "case_id": 105,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.484599999832426,
+  "first_executed": 11,
+  "findings": [
+   "ROOM_RENT_LIMIT_EXCEEDED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000106": {
+  "case_id": 106,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 13.209299999743962,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.340100000168604
+  ],
+  "tasks_created_total": 1
+ },
+ "98000107": {
+  "case_id": 107,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.100200000029872,
+  "first_executed": 11,
+  "findings": [
+   "DEDUCTIBLE_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000108": {
+  "case_id": 108,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 16.1471999999776,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000109": {
+  "case_id": 109,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.417500000035943,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "roots": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   15.581699999984266
+  ],
+  "tasks_created_total": 1
+ },
+ "98000110": {
+  "case_id": 110,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 19.694300000082876,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000111": {
+  "case_id": 111,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 22.34039999984816,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   10.896100000081788
+  ],
+  "tasks_created_total": 1
+ },
+ "98000112": {
+  "case_id": 112,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 16.28519999985656,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000113": {
+  "case_id": 113,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 17.048199999862845,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILL_ARITHMETIC_ERROR",
+   "MISSING_KYC_DOCUMENT",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "BILL_ARITHMETIC_ERROR",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILL_ARITHMETIC_ERROR",
+   "MISSING_KYC_DOCUMENT",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 4,
+  "final_status": "BLOCKED",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 10,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   18.106099999840808,
+   14.659400000255118
+  ],
+  "tasks_created_total": 4
+ },
+ "98000114": {
+  "case_id": 114,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.523499999791966,
+  "first_executed": 11,
+  "findings": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "BLOCKED",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.700100000169186
+  ],
+  "tasks_created_total": 1
+ },
+ "98000115": {
+  "case_id": 115,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 16.26940000005561,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "CO_PAYMENT_APPLIED",
+   "DUPLICATE_BILL_ITEM",
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "DUPLICATE_BILL_ITEM",
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM",
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 10,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   18.928500000129134,
+   10.76290000037261
+  ],
+  "tasks_created_total": 3
+ },
+ "98000116": {
+  "case_id": 116,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.525200000003679,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000117": {
+  "case_id": 117,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 15.987499999937427,
+  "first_executed": 11,
+  "findings": [
+   "CODED_DX_NOT_IN_NOTE",
+   "CO_PAYMENT_APPLIED",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "roots": [
+   "CODED_DX_NOT_IN_NOTE",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "CODED_DX_NOT_IN_NOTE",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 12,
+  "loop_stage_reused": 10,
+  "loop_unnecessary_executions": 3,
+  "loop_wall_ms": [
+   16.81369999960225,
+   18.455299999914132
+  ],
+  "tasks_created_total": 2
+ },
+ "98000118": {
+  "case_id": 118,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 11.753599999792641,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000119": {
+  "case_id": 119,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.183999999862863,
+  "first_executed": 11,
+  "findings": [
+   "POLICY_INACTIVE",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "POLICY_INACTIVE",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "POLICY_INACTIVE",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "BLOCKED",
+  "review_actions": 2,
+  "corrections": 0,
+  "decisions": 2,
+  "loop_runs": 2,
+  "loop_stage_executions": 4,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.18180000007851,
+   9.793400000035035
+  ],
+  "tasks_created_total": 2
+ },
+ "98000120": {
+  "case_id": 120,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.780300000235002,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000121": {
+  "case_id": 121,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.885999999682099,
+  "first_executed": 11,
+  "findings": [
+   "INVALID_ICD_CODE",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "roots": [
+   "INVALID_ICD_CODE",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "consequences": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "first_tasks": [
+   "INVALID_ICD_CODE",
+   "NOTE_DX_NOT_CODED",
+   "NOTE_DX_NOT_CODED"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 14,
+  "loop_stage_reused": 8,
+  "loop_unnecessary_executions": 5,
+  "loop_wall_ms": [
+   17.15199999989636,
+   16.515199999957986
+  ],
+  "tasks_created_total": 3
+ },
+ "98000122": {
+  "case_id": 122,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 16.526899999917077,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.2755999999099
+  ],
+  "tasks_created_total": 1
+ },
+ "98000123": {
+  "case_id": 123,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 16.835700000228826,
+  "first_executed": 11,
+  "findings": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "BLOCKED",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.64369999999326
+  ],
+  "tasks_created_total": 1
+ },
+ "98000124": {
+  "case_id": 124,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.951500000028318,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000125": {
+  "case_id": 125,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 18.6745000000883,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000126": {
+  "case_id": 126,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.405800000280578,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "PROCEDURE_DATE_OUT_OF_RANGE"
+  ],
+  "roots": [
+   "PROCEDURE_DATE_OUT_OF_RANGE"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "PROCEDURE_DATE_OUT_OF_RANGE"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 5,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   20.34670000011829
+  ],
+  "tasks_created_total": 1
+ },
+ "98000127": {
+  "case_id": 127,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.944299999820942,
+  "first_executed": 11,
+  "findings": [
+   "ROOM_RENT_LIMIT_EXCEEDED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000128": {
+  "case_id": 128,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 16.34269999976823,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "CO_PAYMENT_APPLIED",
+   "DUPLICATE_BILL_ITEM",
+   "MISSING_CLAIM_DOCUMENT",
+   "ROOM_RENT_LIMIT_EXCEEDED"
+  ],
+  "roots": [
+   "DUPLICATE_BILL_ITEM",
+   "MISSING_CLAIM_DOCUMENT"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM",
+   "MISSING_CLAIM_DOCUMENT"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 14,
+  "loop_stage_reused": 5,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   19.14600000009159,
+   18.955999999889173
+  ],
+  "tasks_created_total": 3
+ },
+ "98000129": {
+  "case_id": 129,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.793699999700038,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "EXCLUSION_KEYWORD_MATCH",
+   "INSUFFICIENT_PEERS",
+   "LOS_BILLING_MISMATCH",
+   "RECONCILIATION_RESIDUAL"
+  ],
+  "roots": [
+   "EXCLUSION_KEYWORD_MATCH",
+   "LOS_BILLING_MISMATCH",
+   "RECONCILIATION_RESIDUAL"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "EXCLUSION_KEYWORD_MATCH",
+   "LOS_BILLING_MISMATCH",
+   "RECONCILIATION_RESIDUAL"
+  ],
+  "n_first_tasks": 4,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 3,
+  "corrections": 2,
+  "decisions": 1,
+  "loop_runs": 3,
+  "loop_stage_executions": 16,
+  "loop_stage_reused": 2,
+  "loop_unnecessary_executions": 4,
+  "loop_wall_ms": [
+   19.419200000356795,
+   15.499000000090746,
+   8.434400000169262
+  ],
+  "tasks_created_total": 4
+ },
+ "98000130": {
+  "case_id": 130,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 15.101399999821297,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.5002999999233
+  ],
+  "tasks_created_total": 1
+ },
+ "98000131": {
+  "case_id": 131,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 12.947100000019418,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.501300000010815
+  ],
+  "tasks_created_total": 1
+ },
+ "98000132": {
+  "case_id": 132,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.535799999724986,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000133": {
+  "case_id": 133,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.897399999677873,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000134": {
+  "case_id": 134,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.459600000260252,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "roots": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   33.794099999795435
+  ],
+  "tasks_created_total": 1
+ },
+ "98000135": {
+  "case_id": 135,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.594999999895663,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000136": {
+  "case_id": 136,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.550499999837484,
+  "first_executed": 11,
+  "findings": [
+   "ROOM_RENT_LIMIT_EXCEEDED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000137": {
+  "case_id": 137,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.548399999966932,
+  "first_executed": 11,
+  "findings": [
+   "ROOM_RENT_LIMIT_EXCEEDED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000138": {
+  "case_id": 138,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.250999999650958,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000139": {
+  "case_id": 139,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 16.49570000017775,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   11.904599999979837
+  ],
+  "tasks_created_total": 1
+ },
+ "98000140": {
+  "case_id": 140,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 17.75580000003174,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "CO_PAYMENT_APPLIED",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000141": {
+  "case_id": 141,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 18.256099999689468,
+  "first_executed": 11,
+  "findings": [
+   "INSUFFICIENT_PEERS",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   13.168299999961164
+  ],
+  "tasks_created_total": 1
+ },
+ "98000142": {
+  "case_id": 142,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.680699999848002,
+  "first_executed": 11,
+  "findings": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "BLOCKED",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   12.163100000179838
+  ],
+  "tasks_created_total": 1
+ },
+ "98000143": {
+  "case_id": 143,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.150300000233983,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000144": {
+  "case_id": 144,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.859799999612733,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.03569999991305
+  ],
+  "tasks_created_total": 1
+ },
+ "98000145": {
+  "case_id": 145,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 17.554099999870232,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000146": {
+  "case_id": 146,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.945099999797094,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000147": {
+  "case_id": 147,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.591599999926984,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000148": {
+  "case_id": 148,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.686099999835278,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "PROCEDURE_DATE_OUT_OF_RANGE"
+  ],
+  "roots": [
+   "PROCEDURE_DATE_OUT_OF_RANGE"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "PROCEDURE_DATE_OUT_OF_RANGE"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 5,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   17.377099999976053
+  ],
+  "tasks_created_total": 1
+ },
+ "98000149": {
+  "case_id": 149,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 16.302300000006653,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "LATE_FILING"
+  ],
+  "roots": [
+   "LATE_FILING"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_FILING"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.892199999991135
+  ],
+  "tasks_created_total": 1
+ },
+ "98000150": {
+  "case_id": 150,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.28129999956218,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILL_ARITHMETIC_ERROR"
+  ],
+  "roots": [
+   "BILL_ARITHMETIC_ERROR"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILL_ARITHMETIC_ERROR"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   18.87299999998504
+  ],
+  "tasks_created_total": 2
+ },
+ "98000151": {
+  "case_id": 151,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.813399999889953,
+  "first_executed": 11,
+  "findings": [
+   "INVALID_ICD_CODE"
+  ],
+  "roots": [
+   "INVALID_ICD_CODE"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "INVALID_ICD_CODE"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 3,
+  "loop_wall_ms": [
+   16.875299999810522
+  ],
+  "tasks_created_total": 1
+ },
+ "98000152": {
+  "case_id": 152,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.901900000040769,
+  "first_executed": 11,
+  "findings": [
+   "LOS_NOT_VERIFIABLE",
+   "MISSING_DISCHARGE_TIME",
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "MISSING_DISCHARGE_TIME",
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [
+   "LOS_NOT_VERIFIABLE"
+  ],
+  "first_tasks": [
+   "LOS_NOT_VERIFIABLE",
+   "MISSING_DISCHARGE_TIME",
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 4,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 3,
+  "corrections": 2,
+  "decisions": 1,
+  "loop_runs": 3,
+  "loop_stage_executions": 17,
+  "loop_stage_reused": 6,
+  "loop_unnecessary_executions": 5,
+  "loop_wall_ms": [
+   23.308300000280724,
+   14.202299999851675,
+   8.304700000280718
+  ],
+  "tasks_created_total": 4
+ },
+ "98000153": {
+  "case_id": 153,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 17.478199999914068,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000154": {
+  "case_id": 154,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.249500000256376,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000155": {
+  "case_id": 155,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 17.80170000029102,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000156": {
+  "case_id": 156,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 18.55550000027506,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "HISTORICAL_OUTLIER"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   21.12729999998919
+  ],
+  "tasks_created_total": 2
+ },
+ "98000157": {
+  "case_id": 157,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.910800000303425,
+  "first_executed": 11,
+  "findings": [
+   "GENDER_DX_CONFLICT"
+  ],
+  "roots": [
+   "GENDER_DX_CONFLICT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "GENDER_DX_CONFLICT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   17.83930000010514
+  ],
+  "tasks_created_total": 1
+ },
+ "98000158": {
+  "case_id": 158,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.18580000017755,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000159": {
+  "case_id": 159,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 19.94719999993322,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM",
+   "LATE_FILING",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "roots": [
+   "DUPLICATE_BILL_ITEM",
+   "LATE_FILING",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM",
+   "LATE_FILING",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "n_first_tasks": 4,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 3,
+  "corrections": 2,
+  "decisions": 1,
+  "loop_runs": 3,
+  "loop_stage_executions": 18,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   27.12389999987863,
+   16.63479999979245,
+   8.1198999996559
+  ],
+  "tasks_created_total": 4
+ },
+ "98000160": {
+  "case_id": 160,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 16.196900000068126,
+  "first_executed": 11,
+  "findings": [
+   "CODED_DX_NOT_IN_NOTE",
+   "INSUFFICIENT_PEERS",
+   "NOTE_DX_NOT_CODED",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "CODED_DX_NOT_IN_NOTE",
+   "NOTE_DX_NOT_CODED",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "CODED_DX_NOT_IN_NOTE",
+   "NOTE_DX_NOT_CODED",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 3,
+  "corrections": 2,
+  "decisions": 1,
+  "loop_runs": 3,
+  "loop_stage_executions": 14,
+  "loop_stage_reused": 10,
+  "loop_unnecessary_executions": 3,
+  "loop_wall_ms": [
+   16.75710000017716,
+   28.974600000310602,
+   11.303699999643868
+  ],
+  "tasks_created_total": 3
+ },
+ "98000161": {
+  "case_id": 161,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 16.076499999599037,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.707200000117155
+  ],
+  "tasks_created_total": 1
+ },
+ "98000162": {
+  "case_id": 162,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.888299999915034,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "LOS_BILLING_MISMATCH",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 10,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   18.700799999805895,
+   10.466100000030565
+  ],
+  "tasks_created_total": 3
+ },
+ "98000163": {
+  "case_id": 163,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.699499999598629,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000164": {
+  "case_id": 164,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.836799999760842,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000165": {
+  "case_id": 165,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 16.671500000029482,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000166": {
+  "case_id": 166,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.958599999976286,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "DEDUCTIBLE_APPLIED",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000167": {
+  "case_id": 167,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.751500000125816,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000168": {
+  "case_id": 168,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 15.7110999998622,
+  "first_executed": 11,
+  "findings": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "roots": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   20.266999999876134
+  ],
+  "tasks_created_total": 1
+ },
+ "98000169": {
+  "case_id": 169,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 13.745100000051025,
+  "first_executed": 11,
+  "findings": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "roots": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   17.77009999977963
+  ],
+  "tasks_created_total": 1
+ },
+ "98000170": {
+  "case_id": 170,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.823700000055396,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000171": {
+  "case_id": 171,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.686100000039005,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "roots": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   15.964800000347168
+  ],
+  "tasks_created_total": 1
+ },
+ "98000172": {
+  "case_id": 172,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.914699999986624,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "roots": [
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   20.078800000192132
+  ],
+  "tasks_created_total": 2
+ },
+ "98000173": {
+  "case_id": 173,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.082899999924848,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "roots": [
+   "LOS_BILLING_MISMATCH"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   18.53640000035739
+  ],
+  "tasks_created_total": 2
+ },
+ "98000174": {
+  "case_id": 174,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 16.462999999930616,
+  "first_executed": 11,
+  "findings": [
+   "CODED_DX_NOT_IN_NOTE",
+   "LOS_NOT_VERIFIABLE",
+   "MISSING_DISCHARGE_TIME",
+   "RULE_NOT_EVALUABLE"
+  ],
+  "roots": [
+   "CODED_DX_NOT_IN_NOTE",
+   "MISSING_DISCHARGE_TIME"
+  ],
+  "consequences": [
+   "LOS_NOT_VERIFIABLE",
+   "RULE_NOT_EVALUABLE"
+  ],
+  "first_tasks": [
+   "CODED_DX_NOT_IN_NOTE",
+   "LOS_NOT_VERIFIABLE",
+   "MISSING_DISCHARGE_TIME",
+   "RULE_NOT_EVALUABLE"
+  ],
+  "n_first_tasks": 4,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 15,
+  "loop_stage_reused": 7,
+  "loop_unnecessary_executions": 4,
+  "loop_wall_ms": [
+   23.823500000162312,
+   16.66509999995469
+  ],
+  "tasks_created_total": 4
+ },
+ "98000175": {
+  "case_id": 175,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.074100000016188,
+  "first_executed": 11,
+  "findings": [
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "READINESS_ITEM_INCOMPLETE",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 5,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   15.814099999715836,
+   8.50639999998748
+  ],
+  "tasks_created_total": 2
+ },
+ "98000176": {
+  "case_id": 176,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.500499999736348,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000177": {
+  "case_id": 177,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 15.274999999746797,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "NOTE_DX_NOT_CODED",
+   "READINESS_ITEM_INCOMPLETE"
+  ],
+  "roots": [
+   "NOTE_DX_NOT_CODED",
+   "READINESS_ITEM_INCOMPLETE"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "NOTE_DX_NOT_CODED",
+   "READINESS_ITEM_INCOMPLETE"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 2,
+  "decisions": 0,
+  "loop_runs": 2,
+  "loop_stage_executions": 12,
+  "loop_stage_reused": 9,
+  "loop_unnecessary_executions": 3,
+  "loop_wall_ms": [
+   14.322999999876629,
+   19.065800000134914
+  ],
+  "tasks_created_total": 2
+ },
+ "98000178": {
+  "case_id": 178,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.067800000248099,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "roots": [
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   17.389099999945756
+  ],
+  "tasks_created_total": 2
+ },
+ "98000179": {
+  "case_id": 179,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 25.521699999899283,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 10,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   18.041399999674468,
+   8.351799999672949
+  ],
+  "tasks_created_total": 3
+ },
+ "98000180": {
+  "case_id": 180,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.529300000096555,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000181": {
+  "case_id": 181,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 19.461800000044605,
+  "first_executed": 11,
+  "findings": [
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.59149999996589
+  ],
+  "tasks_created_total": 1
+ },
+ "98000182": {
+  "case_id": 182,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 18.751399999928253,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "PREAUTH_LEAD_TIME_SHORT"
+  ],
+  "roots": [
+   "PREAUTH_LEAD_TIME_SHORT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "PREAUTH_LEAD_TIME_SHORT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   9.851799999978539
+  ],
+  "tasks_created_total": 1
+ },
+ "98000183": {
+  "case_id": 183,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 17.45019999998476,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_KYC_DOCUMENT",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "roots": [
+   "MISSING_KYC_DOCUMENT",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_KYC_DOCUMENT",
+   "WAITING_PERIOD_NOT_MET"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "BLOCKED",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   9.151300000212359,
+   18.376699999862467
+  ],
+  "tasks_created_total": 2
+ },
+ "98000184": {
+  "case_id": 184,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.2996999998104,
+  "first_executed": 11,
+  "findings": [
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   10.557900000094378
+  ],
+  "tasks_created_total": 1
+ },
+ "98000185": {
+  "case_id": 185,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 16.77239999980884,
+  "first_executed": 11,
+  "findings": [
+   "CONFLICTING_ASSESSMENT",
+   "HISTORICAL_OUTLIER"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000186": {
+  "case_id": 186,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 15.392499999961728,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000187": {
+  "case_id": 187,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 14.597100000173668,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "HISTORICAL_OUTLIER",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "roots": [
+   "LOS_BILLING_MISMATCH"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "HISTORICAL_OUTLIER"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "LOS_BILLING_MISMATCH"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   18.794699999943987
+  ],
+  "tasks_created_total": 2
+ },
+ "98000188": {
+  "case_id": 188,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 47.79699999971854,
+  "first_executed": 11,
+  "findings": [
+   "GENDER_DX_CONFLICT"
+  ],
+  "roots": [
+   "GENDER_DX_CONFLICT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "GENDER_DX_CONFLICT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   22.959800000080577
+  ],
+  "tasks_created_total": 1
+ },
+ "98000189": {
+  "case_id": 189,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 16.171100000065053,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "CO_PAYMENT_APPLIED",
+   "DUPLICATE_BILL_ITEM",
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "DUPLICATE_BILL_ITEM",
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "DUPLICATE_BILL_ITEM",
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 3,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 10,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   19.040700000005018,
+   8.671900000081223
+  ],
+  "tasks_created_total": 3
+ },
+ "98000190": {
+  "case_id": 190,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.62870000023031,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED",
+   "LATE_NOTIFICATION"
+  ],
+  "roots": [
+   "LATE_NOTIFICATION"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_NOTIFICATION"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   19.23399999986941
+  ],
+  "tasks_created_total": 1
+ },
+ "98000191": {
+  "case_id": 191,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.216299999839975,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000192": {
+  "case_id": 192,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 20.092600000225502,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_CLAIM_DOCUMENT",
+   "RULES_QUARANTINED"
+  ],
+  "roots": [
+   "MISSING_CLAIM_DOCUMENT",
+   "RULES_QUARANTINED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_CLAIM_DOCUMENT",
+   "RULES_QUARANTINED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 2,
+  "corrections": 1,
+  "decisions": 1,
+  "loop_runs": 2,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   23.840800000016316,
+   15.624300000126823
+  ],
+  "tasks_created_total": 2
+ },
+ "98000193": {
+  "case_id": 193,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 17.74569999997766,
+  "first_executed": 11,
+  "findings": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "roots": [
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "consequences": [
+   "ADJUDICATION_ON_DISPUTED_BILL"
+  ],
+  "first_tasks": [
+   "ADJUDICATION_ON_DISPUTED_BILL",
+   "BILLED_PROCEDURE_NOT_DOCUMENTED"
+  ],
+  "n_first_tasks": 2,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 8,
+  "loop_stage_reused": 1,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   18.419600000015635
+  ],
+  "tasks_created_total": 2
+ },
+ "98000194": {
+  "case_id": 194,
+  "first_status": "BLOCKED",
+  "first_wall_ms": 13.404799999989336,
+  "first_executed": 11,
+  "findings": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "roots": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "MISSING_KYC_DOCUMENT"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 6,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   16.576600000007602
+  ],
+  "tasks_created_total": 1
+ },
+ "98000195": {
+  "case_id": 195,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 13.619000000289816,
+  "first_executed": 11,
+  "findings": [
+   "LATE_FILING"
+  ],
+  "roots": [
+   "LATE_FILING"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "LATE_FILING"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 0,
+  "decisions": 1,
+  "loop_runs": 1,
+  "loop_stage_executions": 2,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [
+   8.798600000318402
+  ],
+  "tasks_created_total": 1
+ },
+ "98000196": {
+  "case_id": 196,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 13.969799999813404,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000197": {
+  "case_id": 197,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 12.712599999758822,
+  "first_executed": 11,
+  "findings": [],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000198": {
+  "case_id": 198,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 14.277700000093319,
+  "first_executed": 11,
+  "findings": [
+   "CODED_DX_NOT_IN_NOTE",
+   "ROOM_RENT_LIMIT_EXCEEDED"
+  ],
+  "roots": [
+   "CODED_DX_NOT_IN_NOTE"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "CODED_DX_NOT_IN_NOTE"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 5,
+  "loop_stage_reused": 6,
+  "loop_unnecessary_executions": 1,
+  "loop_wall_ms": [
+   15.26530000001003
+  ],
+  "tasks_created_total": 1
+ },
+ "98000199": {
+  "case_id": 199,
+  "first_status": "PREPARATION_COMPLETE",
+  "first_wall_ms": 14.619300000049407,
+  "first_executed": 11,
+  "findings": [
+   "CO_PAYMENT_APPLIED"
+  ],
+  "roots": [],
+  "consequences": [],
+  "first_tasks": [],
+  "n_first_tasks": 0,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 0,
+  "corrections": 0,
+  "decisions": 0,
+  "loop_runs": 0,
+  "loop_stage_executions": 0,
+  "loop_stage_reused": 0,
+  "loop_unnecessary_executions": 0,
+  "loop_wall_ms": [],
+  "tasks_created_total": 0
+ },
+ "98000200": {
+  "case_id": 200,
+  "first_status": "NEEDS_REVIEW",
+  "first_wall_ms": 13.315900000179681,
+  "first_executed": 11,
+  "findings": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "roots": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "consequences": [],
+  "first_tasks": [
+   "NOTE_DX_NOT_CODED"
+  ],
+  "n_first_tasks": 1,
+  "final_status": "PREPARATION_COMPLETE",
+  "review_actions": 1,
+  "corrections": 1,
+  "decisions": 0,
+  "loop_runs": 1,
+  "loop_stage_executions": 7,
+  "loop_stage_reused": 4,
+  "loop_unnecessary_executions": 2,
+  "loop_wall_ms": [
+   17.079700000067533
+  ],
+  "tasks_created_total": 1
+ }
+}

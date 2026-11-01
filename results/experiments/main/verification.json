@@ -1,0 +1,692 @@
+{
+  "directory": "results/experiments/main",
+  "seeds": [
+    "1",
+    "2",
+    "3"
+  ],
+  "arms": [
+    "B_sequential_full",
+    "C_minus_root_routing",
+    "C_minus_targeted",
+    "C_parallel_targeted"
+  ],
+  "base_db_sha256_per_seed": {
+    "1": "ec751991ff878645fca1a7494f90f68eeb226522f03023d48c28378b2d493e54",
+    "2": "8e9f8db6288a199eea8541fbb35570c1e2386499e22ccdd68ccade2fd85aa519",
+    "3": "157fca6d3ed36f2e623cb94188d6df31c3eae4f11dc1f4677fdb58fa05354bcb"
+  },
+  "mismatches": [],
+  "completeness_problems": [],
+  "loop_outcomes": {
+    "B_sequential_full/seed1": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "B_sequential_full/seed2": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "B_sequential_full/seed3": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed1": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed2": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed3": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_targeted/seed1": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_targeted/seed2": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_targeted/seed3": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed1": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed2": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed3": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    }
+  },
+  "documented_source_anomalies": {
+    "registry": "data/mimic_iv/known_source_anomalies.json",
+    "source_checks": {},
+    "expected_outcomes": []
+  },
+  "cohort_equivalence": {
+    "1": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    },
+    "2": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    },
+    "3": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    }
+  },
+  "root_blocker_errors": [
+    {
+      "seed": "3",
+      "hadm_id": "98000040",
+      "injected": [
+        "LOS_BILLING_MISMATCH"
+      ],
+      "roots": [
+        "LOS_BILLING_MISMATCH",
+        "MISSING_KYC_DOCUMENT"
+      ],
+      "missed_entirely": [],
+      "found_only_as_consequence": [],
+      "spurious_roots": [
+        "MISSING_KYC_DOCUMENT"
+      ],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "3",
+      "hadm_id": "98000070",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "roots": [],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "PREPARATION_COMPLETE"
+    }
+  ],
+  "recomputed": {
+    "B_sequential_full": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          1628,
+          1881,
+          1870
+        ],
+        "mean": 1793,
+        "sd": 143.0
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          1034,
+          1247,
+          1208
+        ],
+        "mean": 1163,
+        "sd": 113.4063
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          148,
+          171,
+          171
+        ],
+        "mean": 163.3333,
+        "sd": 13.2791
+      },
+      "review_actions": {
+        "per_seed": [
+          148,
+          171,
+          170
+        ],
+        "mean": 163,
+        "sd": 13.0
+      },
+      "issues": {
+        "per_seed": [
+          115,
+          133,
+          133
+        ],
+        "mean": 127,
+        "sd": 10.3923
+      },
+      "covered": {
+        "per_seed": [
+          115,
+          133,
+          132
+        ],
+        "mean": 126.6667,
+        "sd": 10.116
+      },
+      "tp": {
+        "per_seed": [
+          115,
+          133,
+          132
+        ],
+        "mean": 126.6667,
+        "sd": 10.116
+      },
+      "fp": {
+        "per_seed": [
+          3,
+          8,
+          6
+        ],
+        "mean": 5.6667,
+        "sd": 2.5166
+      },
+      "fn": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          91,
+          98,
+          92
+        ],
+        "mean": 93.6667,
+        "sd": 3.7859
+      },
+      "dirty": {
+        "per_seed": [
+          91,
+          98,
+          94
+        ],
+        "mean": 94.3333,
+        "sd": 3.5119
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      }
+    },
+    "C_minus_root_routing": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          698,
+          744,
+          761
+        ],
+        "mean": 734.3333,
+        "sd": 32.5935
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          104,
+          110,
+          99
+        ],
+        "mean": 104.3333,
+        "sd": 5.5076
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          188,
+          208,
+          210
+        ],
+        "mean": 202,
+        "sd": 12.1655
+      },
+      "review_actions": {
+        "per_seed": [
+          148,
+          171,
+          170
+        ],
+        "mean": 163,
+        "sd": 13.0
+      },
+      "issues": {
+        "per_seed": [
+          115,
+          133,
+          133
+        ],
+        "mean": 127,
+        "sd": 10.3923
+      },
+      "covered": {
+        "per_seed": [
+          115,
+          133,
+          132
+        ],
+        "mean": 126.6667,
+        "sd": 10.116
+      },
+      "tp": {
+        "per_seed": [
+          115,
+          133,
+          132
+        ],
+        "mean": 126.6667,
+        "sd": 10.116
+      },
+      "fp": {
+        "per_seed": [
+          3,
+          8,
+          6
+        ],
+        "mean": 5.6667,
+        "sd": 2.5166
+      },
+      "fn": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          91,
+          98,
+          92
+        ],
+        "mean": 93.6667,
+        "sd": 3.7859
+      },
+      "dirty": {
+        "per_seed": [
+          91,
+          98,
+          94
+        ],
+        "mean": 94.3333,
+        "sd": 3.5119
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      }
+    },
+    "C_minus_targeted": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          1628,
+          1881,
+          1870
+        ],
+        "mean": 1793,
+        "sd": 143.0
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          1034,
+          1247,
+          1208
+        ],
+        "mean": 1163,
+        "sd": 113.4063
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          148,
+          171,
+          171
+        ],
+        "mean": 163.3333,
+        "sd": 13.2791
+      },
+      "review_actions": {
+        "per_seed": [
+          148,
+          171,
+          170
+        ],
+        "mean": 163,
+        "sd": 13.0
+      },
+      "issues": {
+        "per_seed": [
+          115,
+          133,
+          133
+        ],
+        "mean": 127,
+        "sd": 10.3923
+      },
+      "covered": {
+        "per_seed": [
+          115,
+          133,
+          132
+        ],
+        "mean": 126.6667,
+        "sd": 10.116
+      },
+      "tp": {
+        "per_seed": [
+          115,
+          133,
+          132
+        ],
+        "mean": 126.6667,
+        "sd": 10.116
+      },
+      "fp": {
+        "per_seed": [
+          3,
+          8,
+          6
+        ],
+        "mean": 5.6667,
+        "sd": 2.5166
+      },
+      "fn": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          91,
+          98,
+          92
+        ],
+        "mean": 93.6667,
+        "sd": 3.7859
+      },
+      "dirty": {
+        "per_seed": [
+          91,
+          98,
+          94
+        ],
+        "mean": 94.3333,
+        "sd": 3.5119
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      }
+    },
+    "C_parallel_targeted": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          698,
+          744,
+          761
+        ],
+        "mean": 734.3333,
+        "sd": 32.5935
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          104,
+          110,
+          99
+        ],
+        "mean": 104.3333,
+        "sd": 5.5076
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          148,
+          171,
+          171
+        ],
+        "mean": 163.3333,
+        "sd": 13.2791
+      },
+      "review_actions": {
+        "per_seed": [
+          148,
+          171,
+          170
+        ],
+        "mean": 163,
+        "sd": 13.0
+      },
+      "issues": {
+        "per_seed": [
+          115,
+          133,
+          133
+        ],
+        "mean": 127,
+        "sd": 10.3923
+      },
+      "covered": {
+        "per_seed": [
+          115,
+          133,
+          132
+        ],
+        "mean": 126.6667,
+        "sd": 10.116
+      },
+      "tp": {
+        "per_seed": [
+          115,
+          133,
+          132
+        ],
+        "mean": 126.6667,
+        "sd": 10.116
+      },
+      "fp": {
+        "per_seed": [
+          3,
+          8,
+          6
+        ],
+        "mean": 5.6667,
+        "sd": 2.5166
+      },
+      "fn": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          91,
+          98,
+          92
+        ],
+        "mean": 93.6667,
+        "sd": 3.7859
+      },
+      "dirty": {
+        "per_seed": [
+          91,
+          98,
+          94
+        ],
+        "mean": 94.3333,
+        "sd": 3.5119
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      }
+    }
+  },
+  "derived": {
+    "loop_execution_reduction_C_vs_B": 0.5904,
+    "unnecessary_reduction_C_vs_B": 0.9103,
+    "task_reduction_root_vs_all_findings": 0.1914,
+    "coverage_root_routing": 0.9974,
+    "coverage_all_findings": 0.9974,
+    "issues_total": 381,
+    "misattributed_issues_total": 0,
+    "detection_recall_pooled": 0.9974,
+    "detection_precision_pooled": 0.9572,
+    "false_clear_total": 1,
+    "faulty_cases_total": 283
+  },
+  "notes": [
+    "loop outcomes are inferred from final status and action counts (the raw output does not record tasks left open)"
+  ]
+}

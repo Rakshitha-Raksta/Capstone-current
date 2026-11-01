@@ -1,0 +1,547 @@
+{
+  "directory": "results/experiments/main_v1_unconditional_rules",
+  "seeds": [
+    "1",
+    "2",
+    "3"
+  ],
+  "arms": [
+    "B_sequential_full",
+    "C_minus_root_routing",
+    "C_minus_targeted",
+    "C_parallel_targeted"
+  ],
+  "base_db_sha256_per_seed": {
+    "1": null,
+    "2": null,
+    "3": null
+  },
+  "mismatches": [],
+  "recomputed": {
+    "B_sequential_full": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          1595,
+          1881,
+          1848
+        ],
+        "mean": 1774.6667,
+        "sd": 156.4683
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          1013,
+          1247,
+          1197
+        ],
+        "mean": 1152.3333,
+        "sd": 123.2288
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          144,
+          172,
+          168
+        ],
+        "mean": 161.3333,
+        "sd": 15.1438
+      },
+      "review_actions": {
+        "per_seed": [
+          145,
+          171,
+          168
+        ],
+        "mean": 161.3333,
+        "sd": 14.2244
+      },
+      "issues": {
+        "per_seed": [
+          112,
+          134,
+          130
+        ],
+        "mean": 125.3333,
+        "sd": 11.7189
+      },
+      "covered": {
+        "per_seed": [
+          111,
+          134,
+          129
+        ],
+        "mean": 124.6667,
+        "sd": 12.0968
+      },
+      "tp": {
+        "per_seed": [
+          112,
+          134,
+          129
+        ],
+        "mean": 125,
+        "sd": 11.5326
+      },
+      "fp": {
+        "per_seed": [
+          2,
+          7,
+          4
+        ],
+        "mean": 4.3333,
+        "sd": 2.5166
+      },
+      "fn": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          1,
+          0,
+          0
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "exact": {
+        "per_seed": [
+          88,
+          98,
+          90
+        ],
+        "mean": 92,
+        "sd": 5.2915
+      },
+      "dirty": {
+        "per_seed": [
+          89,
+          98,
+          91
+        ],
+        "mean": 92.6667,
+        "sd": 4.7258
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      }
+    },
+    "C_minus_root_routing": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          686,
+          744,
+          753
+        ],
+        "mean": 727.6667,
+        "sd": 36.3639
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          104,
+          110,
+          102
+        ],
+        "mean": 105.3333,
+        "sd": 4.1633
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          183,
+          208,
+          204
+        ],
+        "mean": 198.3333,
+        "sd": 13.4288
+      },
+      "review_actions": {
+        "per_seed": [
+          145,
+          171,
+          168
+        ],
+        "mean": 161.3333,
+        "sd": 14.2244
+      },
+      "issues": {
+        "per_seed": [
+          112,
+          134,
+          130
+        ],
+        "mean": 125.3333,
+        "sd": 11.7189
+      },
+      "covered": {
+        "per_seed": [
+          112,
+          134,
+          129
+        ],
+        "mean": 125,
+        "sd": 11.5326
+      },
+      "tp": {
+        "per_seed": [
+          112,
+          134,
+          129
+        ],
+        "mean": 125,
+        "sd": 11.5326
+      },
+      "fp": {
+        "per_seed": [
+          2,
+          7,
+          4
+        ],
+        "mean": 4.3333,
+        "sd": 2.5166
+      },
+      "fn": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          1,
+          0,
+          0
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "exact": {
+        "per_seed": [
+          88,
+          98,
+          90
+        ],
+        "mean": 92,
+        "sd": 5.2915
+      },
+      "dirty": {
+        "per_seed": [
+          89,
+          98,
+          91
+        ],
+        "mean": 92.6667,
+        "sd": 4.7258
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      }
+    },
+    "C_minus_targeted": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          1595,
+          1881,
+          1848
+        ],
+        "mean": 1774.6667,
+        "sd": 156.4683
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          1013,
+          1247,
+          1197
+        ],
+        "mean": 1152.3333,
+        "sd": 123.2288
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          144,
+          172,
+          168
+        ],
+        "mean": 161.3333,
+        "sd": 15.1438
+      },
+      "review_actions": {
+        "per_seed": [
+          145,
+          171,
+          168
+        ],
+        "mean": 161.3333,
+        "sd": 14.2244
+      },
+      "issues": {
+        "per_seed": [
+          112,
+          134,
+          130
+        ],
+        "mean": 125.3333,
+        "sd": 11.7189
+      },
+      "covered": {
+        "per_seed": [
+          111,
+          134,
+          129
+        ],
+        "mean": 124.6667,
+        "sd": 12.0968
+      },
+      "tp": {
+        "per_seed": [
+          112,
+          134,
+          129
+        ],
+        "mean": 125,
+        "sd": 11.5326
+      },
+      "fp": {
+        "per_seed": [
+          2,
+          7,
+          4
+        ],
+        "mean": 4.3333,
+        "sd": 2.5166
+      },
+      "fn": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          1,
+          0,
+          0
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "exact": {
+        "per_seed": [
+          88,
+          98,
+          90
+        ],
+        "mean": 92,
+        "sd": 5.2915
+      },
+      "dirty": {
+        "per_seed": [
+          89,
+          98,
+          91
+        ],
+        "mean": 92.6667,
+        "sd": 4.7258
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      }
+    },
+    "C_parallel_targeted": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          686,
+          744,
+          753
+        ],
+        "mean": 727.6667,
+        "sd": 36.3639
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          104,
+          110,
+          102
+        ],
+        "mean": 105.3333,
+        "sd": 4.1633
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          144,
+          172,
+          168
+        ],
+        "mean": 161.3333,
+        "sd": 15.1438
+      },
+      "review_actions": {
+        "per_seed": [
+          145,
+          171,
+          168
+        ],
+        "mean": 161.3333,
+        "sd": 14.2244
+      },
+      "issues": {
+        "per_seed": [
+          112,
+          134,
+          130
+        ],
+        "mean": 125.3333,
+        "sd": 11.7189
+      },
+      "covered": {
+        "per_seed": [
+          111,
+          134,
+          129
+        ],
+        "mean": 124.6667,
+        "sd": 12.0968
+      },
+      "tp": {
+        "per_seed": [
+          112,
+          134,
+          129
+        ],
+        "mean": 125,
+        "sd": 11.5326
+      },
+      "fp": {
+        "per_seed": [
+          2,
+          7,
+          4
+        ],
+        "mean": 4.3333,
+        "sd": 2.5166
+      },
+      "fn": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          1,
+          0,
+          0
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "exact": {
+        "per_seed": [
+          88,
+          98,
+          90
+        ],
+        "mean": 92,
+        "sd": 5.2915
+      },
+      "dirty": {
+        "per_seed": [
+          89,
+          98,
+          91
+        ],
+        "mean": 92.6667,
+        "sd": 4.7258
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          1
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      }
+    }
+  },
+  "derived": {
+    "loop_execution_reduction_C_vs_B": 0.59,
+    "unnecessary_reduction_C_vs_B": 0.9086,
+    "task_reduction_root_vs_all_findings": 0.1866,
+    "coverage_root_routing": 0.9947,
+    "coverage_all_findings": 0.9973,
+    "issues_total": 376,
+    "misattributed_issues_total": 1,
+    "detection_recall_pooled": 0.9973,
+    "detection_precision_pooled": 0.9665,
+    "false_clear_total": 1,
+    "faulty_cases_total": 278
+  }
+}

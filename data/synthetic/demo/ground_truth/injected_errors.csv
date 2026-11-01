@@ -1,0 +1,134 @@
+hadm_id,subject_id,error_type,category,expected_stage,correctable,detail,data_provenance
+98000001,90000001,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2026-06-02, admitted 2026-07-22",SYNTHETIC_GROUND_TRUTH
+98000002,90000002,NOTE_DX_NOT_CODED,documentation,data_validation,true,note lists 'Hypo-osmolality and hyponatremia' (E871) which is not coded,SYNTHETIC_GROUND_TRUTH
+98000002,90000002,UNIT_PRICE_ABOVE_TARIFF,billing,billing,true,NURSING-DAY unit price 1200 vs rate card 800,SYNTHETIC_GROUND_TRUTH
+98000006,90000005,INVALID_ICD_CODE,coding,data_validation,true,seq 3: D649 replaced with non-billable D64,SYNTHETIC_GROUND_TRUTH
+98000006,90000005,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2026-06-11, admitted 2026-08-04",SYNTHETIC_GROUND_TRUTH
+98000008,90000007,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal N390 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000008,90000007,NOTE_DX_NOT_CODED,documentation,data_validation,true,"note lists 'Anemia, unspecified' (D649) which is not coded",SYNTHETIC_GROUND_TRUTH
+98000008,90000007,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 16 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000009,90000008,DUPLICATE_BILL_ITEM,billing,billing,true,LAB-ADMIT on 2026-02-22 billed twice,SYNTHETIC_GROUND_TRUTH
+98000009,90000008,MISSING_CHARGE,billing,billing,true,coded procedure 10D00Z1 has no bill line,SYNTHETIC_GROUND_TRUTH
+98000011,90000010,MISSING_KYC_DOCUMENT,policy,adjudication,true,true bill 113380 > 100000 without KYC,SYNTHETIC_GROUND_TRUTH
+98000019,90000018,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal J441 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000020,90000019,INVALID_ICD_CODE,coding,data_validation,true,seq 2: Z370 replaced with non-billable Z37,SYNTHETIC_GROUND_TRUTH
+98000023,90000022,NOTE_DX_NOT_CODED,documentation,data_validation,true,note lists 'Acute respiratory failure with hypoxia' (J9601) which is not coded,SYNTHETIC_GROUND_TRUTH
+98000024,90000023,LATE_FILING,policy,eligibility,false,filed 38 days after discharge,SYNTHETIC_GROUND_TRUTH
+98000026,90000025,DUPLICATE_BILL_ITEM,billing,billing,true,LAB-ADMIT on 2026-05-03 billed twice,SYNTHETIC_GROUND_TRUTH
+98000026,90000025,LATE_FILING,policy,eligibility,false,filed 32 days after discharge,SYNTHETIC_GROUND_TRUTH
+98000028,90000027,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 16 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000031,90000030,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal I214 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000032,90000031,MISSING_CLAIM_DOCUMENT,missing_information,discharge_readiness,true,discharge_summary not in documents_submitted,SYNTHETIC_GROUND_TRUTH
+98000035,90000034,MISSING_CLAIM_DOCUMENT,missing_information,discharge_readiness,true,final_bill not in documents_submitted,SYNTHETIC_GROUND_TRUTH
+98000035,90000034,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 567 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000037,90000036,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2026-04-21, admitted 2026-04-26",SYNTHETIC_GROUND_TRUTH
+98000040,90000039,MISSING_DISCHARGE_TIME,missing_information,data_validation,true,admissions.dischtime blanked,SYNTHETIC_GROUND_TRUTH
+98000040,90000039,RECONCILIATION_RESIDUAL,billing,reconciliation,true,bill header total differs from sum of lines by 12000,SYNTHETIC_GROUND_TRUTH
+98000042,90000029,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal I639 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000043,90000041,NOTE_DX_NOT_CODED,documentation,data_validation,true,note lists 'Unspecified atrial fibrillation' (I4891) which is not coded,SYNTHETIC_GROUND_TRUTH
+98000045,90000043,LATE_NOTIFICATION,policy,eligibility,false,notified 4 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000045,90000043,NOTE_DX_NOT_CODED,documentation,data_validation,true,note lists 'Acute respiratory failure with hypoxia' (J9601) which is not coded,SYNTHETIC_GROUND_TRUTH
+98000046,90000044,LOS_BILLING_MISMATCH,billing,billing,true,5 room/ICU day(s) billed; length of stay is 3,SYNTHETIC_GROUND_TRUTH
+98000047,90000045,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal O80 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000047,90000045,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 14 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000051,90000049,LOS_BILLING_MISMATCH,billing,billing,true,4 room/ICU day(s) billed; length of stay is 2,SYNTHETIC_GROUND_TRUTH
+98000051,90000049,MISSING_CHARGE,billing,billing,true,coded procedure 10E0XZZ has no bill line,SYNTHETIC_GROUND_TRUTH
+98000052,90000050,INVALID_ICD_CODE,coding,data_validation,true,seq 4: N179 replaced with non-billable N17,SYNTHETIC_GROUND_TRUTH
+98000053,90000051,LOS_BILLING_MISMATCH,billing,billing,true,5 room/ICU day(s) billed; length of stay is 3,SYNTHETIC_GROUND_TRUTH
+98000054,90000051,DUPLICATE_BILL_ITEM,billing,billing,true,LAB-ADMIT on 2026-10-18 billed twice,SYNTHETIC_GROUND_TRUTH
+98000054,90000051,LOS_BILLING_MISMATCH,billing,billing,true,5 room/ICU day(s) billed; length of stay is 3,SYNTHETIC_GROUND_TRUTH
+98000056,90000003,DUPLICATE_BILL_ITEM,billing,billing,true,ED-VISIT on 2026-12-14 billed twice,SYNTHETIC_GROUND_TRUTH
+98000058,90000053,PREAUTH_LEAD_TIME_SHORT,policy,eligibility,false,preauth 1 day(s) before admission,SYNTHETIC_GROUND_TRUTH
+98000058,90000053,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 986 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000061,90000056,LATE_NOTIFICATION,policy,eligibility,false,notified 3 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000061,90000056,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2025-12-09, admitted 2026-02-01",SYNTHETIC_GROUND_TRUTH
+98000063,90000058,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-0SR90J9 has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000065,90000060,DUPLICATE_BILL_ITEM,billing,billing,true,IMG-ECHO on 2026-06-27 billed twice,SYNTHETIC_GROUND_TRUTH
+98000065,90000060,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2026-05-24, admitted 2026-06-27",SYNTHETIC_GROUND_TRUTH
+98000069,90000064,INVALID_ICD_CODE,coding,data_validation,true,seq 2: Z370 replaced with non-billable Z37,SYNTHETIC_GROUND_TRUTH
+98000071,90000066,NOTE_DX_NOT_CODED,documentation,data_validation,true,note lists 'Acute respiratory failure with hypoxia' (J9601) which is not coded,SYNTHETIC_GROUND_TRUTH
+98000072,90000038,LATE_NOTIFICATION,policy,eligibility,false,notified 2 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000074,90000068,LOS_BILLING_MISMATCH,billing,billing,true,8 room/ICU day(s) billed; length of stay is 4,SYNTHETIC_GROUND_TRUTH
+98000075,90000069,LOS_BILLING_MISMATCH,billing,billing,true,4 room/ICU day(s) billed; length of stay is 2,SYNTHETIC_GROUND_TRUTH
+98000076,90000070,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal M1611 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000077,90000071,UNIT_PRICE_ABOVE_TARIFF,billing,billing,true,CONSULT-DAY unit price 1440 vs rate card 1200,SYNTHETIC_GROUND_TRUTH
+98000079,90000073,MISSING_CLAIM_DOCUMENT,missing_information,discharge_readiness,true,final_bill not in documents_submitted,SYNTHETIC_GROUND_TRUTH
+98000083,90000076,MISSING_CLAIM_DOCUMENT,missing_information,discharge_readiness,true,final_bill not in documents_submitted,SYNTHETIC_GROUND_TRUTH
+98000084,90000077,GENDER_DX_CONFLICT,coding,data_validation,true,N979 coded for patient with sex M,SYNTHETIC_GROUND_TRUTH
+98000084,90000077,UNIT_PRICE_ABOVE_TARIFF,billing,billing,true,CONSULT-DAY unit price 1620 vs rate card 1200,SYNTHETIC_GROUND_TRUTH
+98000085,90000078,INVALID_ICD_CODE,coding,data_validation,true,seq 3: E1122 replaced with non-billable E11,SYNTHETIC_GROUND_TRUTH
+98000088,90000081,LATE_NOTIFICATION,policy,eligibility,false,notified 4 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000088,90000081,NOTE_DX_NOT_CODED,documentation,data_validation,true,note lists 'Hypokalemia' (E876) which is not coded,SYNTHETIC_GROUND_TRUTH
+98000095,90000087,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-30233N1 has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000095,90000087,RECONCILIATION_RESIDUAL,billing,reconciliation,true,bill header total differs from sum of lines by -7500,SYNTHETIC_GROUND_TRUTH
+98000097,90000089,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 21 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000098,90000090,DUPLICATE_BILL_ITEM,billing,billing,true,LAB-ADMIT on 2026-02-03 billed twice,SYNTHETIC_GROUND_TRUTH
+98000099,90000091,INVALID_ICD_CODE,coding,data_validation,true,seq 4: E871 replaced with non-billable E87,SYNTHETIC_GROUND_TRUTH
+98000101,90000093,LATE_NOTIFICATION,policy,eligibility,false,notified 3 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000101,90000093,MISSING_DISCHARGE_TIME,missing_information,data_validation,true,admissions.dischtime blanked,SYNTHETIC_GROUND_TRUTH
+98000104,90000096,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-0QS604Z has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000106,90000098,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-5A1D70Z has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000108,90000089,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 132 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000109,90000021,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal J441 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000109,90000021,MISSING_DISCHARGE_TIME,missing_information,data_validation,true,admissions.dischtime blanked,SYNTHETIC_GROUND_TRUTH
+98000112,90000101,DUPLICATE_BILL_ITEM,billing,billing,true,LAB-ADMIT on 2026-02-20 billed twice,SYNTHETIC_GROUND_TRUTH
+98000112,90000101,LOS_BILLING_MISMATCH,billing,billing,true,6 room/ICU day(s) billed; length of stay is 3,SYNTHETIC_GROUND_TRUTH
+98000116,90000105,INVALID_ICD_CODE,coding,data_validation,true,seq 2: E785 replaced with non-billable E78,SYNTHETIC_GROUND_TRUTH
+98000116,90000105,LOS_BILLING_MISMATCH,billing,billing,true,7 room/ICU day(s) billed; length of stay is 3,SYNTHETIC_GROUND_TRUTH
+98000117,90000106,PREAUTH_LEAD_TIME_SHORT,policy,eligibility,false,preauth 1 day(s) before admission,SYNTHETIC_GROUND_TRUTH
+98000118,90000107,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 4 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000119,90000001,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2026-06-02, admitted 2026-10-14",SYNTHETIC_GROUND_TRUTH
+98000120,90000108,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-10D00Z1 has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000121,90000109,INVALID_ICD_CODE,coding,data_validation,true,seq 4: I4891 replaced with non-billable I48,SYNTHETIC_GROUND_TRUTH
+98000121,90000109,LATE_FILING,policy,eligibility,false,filed 36 days after discharge,SYNTHETIC_GROUND_TRUTH
+98000121,90000109,LATE_NOTIFICATION,policy,eligibility,false,notified 2 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000121,90000109,LOS_BILLING_MISMATCH,billing,billing,true,8 room/ICU day(s) billed; length of stay is 4,SYNTHETIC_GROUND_TRUTH
+98000128,90000115,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal K3580 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000128,90000115,MISSING_CLAIM_DOCUMENT,missing_information,discharge_readiness,true,discharge_summary not in documents_submitted,SYNTHETIC_GROUND_TRUTH
+98000129,90000116,GENDER_DX_CONFLICT,coding,data_validation,true,N400 coded for patient with sex F,SYNTHETIC_GROUND_TRUTH
+98000130,90000117,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal I5023 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000130,90000117,MISSING_CLAIM_DOCUMENT,missing_information,discharge_readiness,true,discharge_summary not in documents_submitted,SYNTHETIC_GROUND_TRUTH
+98000131,90000118,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2026-01-11, admitted 2026-01-20",SYNTHETIC_GROUND_TRUTH
+98000133,90000120,UNIT_PRICE_ABOVE_TARIFF,billing,billing,true,LAB-ADMIT unit price 3000 vs rate card 2500,SYNTHETIC_GROUND_TRUTH
+98000134,90000121,MISSING_KYC_DOCUMENT,policy,adjudication,true,true bill 218420 > 100000 without KYC,SYNTHETIC_GROUND_TRUTH
+98000134,90000121,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 350 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000138,90000124,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-30233N1 has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000138,90000124,INVALID_ICD_CODE,coding,data_validation,true,seq 2: I4891 replaced with non-billable I48,SYNTHETIC_GROUND_TRUTH
+98000138,90000124,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2026-07-22, admitted 2026-08-20",SYNTHETIC_GROUND_TRUTH
+98000143,90000128,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-0SRC0J9 has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000143,90000128,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal R079 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000144,90000129,MISSING_DISCHARGE_TIME,missing_information,data_validation,true,admissions.dischtime blanked,SYNTHETIC_GROUND_TRUTH
+98000144,90000129,RECONCILIATION_RESIDUAL,billing,reconciliation,true,bill header total differs from sum of lines by 12000,SYNTHETIC_GROUND_TRUTH
+98000148,90000133,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 26 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000150,90000125,LATE_NOTIFICATION,policy,eligibility,false,notified 4 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000154,90000125,LATE_NOTIFICATION,policy,eligibility,false,notified 2 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000155,90000138,MISSING_CHARGE,billing,billing,true,coded procedure 027034Z has no bill line,SYNTHETIC_GROUND_TRUTH
+98000155,90000138,UNIT_PRICE_ABOVE_TARIFF,billing,billing,true,NURSING-DAY unit price 960 vs rate card 800,SYNTHETIC_GROUND_TRUTH
+98000157,90000139,DUPLICATE_BILL_ITEM,billing,billing,true,LAB-DAILY on 2026-05-28 billed twice,SYNTHETIC_GROUND_TRUTH
+98000158,90000140,BILL_ARITHMETIC_ERROR,billing,billing,true,line 3 NURSING-DAY: amount 2600 != 2 x 800,SYNTHETIC_GROUND_TRUTH
+98000159,90000141,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-4A023N7 has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000160,90000142,LATE_NOTIFICATION,policy,eligibility,false,notified 3 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000161,90000143,LATE_FILING,policy,eligibility,false,filed 36 days after discharge,SYNTHETIC_GROUND_TRUTH
+98000162,90000144,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 93 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000166,90000148,LOS_BILLING_MISMATCH,billing,billing,true,5 room/ICU day(s) billed; length of stay is 1,SYNTHETIC_GROUND_TRUTH
+98000167,90000056,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2025-12-09, admitted 2026-05-01",SYNTHETIC_GROUND_TRUTH
+98000170,90000151,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 6 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000172,90000153,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 15 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000173,90000154,NOTE_DX_NOT_CODED,documentation,data_validation,true,"note lists 'Anemia, unspecified' (D649) which is not coded",SYNTHETIC_GROUND_TRUTH
+98000174,90000052,INVALID_ICD_CODE,coding,data_validation,true,seq 1: I5023 replaced with non-billable I50,SYNTHETIC_GROUND_TRUTH
+98000177,90000156,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 10 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000178,90000157,WAITING_PERIOD_NOT_MET,policy,eligibility,false,tenure 25 days < 1080 days,SYNTHETIC_GROUND_TRUTH
+98000181,90000036,POLICY_INACTIVE,policy,eligibility,false,"cancelled 2026-04-21, admitted 2026-07-05",SYNTHETIC_GROUND_TRUTH
+98000183,90000160,BILLED_PROCEDURE_NOT_DOCUMENTED,billing,billing,true,bill line PROC-4A023N7 has no matching coded procedure,SYNTHETIC_GROUND_TRUTH
+98000183,90000160,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal I639 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000184,90000161,LATE_NOTIFICATION,policy,eligibility,false,notified 4 day(s) after admission,SYNTHETIC_GROUND_TRUTH
+98000190,90000166,GENDER_DX_CONFLICT,coding,data_validation,true,N979 coded for patient with sex M,SYNTHETIC_GROUND_TRUTH
+98000191,90000167,LATE_FILING,policy,eligibility,false,filed 41 days after discharge,SYNTHETIC_GROUND_TRUTH
+98000192,90000168,LOS_BILLING_MISMATCH,billing,billing,true,9 room/ICU day(s) billed; length of stay is 6,SYNTHETIC_GROUND_TRUTH
+98000193,90000169,LOS_BILLING_MISMATCH,billing,billing,true,7 room/ICU day(s) billed; length of stay is 4,SYNTHETIC_GROUND_TRUTH
+98000193,90000169,UNIT_PRICE_ABOVE_TARIFF,billing,billing,true,PROC-4A023N7 unit price 47250 vs rate card 35000,SYNTHETIC_GROUND_TRUTH
+98000194,90000170,INVALID_ICD_CODE,coding,data_validation,true,seq 2: E785 replaced with non-billable E78,SYNTHETIC_GROUND_TRUTH
+98000196,90000172,LATE_FILING,policy,eligibility,false,filed 38 days after discharge,SYNTHETIC_GROUND_TRUTH
+98000196,90000172,NOTE_DX_NOT_CODED,documentation,data_validation,true,note lists 'Hypo-osmolality and hyponatremia' (E871) which is not coded,SYNTHETIC_GROUND_TRUTH
+98000198,90000174,CODED_DX_NOT_IN_NOTE,documentation,data_validation,true,principal J189 omitted from note,SYNTHETIC_GROUND_TRUTH
+98000198,90000174,LATE_NOTIFICATION,policy,eligibility,false,notified 4 day(s) after admission,SYNTHETIC_GROUND_TRUTH

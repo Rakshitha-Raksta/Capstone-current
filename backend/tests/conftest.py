@@ -4,7 +4,7 @@ import pytest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-os.environ["DATABASE_URL"] = "sqlite:///./test_claim_validator.db"
+os.environ["DATABASE_URL"] = os.environ.get("TEST_DATABASE_URL", "sqlite:///./test_claim_validator.db")
 
 from app.database.db import engine, SessionLocal
 from app.models.models import Base

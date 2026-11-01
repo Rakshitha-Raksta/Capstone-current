@@ -115,7 +115,7 @@ def main():
     # represent "25 hours" distinctly from "24 hours" (both round to a
     # 1-day gap). This boundary case therefore uses a clearly-over-24h gap
     # (2 days = 48h) instead of a fabricated sub-day precision the current
-    # schema cannot actually store. See docs/rule_engine.md limitations.
+    # schema cannot actually store (a documented date-only limitation).
     add("SYN-NOTIF-48h", "star_assure_2026_v1", "Notified 48h after admission (emergency)", "SA26-012",
         "BOUNDARY_OVER", claim_type="EMERGENCY",
         admission_date="2026-01-01", notification_date="2026-01-03", expected_severity="WARNING")

@@ -1,0 +1,967 @@
+{
+  "directory": "results/experiments/mimic_demo",
+  "seeds": [
+    "1",
+    "2",
+    "3"
+  ],
+  "arms": [
+    "B_sequential_full",
+    "C_minus_root_routing",
+    "C_minus_targeted",
+    "C_parallel_targeted"
+  ],
+  "base_db_sha256_per_seed": {
+    "1": "d1a03a6d20affd2c18c5bf4ff559dd8d01a3e9ec7f3fe034317b3212151a2d5a",
+    "2": "818e9e893387146d2e93d1ec5b9299ca9bc05397dade4a906efa94502ef49e3b",
+    "3": "9845571d57049a9990f749820554f40c2817e8d4920414c14a0676c2768094bc"
+  },
+  "mismatches": [],
+  "completeness_problems": [],
+  "loop_outcomes": {
+    "B_sequential_full/seed1": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "B_sequential_full/seed2": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "B_sequential_full/seed3": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed1": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed2": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed3": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_minus_targeted/seed1": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_minus_targeted/seed2": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_minus_targeted/seed3": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed1": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed2": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed3": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [
+        "26529390"
+      ],
+      "blocked_by_documented_source_anomaly": [
+        "26529390"
+      ],
+      "error_status": []
+    }
+  },
+  "documented_source_anomalies": {
+    "registry": "data/mimic_iv/known_source_anomalies.json",
+    "source_checks": {
+      "26529390": {
+        "confirmed": true,
+        "detail": "4 procedure(s) dated outside 2155-05-17..2155-05-19"
+      }
+    },
+    "expected_outcomes": [
+      "B_sequential_full seed 1: 26529390",
+      "B_sequential_full seed 2: 26529390",
+      "B_sequential_full seed 3: 26529390",
+      "C_parallel_targeted seed 1: 26529390",
+      "C_parallel_targeted seed 2: 26529390",
+      "C_parallel_targeted seed 3: 26529390",
+      "C_minus_targeted seed 1: 26529390",
+      "C_minus_targeted seed 2: 26529390",
+      "C_minus_targeted seed 3: 26529390",
+      "C_minus_root_routing seed 1: 26529390",
+      "C_minus_root_routing seed 2: 26529390",
+      "C_minus_root_routing seed 3: 26529390"
+    ]
+  },
+  "cohort_equivalence": {
+    "1": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    },
+    "2": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    },
+    "3": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    }
+  },
+  "root_blocker_errors": [
+    {
+      "seed": "1",
+      "hadm_id": "20429160",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "roots": [],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "PREPARATION_COMPLETE"
+    },
+    {
+      "seed": "1",
+      "hadm_id": "20611640",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE",
+        "MISSING_KYC_DOCUMENT",
+        "READINESS_ITEM_INCOMPLETE"
+      ],
+      "roots": [
+        "MISSING_KYC_DOCUMENT",
+        "READINESS_ITEM_INCOMPLETE"
+      ],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "1",
+      "hadm_id": "22059910",
+      "injected": [
+        "LOS_BILLING_MISMATCH"
+      ],
+      "roots": [
+        "LOS_BILLING_MISMATCH",
+        "MISSING_KYC_DOCUMENT"
+      ],
+      "missed_entirely": [],
+      "found_only_as_consequence": [],
+      "spurious_roots": [
+        "MISSING_KYC_DOCUMENT"
+      ],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "1",
+      "hadm_id": "22228639",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "roots": [],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "PREPARATION_COMPLETE"
+    },
+    {
+      "seed": "1",
+      "hadm_id": "27154822",
+      "injected": [
+        "DUPLICATE_BILL_ITEM",
+        "LOS_BILLING_MISMATCH"
+      ],
+      "roots": [
+        "DUPLICATE_BILL_ITEM",
+        "LOS_BILLING_MISMATCH",
+        "MISSING_KYC_DOCUMENT"
+      ],
+      "missed_entirely": [],
+      "found_only_as_consequence": [],
+      "spurious_roots": [
+        "MISSING_KYC_DOCUMENT"
+      ],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "1",
+      "hadm_id": "27882036",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE",
+        "WAITING_PERIOD_NOT_MET"
+      ],
+      "roots": [
+        "WAITING_PERIOD_NOT_MET"
+      ],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "1",
+      "hadm_id": "29858644",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "roots": [],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "NEEDS_REVIEW"
+    },
+    {
+      "seed": "2",
+      "hadm_id": "22950920",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE",
+        "UNIT_PRICE_ABOVE_TARIFF"
+      ],
+      "roots": [
+        "UNIT_PRICE_ABOVE_TARIFF"
+      ],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "2",
+      "hadm_id": "26529390",
+      "injected": [
+        "MISSING_CHARGE",
+        "MISSING_CLAIM_DOCUMENT",
+        "MISSING_KYC_DOCUMENT"
+      ],
+      "roots": [
+        "MISSING_CHARGE",
+        "MISSING_CLAIM_DOCUMENT",
+        "MISSING_KYC_DOCUMENT",
+        "PROCEDURE_DATE_OUT_OF_RANGE"
+      ],
+      "missed_entirely": [],
+      "found_only_as_consequence": [],
+      "spurious_roots": [
+        "PROCEDURE_DATE_OUT_OF_RANGE"
+      ],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "3",
+      "hadm_id": "24928679",
+      "injected": [
+        "LOS_BILLING_MISMATCH",
+        "NOTE_DX_NOT_CODED"
+      ],
+      "roots": [
+        "LOS_BILLING_MISMATCH",
+        "MISSING_KYC_DOCUMENT",
+        "NOTE_DX_NOT_CODED"
+      ],
+      "missed_entirely": [],
+      "found_only_as_consequence": [],
+      "spurious_roots": [
+        "MISSING_KYC_DOCUMENT"
+      ],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "3",
+      "hadm_id": "25020332",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE",
+        "DUPLICATE_BILL_ITEM",
+        "LATE_NOTIFICATION"
+      ],
+      "roots": [
+        "DUPLICATE_BILL_ITEM",
+        "LATE_NOTIFICATION"
+      ],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "3",
+      "hadm_id": "27259207",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "roots": [],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "PREPARATION_COMPLETE"
+    },
+    {
+      "seed": "3",
+      "hadm_id": "28998349",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE",
+        "LOS_BILLING_MISMATCH"
+      ],
+      "roots": [
+        "LOS_BILLING_MISMATCH"
+      ],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "BLOCKED"
+    },
+    {
+      "seed": "3",
+      "hadm_id": "29654498",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE",
+        "LATE_NOTIFICATION",
+        "MISSING_CHARGE"
+      ],
+      "roots": [
+        "LATE_NOTIFICATION",
+        "MISSING_CHARGE"
+      ],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "NEEDS_REVIEW"
+    }
+  ],
+  "recomputed": {
+    "B_sequential_full": {
+      "cases": {
+        "per_seed": [
+          275,
+          275,
+          275
+        ],
+        "mean": 275,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          3355,
+          3542,
+          3168
+        ],
+        "mean": 3355,
+        "sd": 187.0
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          2314,
+          2396,
+          2111
+        ],
+        "mean": 2273.6667,
+        "sd": 146.7186
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          311,
+          329,
+          294
+        ],
+        "mean": 311.3333,
+        "sd": 17.5024
+      },
+      "review_actions": {
+        "per_seed": [
+          305,
+          322,
+          288
+        ],
+        "mean": 305,
+        "sd": 17.0
+      },
+      "issues": {
+        "per_seed": [
+          207,
+          239,
+          196
+        ],
+        "mean": 214,
+        "sd": 22.3383
+      },
+      "covered": {
+        "per_seed": [
+          202,
+          238,
+          192
+        ],
+        "mean": 210.6667,
+        "sd": 24.1937
+      },
+      "tp": {
+        "per_seed": [
+          202,
+          238,
+          192
+        ],
+        "mean": 210.6667,
+        "sd": 24.1937
+      },
+      "fp": {
+        "per_seed": [
+          3,
+          2,
+          5
+        ],
+        "mean": 3.3333,
+        "sd": 1.5275
+      },
+      "fn": {
+        "per_seed": [
+          5,
+          1,
+          4
+        ],
+        "mean": 3.3333,
+        "sd": 2.0817
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          140,
+          163,
+          135
+        ],
+        "mean": 146,
+        "sd": 14.9332
+      },
+      "dirty": {
+        "per_seed": [
+          147,
+          165,
+          140
+        ],
+        "mean": 150.6667,
+        "sd": 12.897
+      },
+      "false_clear": {
+        "per_seed": [
+          2,
+          0,
+          1
+        ],
+        "mean": 1,
+        "sd": 1.0
+      }
+    },
+    "C_minus_root_routing": {
+      "cases": {
+        "per_seed": [
+          275,
+          275,
+          275
+        ],
+        "mean": 275,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          1235,
+          1361,
+          1232
+        ],
+        "mean": 1276,
+        "sd": 73.6274
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          194,
+          215,
+          175
+        ],
+        "mean": 194.6667,
+        "sd": 20.0083
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          359,
+          391,
+          351
+        ],
+        "mean": 367,
+        "sd": 21.166
+      },
+      "review_actions": {
+        "per_seed": [
+          305,
+          322,
+          288
+        ],
+        "mean": 305,
+        "sd": 17.0
+      },
+      "issues": {
+        "per_seed": [
+          207,
+          239,
+          196
+        ],
+        "mean": 214,
+        "sd": 22.3383
+      },
+      "covered": {
+        "per_seed": [
+          202,
+          238,
+          192
+        ],
+        "mean": 210.6667,
+        "sd": 24.1937
+      },
+      "tp": {
+        "per_seed": [
+          202,
+          238,
+          192
+        ],
+        "mean": 210.6667,
+        "sd": 24.1937
+      },
+      "fp": {
+        "per_seed": [
+          3,
+          2,
+          5
+        ],
+        "mean": 3.3333,
+        "sd": 1.5275
+      },
+      "fn": {
+        "per_seed": [
+          5,
+          1,
+          4
+        ],
+        "mean": 3.3333,
+        "sd": 2.0817
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          140,
+          163,
+          135
+        ],
+        "mean": 146,
+        "sd": 14.9332
+      },
+      "dirty": {
+        "per_seed": [
+          147,
+          165,
+          140
+        ],
+        "mean": 150.6667,
+        "sd": 12.897
+      },
+      "false_clear": {
+        "per_seed": [
+          2,
+          0,
+          1
+        ],
+        "mean": 1,
+        "sd": 1.0
+      }
+    },
+    "C_minus_targeted": {
+      "cases": {
+        "per_seed": [
+          275,
+          275,
+          275
+        ],
+        "mean": 275,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          3355,
+          3542,
+          3168
+        ],
+        "mean": 3355,
+        "sd": 187.0
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          2314,
+          2396,
+          2111
+        ],
+        "mean": 2273.6667,
+        "sd": 146.7186
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          311,
+          329,
+          294
+        ],
+        "mean": 311.3333,
+        "sd": 17.5024
+      },
+      "review_actions": {
+        "per_seed": [
+          305,
+          322,
+          288
+        ],
+        "mean": 305,
+        "sd": 17.0
+      },
+      "issues": {
+        "per_seed": [
+          207,
+          239,
+          196
+        ],
+        "mean": 214,
+        "sd": 22.3383
+      },
+      "covered": {
+        "per_seed": [
+          202,
+          238,
+          192
+        ],
+        "mean": 210.6667,
+        "sd": 24.1937
+      },
+      "tp": {
+        "per_seed": [
+          202,
+          238,
+          192
+        ],
+        "mean": 210.6667,
+        "sd": 24.1937
+      },
+      "fp": {
+        "per_seed": [
+          3,
+          2,
+          5
+        ],
+        "mean": 3.3333,
+        "sd": 1.5275
+      },
+      "fn": {
+        "per_seed": [
+          5,
+          1,
+          4
+        ],
+        "mean": 3.3333,
+        "sd": 2.0817
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          140,
+          163,
+          135
+        ],
+        "mean": 146,
+        "sd": 14.9332
+      },
+      "dirty": {
+        "per_seed": [
+          147,
+          165,
+          140
+        ],
+        "mean": 150.6667,
+        "sd": 12.897
+      },
+      "false_clear": {
+        "per_seed": [
+          2,
+          0,
+          1
+        ],
+        "mean": 1,
+        "sd": 1.0
+      }
+    },
+    "C_parallel_targeted": {
+      "cases": {
+        "per_seed": [
+          275,
+          275,
+          275
+        ],
+        "mean": 275,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          1235,
+          1361,
+          1232
+        ],
+        "mean": 1276,
+        "sd": 73.6274
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          194,
+          215,
+          175
+        ],
+        "mean": 194.6667,
+        "sd": 20.0083
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          311,
+          329,
+          294
+        ],
+        "mean": 311.3333,
+        "sd": 17.5024
+      },
+      "review_actions": {
+        "per_seed": [
+          305,
+          322,
+          288
+        ],
+        "mean": 305,
+        "sd": 17.0
+      },
+      "issues": {
+        "per_seed": [
+          207,
+          239,
+          196
+        ],
+        "mean": 214,
+        "sd": 22.3383
+      },
+      "covered": {
+        "per_seed": [
+          202,
+          238,
+          192
+        ],
+        "mean": 210.6667,
+        "sd": 24.1937
+      },
+      "tp": {
+        "per_seed": [
+          202,
+          238,
+          192
+        ],
+        "mean": 210.6667,
+        "sd": 24.1937
+      },
+      "fp": {
+        "per_seed": [
+          3,
+          2,
+          5
+        ],
+        "mean": 3.3333,
+        "sd": 1.5275
+      },
+      "fn": {
+        "per_seed": [
+          5,
+          1,
+          4
+        ],
+        "mean": 3.3333,
+        "sd": 2.0817
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          140,
+          163,
+          135
+        ],
+        "mean": 146,
+        "sd": 14.9332
+      },
+      "dirty": {
+        "per_seed": [
+          147,
+          165,
+          140
+        ],
+        "mean": 150.6667,
+        "sd": 12.897
+      },
+      "false_clear": {
+        "per_seed": [
+          2,
+          0,
+          1
+        ],
+        "mean": 1,
+        "sd": 1.0
+      }
+    }
+  },
+  "derived": {
+    "loop_execution_reduction_C_vs_B": 0.6197,
+    "unnecessary_reduction_C_vs_B": 0.9144,
+    "task_reduction_root_vs_all_findings": 0.1517,
+    "coverage_root_routing": 0.9844,
+    "coverage_all_findings": 0.9844,
+    "issues_total": 642,
+    "misattributed_issues_total": 0,
+    "detection_recall_pooled": 0.9844,
+    "detection_precision_pooled": 0.9844,
+    "false_clear_total": 3,
+    "faulty_cases_total": 452
+  },
+  "notes": [
+    "loop outcomes are inferred from final status and action counts (the raw output does not record tasks left open)"
+  ]
+}

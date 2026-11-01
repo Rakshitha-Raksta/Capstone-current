@@ -416,3 +416,8 @@ def get_latest_validation(claim_id: int, db: Session = Depends(get_db)):
 
 
 app.include_router(qa_router)
+
+# ClearClaim product layer (/api/v1, CORS, request limits, logging). Added
+# without changing any route above; see app/clearclaim/server.py.
+from app.clearclaim.server import install as _install_clearclaim  # noqa: E402
+_install_clearclaim(app)

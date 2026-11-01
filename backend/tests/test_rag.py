@@ -11,8 +11,6 @@ Uses the REAL TF-IDF index built from the real extracted documents
 (scripts/build_rag_index.py must have been run -- conftest.py's session
 fixture ensures this happens before these tests run).
 """
-import os
-import pytest
 from app.rag.retrieve import retrieve
 from app.rag.service import answer_question
 from app.rules.engine import validate_claim

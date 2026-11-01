@@ -1,0 +1,100 @@
+{
+  "files": {
+    "admin/claim_admin.csv": {
+      "rows": 200,
+      "sha256": "c4fc717493915adb5013cfb5b16ba21b5f93ed93bf51eb77d686fa01bf625250"
+    },
+    "admin/discharge_checklist.csv": {
+      "rows": 1000,
+      "sha256": "e95af28296e1b54667dd77e6b230dffc755ee2570619554d8449bd6909a439a8"
+    },
+    "admin/historical_claims.csv": {
+      "rows": 900,
+      "sha256": "c9819f146f17d4a9ec6edf9190adb0bd6bf1fdbb5305f515ee0db04a7c555531"
+    },
+    "admin/hospital_bill_items.csv": {
+      "rows": 2154,
+      "sha256": "ec78962b318547d7327d881870d5f9a7c3b7df150767e646c9e4735915e43d5f"
+    },
+    "admin/member_policies.csv": {
+      "rows": 178,
+      "sha256": "964da2dc6dad1670bbd3d32c76469973bceb10c8ac13216f0ff1a281a6db6b47"
+    },
+    "admin/tariff_inr.csv": {
+      "rows": 55,
+      "sha256": "499d6973c9fef30aeb3cf01a3bc5975bb9070938b45aa8b79255baeb1cc3bf57"
+    },
+    "ground_truth/corrections.json": {
+      "rows": 200,
+      "sha256": "751c8447fa2288a691e5c8ebe4b6fed5cc6b27f0c582425be85a4088538c0001"
+    },
+    "ground_truth/encounter_labels.csv": {
+      "rows": 200,
+      "sha256": "d378f3f847fa80fe4fe560ed78ad9ea6a6d89e33f1842ff93dd222503c366739"
+    },
+    "ground_truth/injected_errors.csv": {
+      "rows": 121,
+      "sha256": "5e76ca22d6ddd510f98349b82144571daace3eb0b869632cc11031d4683a0fd1"
+    },
+    "hosp/admissions.csv": {
+      "rows": 200,
+      "sha256": "45e7d8106d686ee106d868320252898d65949b3016287f22aaa2121d76d057bf"
+    },
+    "hosp/d_icd_diagnoses.csv": {
+      "rows": 40,
+      "sha256": "e6c62a0f17be25f513d5d39fa890fc5e75fabcb3e1731c4ea2d939db93f048f8"
+    },
+    "hosp/d_icd_procedures.csv": {
+      "rows": 12,
+      "sha256": "bfe7274ff9e4b5b51b761b28681a97a7c05338fc8438bd4a4b192beeeb4e362d"
+    },
+    "hosp/diagnoses_icd.csv": {
+      "rows": 541,
+      "sha256": "3ed8173370341a1fde10931eeec00f0d81d150edf25b69161bab0038ac5e3ef2"
+    },
+    "hosp/drgcodes.csv": {
+      "rows": 199,
+      "sha256": "2c5c130121397fa6bd924e3e539e1cc13c899038eda2a1466981c0105ad34840"
+    },
+    "hosp/patients.csv": {
+      "rows": 178,
+      "sha256": "790955197b5b3b0d8f79d8e2c761f8d95a0eafac200534f4226f9ff70519f583"
+    },
+    "hosp/prescriptions.csv": {
+      "rows": 600,
+      "sha256": "fb6dd4e87f2ab0acd48764fb5c77e96b60a7453bfdc717d628bc1aa5a75a76c8"
+    },
+    "hosp/procedures_icd.csv": {
+      "rows": 119,
+      "sha256": "f18eb83a1bb0214674f19fb52f4d5d9fa6cfc65ae47f70a4d97e08ff9f546d2f"
+    },
+    "hosp/services.csv": {
+      "rows": 0,
+      "sha256": "60575fbd482e91414237d1420b04d933b480194989d1902c6d0892ce35f41eae"
+    },
+    "hosp/transfers.csv": {
+      "rows": 613,
+      "sha256": "7256cb4314b9406a5437319f988327a8ca38f52dfa73b94a2e206a829a87dadb"
+    },
+    "note/discharge.csv": {
+      "rows": 200,
+      "sha256": "deccfecdc703c5a5016330d8eaad4be9d70ef1a8d313dcac01fe2e75b5f774ec"
+    }
+  },
+  "generator": "clearclaim-synthetic-encounters",
+  "generator_version": "2.2.0",
+  "ground_truth_notice": "ground_truth/ is for offline evaluation only and must never be loaded by the runtime.",
+  "mode": "synthetic_full",
+  "parameters": {
+    "base_date": "2026-01-05",
+    "error_rate": 0.35,
+    "n_encounters": 200,
+    "seed": 5,
+    "span_days": 240
+  },
+  "provenance_notice": "ALL ROWS IN THIS DIRECTORY ARE SYNTHETIC unless stated otherwise in 'mode'. They are not MIMIC-IV data, not real patients, not real hospital prices and not real insurance claims.",
+  "unverified_catalogs": [
+    "hosp/d_icd_procedures.csv (ICD-10-PCS titles)",
+    "hosp/drgcodes.csv (MS-DRG titles)"
+  ]
+}

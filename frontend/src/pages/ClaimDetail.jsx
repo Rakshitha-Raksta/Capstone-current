@@ -85,7 +85,7 @@ export default function ClaimDetail() {
             <tbody>
               {validation.results.map((r, i) => (
                 <tr key={i} className="clickable" onClick={() => {
-                  window.location.href = `/claims/${claimId}/rules/${encodeURIComponent(r.rule_id)}`;
+                  window.location.href = `/legacy/claims/${claimId}/rules/${encodeURIComponent(r.rule_id)}`;
                 }}>
                   <td>{r.rule_id}</td>
                   <td>{r.category}</td>

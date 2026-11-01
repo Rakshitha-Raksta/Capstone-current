@@ -7,11 +7,10 @@ a chunk from a different policy version is never even scored against the
 question, let alone returned.
 """
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List
 
 from sklearn.metrics.pairwise import cosine_similarity
 
-from app.rag.chunking import Chunk
 from app.rag.embeddings import load_index
 
 DEFAULT_SIMILARITY_THRESHOLD = 0.08  # calibrated empirically: 0.10 was too strict
@@ -20,7 +19,7 @@ DEFAULT_SIMILARITY_THRESHOLD = 0.08  # calibrated empirically: 0.10 was too stri
 # against "What is the initial waiting period?" -- just under a 0.10 cutoff).
 # 0.08 keeps that true positive while zero-domain-overlap questions (e.g.
 # "What is the recipe for chocolate chip cookies?") still score exactly 0.0
-# and are correctly refused. See docs/rag.md for the known remaining
+# and are correctly refused. Known remaining
 # limitation: insurance-domain-ADJACENT-but-unsupported questions (e.g.
 # "does this cover skydiving/pet insurance") can still occasionally score
 # above this threshold on lexical overlap alone (e.g. a header containing

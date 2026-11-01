@@ -1,0 +1,13 @@
+{
+  "description": "Genuine data-quality issues in the MIMIC-IV source that ClearClaim correctly reports but that the synthetic answer key (injected faults only) cannot list. scripts/verify_results.py treats a case listed here as an expected outcome ONLY when (a) the run's clinical source matches, (b) the listed finding is a first-pass root of that case, (c) every other root is an injected fault, and (d) the anomaly is re-confirmed from the source files during verification. Otherwise it remains a completeness problem. The finding stays visible in the application, the raw outputs and the verifier report; nothing is suppressed.",
+  "anomalies": [
+    {
+      "clinical_source": "MIMIC_IV_DEMO_2.2",
+      "hadm_id": "26529390",
+      "finding": "PROCEDURE_DATE_OUT_OF_RANGE",
+      "check": "procedure_chartdate_outside_admission",
+      "evidence": "4 of 5 coded procedures (seq 2-5) are dated 9-25 days after discharge. The dates fall inside the same patient's next two admissions, consistent with a source-side admission linkage error. It is the only such admission in the demo.",
+      "reviewed": "2026-10-22"
+    }
+  ]
+}

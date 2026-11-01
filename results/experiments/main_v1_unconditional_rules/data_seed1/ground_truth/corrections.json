@@ -1,0 +1,933 @@
+{
+ "98000001": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 9000,
+    "quantity": 2
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000002": [
+  {
+   "error_type": "UNIT_PRICE_ABOVE_TARIFF",
+   "fields": {
+    "amount_inr": 3500,
+    "unit_price_inr": 3500
+   },
+   "line_no": 8,
+   "op": "update_bill_line"
+  },
+  {
+   "error_type": "RECONCILIATION_RESIDUAL",
+   "op": "set_bill_header_total",
+   "value": "SUM_OF_LINES"
+  }
+ ],
+ "98000003": [],
+ "98000004": [],
+ "98000005": [],
+ "98000006": [
+  {
+   "error_type": "UNIT_PRICE_ABOVE_TARIFF",
+   "fields": {
+    "amount_inr": 2400,
+    "unit_price_inr": 800
+   },
+   "line_no": 3,
+   "op": "update_bill_line"
+  },
+  {
+   "error_type": "INVALID_ICD_CODE",
+   "icd_code": "E1165",
+   "op": "update_diagnosis",
+   "seq_num": 1
+  }
+ ],
+ "98000007": [],
+ "98000008": [],
+ "98000009": [
+  {
+   "error_type": "DUPLICATE_BILL_ITEM",
+   "line_no": 11,
+   "op": "delete_bill_line"
+  }
+ ],
+ "98000010": [],
+ "98000011": [],
+ "98000012": [],
+ "98000013": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  }
+ ],
+ "98000014": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "PREAUTH_LEAD_TIME_SHORT",
+   "op": "review_decision"
+  },
+  {
+   "error_type": "MISSING_DISCHARGE_TIME",
+   "op": "set_discharge_time",
+   "value": "2026-08-12 13:13:00"
+  }
+ ],
+ "98000015": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000016": [],
+ "98000017": [
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000018": [],
+ "98000019": [],
+ "98000020": [],
+ "98000021": [],
+ "98000022": [
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000023": [],
+ "98000024": [
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000025": [],
+ "98000026": [],
+ "98000027": [],
+ "98000028": [],
+ "98000029": [
+  {
+   "error_type": "READINESS_ITEM_INCOMPLETE",
+   "item": "DISCHARGE_SUMMARY_FINALISED",
+   "op": "complete_checklist_item"
+  },
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000030": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 7500,
+    "quantity": 3
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000031": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  }
+ ],
+ "98000032": [],
+ "98000033": [
+  {
+   "error_type": "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "line_no": 11,
+   "op": "delete_bill_line"
+  },
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  },
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000034": [
+  {
+   "error_type": "UNIT_PRICE_ABOVE_TARIFF",
+   "fields": {
+    "amount_inr": 1500,
+    "unit_price_inr": 1500
+   },
+   "line_no": 1,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000035": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000036": [],
+ "98000037": [
+  {
+   "error_type": "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "line_no": 16,
+   "op": "delete_bill_line"
+  }
+ ],
+ "98000038": [],
+ "98000039": [],
+ "98000040": [],
+ "98000041": [],
+ "98000042": [],
+ "98000043": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000044": [
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000045": [],
+ "98000046": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 7500,
+    "quantity": 1
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000047": [],
+ "98000048": [
+  {
+   "error_type": "BILL_ARITHMETIC_ERROR",
+   "fields": {
+    "amount_inr": 200
+   },
+   "line_no": 12,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000049": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "E876",
+   "op": "add_diagnosis"
+  }
+ ],
+ "98000050": [],
+ "98000051": [
+  {
+   "error_type": "UNIT_PRICE_ABOVE_TARIFF",
+   "fields": {
+    "amount_inr": 2500,
+    "unit_price_inr": 2500
+   },
+   "line_no": 4,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000052": [],
+ "98000053": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000054": [],
+ "98000055": [],
+ "98000056": [],
+ "98000057": [
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "POLICY_INACTIVE",
+   "op": "review_decision"
+  }
+ ],
+ "98000058": [],
+ "98000059": [],
+ "98000060": [],
+ "98000061": [
+  {
+   "error_type": "READINESS_ITEM_INCOMPLETE",
+   "item": "FINAL_BILL_GENERATED",
+   "op": "complete_checklist_item"
+  },
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "E871",
+   "op": "add_diagnosis"
+  }
+ ],
+ "98000062": [],
+ "98000063": [],
+ "98000064": [
+  {
+   "document": "final_bill",
+   "error_type": "MISSING_CLAIM_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000065": [],
+ "98000066": [],
+ "98000067": [],
+ "98000068": [],
+ "98000069": [],
+ "98000070": [],
+ "98000071": [],
+ "98000072": [
+  {
+   "error_type": "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "line_no": 11,
+   "op": "delete_bill_line"
+  }
+ ],
+ "98000073": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 7500,
+    "quantity": 3
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  },
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  }
+ ],
+ "98000074": [],
+ "98000075": [],
+ "98000076": [],
+ "98000077": [],
+ "98000078": [
+  {
+   "document": "KYC",
+   "error_type": "MISSING_KYC_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000079": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000080": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000081": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  }
+ ],
+ "98000082": [
+  {
+   "document": "KYC",
+   "error_type": "MISSING_KYC_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000083": [
+  {
+   "error_type": "UNIT_PRICE_ABOVE_TARIFF",
+   "fields": {
+    "amount_inr": 1200,
+    "unit_price_inr": 1200
+   },
+   "line_no": 4,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000084": [],
+ "98000085": [],
+ "98000086": [
+  {
+   "error_type": "READINESS_ITEM_INCOMPLETE",
+   "item": "FINAL_BILL_GENERATED",
+   "op": "complete_checklist_item"
+  }
+ ],
+ "98000087": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  }
+ ],
+ "98000088": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000089": [],
+ "98000090": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "E876",
+   "op": "add_diagnosis"
+  }
+ ],
+ "98000091": [],
+ "98000092": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 5000,
+    "quantity": 2
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000093": [],
+ "98000094": [],
+ "98000095": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "E871",
+   "op": "add_diagnosis"
+  },
+  {
+   "error_type": "GENDER_DX_CONFLICT",
+   "op": "delete_diagnosis",
+   "seq_num": 4
+  }
+ ],
+ "98000096": [],
+ "98000097": [],
+ "98000098": [],
+ "98000099": [
+  {
+   "error_type": "RECONCILIATION_RESIDUAL",
+   "op": "set_bill_header_total",
+   "value": "SUM_OF_LINES"
+  }
+ ],
+ "98000100": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "PREAUTH_LEAD_TIME_SHORT",
+   "op": "review_decision"
+  }
+ ],
+ "98000101": [
+  {
+   "error_type": "INVALID_ICD_CODE",
+   "icd_code": "J441",
+   "op": "update_diagnosis",
+   "seq_num": 1
+  }
+ ],
+ "98000102": [],
+ "98000103": [],
+ "98000104": [
+  {
+   "error_type": "BILL_ARITHMETIC_ERROR",
+   "fields": {
+    "amount_inr": 3600
+   },
+   "line_no": 6,
+   "op": "update_bill_line"
+  },
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 10000,
+    "quantity": 4
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000105": [],
+ "98000106": [],
+ "98000107": [],
+ "98000108": [],
+ "98000109": [
+  {
+   "document": "KYC",
+   "error_type": "MISSING_KYC_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000110": [],
+ "98000111": [],
+ "98000112": [],
+ "98000113": [
+  {
+   "error_type": "BILL_ARITHMETIC_ERROR",
+   "fields": {
+    "amount_inr": 800
+   },
+   "line_no": 8,
+   "op": "update_bill_line"
+  },
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000114": [],
+ "98000115": [],
+ "98000116": [],
+ "98000117": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "J9601",
+   "op": "add_diagnosis"
+  },
+  {
+   "error_type": "CODED_DX_NOT_IN_NOTE",
+   "op": "amend_note_add_diagnosis",
+   "text": "Cerebral infarction, unspecified"
+  }
+ ],
+ "98000118": [],
+ "98000119": [
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "POLICY_INACTIVE",
+   "op": "review_decision"
+  }
+ ],
+ "98000120": [],
+ "98000121": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "J9601",
+   "op": "add_diagnosis"
+  },
+  {
+   "error_type": "INVALID_ICD_CODE",
+   "icd_code": "E785",
+   "op": "update_diagnosis",
+   "seq_num": 2
+  }
+ ],
+ "98000122": [],
+ "98000123": [
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000124": [],
+ "98000125": [],
+ "98000126": [
+  {
+   "chartdate": "2026-01-17",
+   "error_type": "PROCEDURE_DATE_OUT_OF_RANGE",
+   "op": "update_procedure",
+   "seq_num": 1
+  }
+ ],
+ "98000127": [],
+ "98000128": [
+  {
+   "error_type": "DUPLICATE_BILL_ITEM",
+   "line_no": 11,
+   "op": "delete_bill_line"
+  },
+  {
+   "document": "discharge_summary",
+   "error_type": "MISSING_CLAIM_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000129": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 2500,
+    "quantity": 1
+   },
+   "line_no": 1,
+   "op": "update_bill_line"
+  },
+  {
+   "error_type": "RECONCILIATION_RESIDUAL",
+   "op": "set_bill_header_total",
+   "value": "SUM_OF_LINES"
+  }
+ ],
+ "98000130": [],
+ "98000131": [],
+ "98000132": [],
+ "98000133": [],
+ "98000134": [
+  {
+   "document": "KYC",
+   "error_type": "MISSING_KYC_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000135": [],
+ "98000136": [],
+ "98000137": [],
+ "98000138": [],
+ "98000139": [],
+ "98000140": [],
+ "98000141": [],
+ "98000142": [
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000143": [],
+ "98000144": [],
+ "98000145": [],
+ "98000146": [],
+ "98000147": [],
+ "98000148": [
+  {
+   "chartdate": "2026-06-26",
+   "error_type": "PROCEDURE_DATE_OUT_OF_RANGE",
+   "op": "update_procedure",
+   "seq_num": 1
+  }
+ ],
+ "98000149": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  }
+ ],
+ "98000150": [
+  {
+   "error_type": "BILL_ARITHMETIC_ERROR",
+   "fields": {
+    "amount_inr": 800
+   },
+   "line_no": 7,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000151": [
+  {
+   "error_type": "INVALID_ICD_CODE",
+   "icd_code": "N179",
+   "op": "update_diagnosis",
+   "seq_num": 4
+  }
+ ],
+ "98000152": [
+  {
+   "error_type": "READINESS_ITEM_INCOMPLETE",
+   "item": "PATIENT_ID_VERIFIED",
+   "op": "complete_checklist_item"
+  },
+  {
+   "error_type": "MISSING_DISCHARGE_TIME",
+   "op": "set_discharge_time",
+   "value": "2026-10-16 10:49:00"
+  }
+ ],
+ "98000153": [],
+ "98000154": [],
+ "98000155": [],
+ "98000156": [
+  {
+   "error_type": "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "line_no": 9,
+   "op": "delete_bill_line"
+  }
+ ],
+ "98000157": [
+  {
+   "error_type": "GENDER_DX_CONFLICT",
+   "op": "delete_diagnosis",
+   "seq_num": 2
+  }
+ ],
+ "98000158": [],
+ "98000159": [
+  {
+   "error_type": "DUPLICATE_BILL_ITEM",
+   "line_no": 9,
+   "op": "delete_bill_line"
+  },
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 2500,
+    "quantity": 1
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  },
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  }
+ ],
+ "98000160": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "E871",
+   "op": "add_diagnosis"
+  },
+  {
+   "error_type": "CODED_DX_NOT_IN_NOTE",
+   "op": "amend_note_add_diagnosis",
+   "text": "Encounter for cosmetic surgery"
+  }
+ ],
+ "98000161": [],
+ "98000162": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 31500,
+    "quantity": 7
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000163": [],
+ "98000164": [],
+ "98000165": [],
+ "98000166": [],
+ "98000167": [],
+ "98000168": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "N179",
+   "op": "add_diagnosis"
+  }
+ ],
+ "98000169": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "E876",
+   "op": "add_diagnosis"
+  }
+ ],
+ "98000170": [],
+ "98000171": [
+  {
+   "document": "KYC",
+   "error_type": "MISSING_KYC_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000172": [
+  {
+   "error_type": "DUPLICATE_BILL_ITEM",
+   "line_no": 12,
+   "op": "delete_bill_line"
+  }
+ ],
+ "98000173": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 13500,
+    "quantity": 3
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000174": [
+  {
+   "error_type": "CODED_DX_NOT_IN_NOTE",
+   "op": "amend_note_add_diagnosis",
+   "text": "Chronic obstructive pulmonary disease with (acute) exacerbation"
+  },
+  {
+   "error_type": "MISSING_DISCHARGE_TIME",
+   "op": "set_discharge_time",
+   "value": "2026-06-15 16:01:00"
+  }
+ ],
+ "98000175": [
+  {
+   "error_type": "READINESS_ITEM_INCOMPLETE",
+   "item": "DISCHARGE_SUMMARY_FINALISED",
+   "op": "complete_checklist_item"
+  }
+ ],
+ "98000176": [],
+ "98000177": [
+  {
+   "error_type": "READINESS_ITEM_INCOMPLETE",
+   "item": "DISCHARGE_SUMMARY_FINALISED",
+   "op": "complete_checklist_item"
+  },
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "I4891",
+   "op": "add_diagnosis"
+  }
+ ],
+ "98000178": [
+  {
+   "error_type": "DUPLICATE_BILL_ITEM",
+   "line_no": 11,
+   "op": "delete_bill_line"
+  }
+ ],
+ "98000179": [
+  {
+   "error_type": "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "line_no": 13,
+   "op": "delete_bill_line"
+  }
+ ],
+ "98000180": [],
+ "98000181": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000182": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "PREAUTH_LEAD_TIME_SHORT",
+   "op": "review_decision"
+  }
+ ],
+ "98000183": [
+  {
+   "document": "KYC",
+   "error_type": "MISSING_KYC_DOCUMENT",
+   "op": "add_document"
+  },
+  {
+   "decision": "CONFIRM_BLOCKED",
+   "error_type": "WAITING_PERIOD_NOT_MET",
+   "op": "review_decision"
+  }
+ ],
+ "98000184": [],
+ "98000185": [],
+ "98000186": [],
+ "98000187": [
+  {
+   "error_type": "LOS_BILLING_MISMATCH",
+   "fields": {
+    "amount_inr": 30000,
+    "quantity": 4
+   },
+   "line_no": 2,
+   "op": "update_bill_line"
+  }
+ ],
+ "98000188": [
+  {
+   "error_type": "GENDER_DX_CONFLICT",
+   "op": "delete_diagnosis",
+   "seq_num": 2
+  }
+ ],
+ "98000189": [
+  {
+   "error_type": "DUPLICATE_BILL_ITEM",
+   "line_no": 12,
+   "op": "delete_bill_line"
+  },
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000190": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_NOTIFICATION",
+   "op": "review_decision"
+  }
+ ],
+ "98000191": [],
+ "98000192": [
+  {
+   "document": "final_bill",
+   "error_type": "MISSING_CLAIM_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000193": [
+  {
+   "error_type": "BILLED_PROCEDURE_NOT_DOCUMENTED",
+   "line_no": 9,
+   "op": "delete_bill_line"
+  }
+ ],
+ "98000194": [
+  {
+   "document": "KYC",
+   "error_type": "MISSING_KYC_DOCUMENT",
+   "op": "add_document"
+  }
+ ],
+ "98000195": [
+  {
+   "decision": "ACCEPT_WITH_JUSTIFICATION",
+   "error_type": "LATE_FILING",
+   "op": "review_decision"
+  }
+ ],
+ "98000196": [],
+ "98000197": [],
+ "98000198": [
+  {
+   "error_type": "CODED_DX_NOT_IN_NOTE",
+   "op": "amend_note_add_diagnosis",
+   "text": "Urinary tract infection, site not specified"
+  }
+ ],
+ "98000199": [],
+ "98000200": [
+  {
+   "error_type": "NOTE_DX_NOT_CODED",
+   "icd_code": "J9601",
+   "op": "add_diagnosis"
+  }
+ ]
+}

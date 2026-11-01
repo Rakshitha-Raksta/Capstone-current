@@ -58,7 +58,7 @@ export default function NewClaim() {
 
       const created = await api.createClaim(payload);
       await api.validateClaim(created.claim_id);
-      navigate(`/claims/${created.claim_id}`);
+      navigate(`/legacy/claims/${created.claim_id}`);
     } catch (err) {
       setSubmitError(err instanceof ApiError ? err.message : String(err));
     } finally {

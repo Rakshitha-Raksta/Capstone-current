@@ -27,7 +27,7 @@ export default function RuleEvidence() {
 
   return (
     <div>
-      <p><Link to={`/claims/${claimId}`}>&larr; Back to claim</Link></p>
+      <p><Link to={`/legacy/claims/${claimId}`}>&larr; Back to claim</Link></p>
       <h1>Rule Detail — {result.rule_id}</h1>
 
       <div className="evidence-panel">

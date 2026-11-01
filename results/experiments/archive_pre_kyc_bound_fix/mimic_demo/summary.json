@@ -1,0 +1,2657 @@
+{
+  "config": {
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "n_encounters": null,
+    "error_rate": 0.35,
+    "arms": [
+      "B_sequential_full",
+      "C_parallel_targeted",
+      "C_minus_targeted",
+      "C_minus_root_routing"
+    ],
+    "clinical_source": "MIMIC_IV_DEMO_2.2",
+    "assumed_manual_minutes": {
+      "ingestion": 3,
+      "data_validation": 10,
+      "discharge_readiness": 8,
+      "billing": 20,
+      "eligibility": 12,
+      "adjudication": 15,
+      "historical": 0,
+      "reconciliation": 8,
+      "root_blocker": 10,
+      "review_routing": 3,
+      "claim_generation": 12
+    },
+    "assumed_minutes_per_review_action": 6
+  },
+  "seeds": {
+    "1": {
+      "base_db_sha256": "d7a5e29df635ecd9a62be6e5075506b6d372a838909cfd4b19e744d2964dad53",
+      "dataset_files": {
+        "admin/claim_admin.csv": "29babbb3a04c1f7f1d2d67c2ef5059c7bf15c27f3f877e9740af47479776b0e7",
+        "admin/discharge_checklist.csv": "0574788e18e4521bee250fb65b33665d9412864cc9871dee9de429fff4e951b0",
+        "admin/historical_claims.csv": "019f7eea87e1d5a6434ed54436d8ab2d956375b39d021385189f418c463df314",
+        "admin/hospital_bill_items.csv": "944deda98917532be016f42d63d4304475847f32d6c8dcd53062befe530248d8",
+        "admin/member_policies.csv": "803202f5abcde84d16b747c189a692ae4243fc59898685d49a6ad60324fd43ba",
+        "admin/tariff_inr.csv": "499d6973c9fef30aeb3cf01a3bc5975bb9070938b45aa8b79255baeb1cc3bf57",
+        "ground_truth/corrections.json": "eae3ac7eb449198096a70aa937de1b68635a5bba5233052bca27d1e4d7a0507b",
+        "ground_truth/encounter_labels.csv": "5eacf5f61cc137870955a66d09f1161f1ed8e4822f6486f27d75f1ee3ff70e96",
+        "ground_truth/injected_errors.csv": "4171fcaa9a04f9cfc7f78229d0180b94c5495dc0c72e4bd56141f4828c90a0d2",
+        "note/discharge.csv": "9b4896284c42ed3686c186dfe7f6500ae228c73c43312a69428dc3efa39b54c2"
+      },
+      "scenario_classes": {
+        "single_fault": 89,
+        "normal": 128,
+        "multi_fault": 38,
+        "missing_information": 20
+      },
+      "arms": {
+        "B_sequential_full": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 202,
+            "fp": 3,
+            "fn": 5,
+            "precision": 0.9854,
+            "recall": 0.9758,
+            "f1": 0.9806
+          },
+          "detection_root_findings": {
+            "tp": 201,
+            "fp": 1,
+            "fn": 5,
+            "precision": 0.995,
+            "recall": 0.9757,
+            "f1": 0.9853
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "fn": 5,
+              "tp": 5,
+              "precision": 1.0,
+              "recall": 0.5,
+              "f1": 0.6667
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 13,
+              "fp": 2,
+              "precision": 0.8667,
+              "recall": 1.0,
+              "f1": 0.9286
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 16,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 37,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 141,
+            "total": 147,
+            "accuracy": 0.9592
+          },
+          "first_pass_status": {
+            "NEEDS_REVIEW": 85,
+            "PREPARATION_COMPLETE": 77,
+            "BLOCKED": 113
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 228,
+            "BLOCKED": 47
+          },
+          "first_pass_yield": 0.28,
+          "first_pass_yield_clean_cases": 0.5859,
+          "review_rate": 0.72,
+          "first_pass_tasks": 308,
+          "tasks_created_total": 309,
+          "tasks_without_injected_issue": 107,
+          "issue_coverage_by_tasks": {
+            "covered": 201,
+            "total": 207,
+            "recall": 0.971
+          },
+          "false_clear_rate": 0.0136,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 305,
+          "corrections": 125,
+          "decisions": 180,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 305,
+          "loop_stage_executions": 3355,
+          "loop_stage_reused": 0,
+          "loop_unnecessary_executions": 2314,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 24.823,
+            "median": 22.422,
+            "p95": 41.527
+          },
+          "rerun_latency_ms": {
+            "n": 305,
+            "mean": 34.571,
+            "median": 31.86,
+            "p95": 54.247
+          },
+          "modelled_human_minutes_per_case": 6.65
+        },
+        "C_parallel_targeted": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 202,
+            "fp": 3,
+            "fn": 5,
+            "precision": 0.9854,
+            "recall": 0.9758,
+            "f1": 0.9806
+          },
+          "detection_root_findings": {
+            "tp": 201,
+            "fp": 1,
+            "fn": 5,
+            "precision": 0.995,
+            "recall": 0.9757,
+            "f1": 0.9853
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "fn": 5,
+              "tp": 5,
+              "precision": 1.0,
+              "recall": 0.5,
+              "f1": 0.6667
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 13,
+              "fp": 2,
+              "precision": 0.8667,
+              "recall": 1.0,
+              "f1": 0.9286
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 16,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 37,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 141,
+            "total": 147,
+            "accuracy": 0.9592
+          },
+          "first_pass_status": {
+            "NEEDS_REVIEW": 85,
+            "PREPARATION_COMPLETE": 77,
+            "BLOCKED": 113
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 228,
+            "BLOCKED": 47
+          },
+          "first_pass_yield": 0.28,
+          "first_pass_yield_clean_cases": 0.5859,
+          "review_rate": 0.72,
+          "first_pass_tasks": 308,
+          "tasks_created_total": 309,
+          "tasks_without_injected_issue": 107,
+          "issue_coverage_by_tasks": {
+            "covered": 201,
+            "total": 207,
+            "recall": 0.971
+          },
+          "false_clear_rate": 0.0136,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 305,
+          "corrections": 125,
+          "decisions": 180,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 305,
+          "loop_stage_executions": 1235,
+          "loop_stage_reused": 281,
+          "loop_unnecessary_executions": 194,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.106,
+            "median": 22.541,
+            "p95": 42.393
+          },
+          "rerun_latency_ms": {
+            "n": 305,
+            "mean": 16.721,
+            "median": 13.735,
+            "p95": 28.6
+          },
+          "modelled_human_minutes_per_case": 6.65
+        },
+        "C_minus_targeted": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 202,
+            "fp": 3,
+            "fn": 5,
+            "precision": 0.9854,
+            "recall": 0.9758,
+            "f1": 0.9806
+          },
+          "detection_root_findings": {
+            "tp": 201,
+            "fp": 1,
+            "fn": 5,
+            "precision": 0.995,
+            "recall": 0.9757,
+            "f1": 0.9853
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "fn": 5,
+              "tp": 5,
+              "precision": 1.0,
+              "recall": 0.5,
+              "f1": 0.6667
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 13,
+              "fp": 2,
+              "precision": 0.8667,
+              "recall": 1.0,
+              "f1": 0.9286
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 16,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 37,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 141,
+            "total": 147,
+            "accuracy": 0.9592
+          },
+          "first_pass_status": {
+            "NEEDS_REVIEW": 85,
+            "PREPARATION_COMPLETE": 77,
+            "BLOCKED": 113
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 228,
+            "BLOCKED": 47
+          },
+          "first_pass_yield": 0.28,
+          "first_pass_yield_clean_cases": 0.5859,
+          "review_rate": 0.72,
+          "first_pass_tasks": 308,
+          "tasks_created_total": 309,
+          "tasks_without_injected_issue": 107,
+          "issue_coverage_by_tasks": {
+            "covered": 201,
+            "total": 207,
+            "recall": 0.971
+          },
+          "false_clear_rate": 0.0136,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 305,
+          "corrections": 125,
+          "decisions": 180,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 305,
+          "loop_stage_executions": 3355,
+          "loop_stage_reused": 0,
+          "loop_unnecessary_executions": 2314,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.491,
+            "median": 22.687,
+            "p95": 43.55
+          },
+          "rerun_latency_ms": {
+            "n": 305,
+            "mean": 35.138,
+            "median": 32.583,
+            "p95": 52.484
+          },
+          "modelled_human_minutes_per_case": 6.65
+        },
+        "C_minus_root_routing": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 202,
+            "fp": 3,
+            "fn": 5,
+            "precision": 0.9854,
+            "recall": 0.9758,
+            "f1": 0.9806
+          },
+          "detection_root_findings": {
+            "tp": 201,
+            "fp": 1,
+            "fn": 5,
+            "precision": 0.995,
+            "recall": 0.9757,
+            "f1": 0.9853
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "fn": 5,
+              "tp": 5,
+              "precision": 1.0,
+              "recall": 0.5,
+              "f1": 0.6667
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 13,
+              "fp": 2,
+              "precision": 0.8667,
+              "recall": 1.0,
+              "f1": 0.9286
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 16,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 37,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 141,
+            "total": 147,
+            "accuracy": 0.9592
+          },
+          "first_pass_status": {
+            "NEEDS_REVIEW": 85,
+            "PREPARATION_COMPLETE": 77,
+            "BLOCKED": 113
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 228,
+            "BLOCKED": 47
+          },
+          "first_pass_yield": 0.28,
+          "first_pass_yield_clean_cases": 0.5859,
+          "review_rate": 0.72,
+          "first_pass_tasks": 359,
+          "tasks_created_total": 359,
+          "tasks_without_injected_issue": 157,
+          "issue_coverage_by_tasks": {
+            "covered": 202,
+            "total": 207,
+            "recall": 0.9758
+          },
+          "false_clear_rate": 0.0136,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 305,
+          "corrections": 125,
+          "decisions": 180,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 305,
+          "loop_stage_executions": 1235,
+          "loop_stage_reused": 281,
+          "loop_unnecessary_executions": 194,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.458,
+            "median": 22.827,
+            "p95": 42.026
+          },
+          "rerun_latency_ms": {
+            "n": 305,
+            "mean": 17.127,
+            "median": 13.854,
+            "p95": 28.93
+          },
+          "modelled_human_minutes_per_case": 6.65
+        }
+      },
+      "A_manual_model": {
+        "note": "MODELLED from ASSUMED durations; no detection metrics (no manual process was observed).",
+        "minutes_per_case": 150.84,
+        "minutes_per_case_x0_5": 75.42,
+        "minutes_per_case_x2": 301.67
+      }
+    },
+    "2": {
+      "base_db_sha256": "8af33c547245d72fca866e0c5cfea45966de318f7084938f7eba08fd2fdafce7",
+      "dataset_files": {
+        "admin/claim_admin.csv": "60bd67071f998b24a3a2cbc0d3a43f841866fb85700f2e10c88e6cc632651fbe",
+        "admin/discharge_checklist.csv": "7353f57295e3e8be9927677b6f8add8b11117f0954acef2f84cd1e01114a2c95",
+        "admin/historical_claims.csv": "7563b120ed19d621cc5dcfd50cce29b949b058e6f399499a732e0ea53f604737",
+        "admin/hospital_bill_items.csv": "a658bbe61e13b2f8dc4bbdb412db9b42e64d75f95f565563a539a38e0befded2",
+        "admin/member_policies.csv": "8aaaebc24aadac21c804c5a29d846e8fa8b3cde7e193dd96ecab62037700efec",
+        "admin/tariff_inr.csv": "499d6973c9fef30aeb3cf01a3bc5975bb9070938b45aa8b79255baeb1cc3bf57",
+        "ground_truth/corrections.json": "1b1b1d449003143929f61d65900f4bbad6081e5c8194d513eb7f6c2ce36b985a",
+        "ground_truth/encounter_labels.csv": "f11d7ab1947f3bd30de64da3c09006d90699254c1384abb21a80847647a00cff",
+        "ground_truth/injected_errors.csv": "3c9bc255e52f04793e9b72288013d5e071ca43e59a852c4121c449c45637331b",
+        "note/discharge.csv": "1ab798f93526c9d1c99ea167d2aeab09294f08b7d3fbc3441f6e002e607d2302"
+      },
+      "scenario_classes": {
+        "missing_information": 18,
+        "normal": 110,
+        "single_fault": 97,
+        "multi_fault": 50
+      },
+      "arms": {
+        "B_sequential_full": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 238,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.9917,
+            "recall": 0.9958,
+            "f1": 0.9937
+          },
+          "detection_root_findings": {
+            "tp": 238,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.9958,
+            "recall": 0.9958,
+            "f1": 0.9958
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "tp": 11,
+              "fn": 1,
+              "precision": 1.0,
+              "recall": 0.9167,
+              "f1": 0.9565
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 16,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 7,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 10,
+              "fp": 1,
+              "precision": 0.9091,
+              "recall": 1.0,
+              "f1": 0.9524
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 18,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 19,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 57,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 163,
+            "total": 165,
+            "accuracy": 0.9879
+          },
+          "first_pass_status": {
+            "BLOCKED": 127,
+            "PREPARATION_COMPLETE": 73,
+            "NEEDS_REVIEW": 75
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 211,
+            "BLOCKED": 64
+          },
+          "first_pass_yield": 0.2655,
+          "first_pass_yield_clean_cases": 0.6636,
+          "review_rate": 0.7345,
+          "first_pass_tasks": 329,
+          "tasks_created_total": 329,
+          "tasks_without_injected_issue": 91,
+          "issue_coverage_by_tasks": {
+            "covered": 238,
+            "total": 239,
+            "recall": 0.9958
+          },
+          "false_clear_rate": 0.0,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 322,
+          "corrections": 141,
+          "decisions": 181,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 322,
+          "loop_stage_executions": 3542,
+          "loop_stage_reused": 0,
+          "loop_unnecessary_executions": 2396,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.542,
+            "median": 22.514,
+            "p95": 46.184
+          },
+          "rerun_latency_ms": {
+            "n": 322,
+            "mean": 35.966,
+            "median": 32.545,
+            "p95": 57.392
+          },
+          "modelled_human_minutes_per_case": 7.03
+        },
+        "C_parallel_targeted": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 238,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.9917,
+            "recall": 0.9958,
+            "f1": 0.9937
+          },
+          "detection_root_findings": {
+            "tp": 238,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.9958,
+            "recall": 0.9958,
+            "f1": 0.9958
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "tp": 11,
+              "fn": 1,
+              "precision": 1.0,
+              "recall": 0.9167,
+              "f1": 0.9565
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 16,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 7,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 10,
+              "fp": 1,
+              "precision": 0.9091,
+              "recall": 1.0,
+              "f1": 0.9524
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 18,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 19,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 57,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 163,
+            "total": 165,
+            "accuracy": 0.9879
+          },
+          "first_pass_status": {
+            "BLOCKED": 127,
+            "PREPARATION_COMPLETE": 73,
+            "NEEDS_REVIEW": 75
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 211,
+            "BLOCKED": 64
+          },
+          "first_pass_yield": 0.2655,
+          "first_pass_yield_clean_cases": 0.6636,
+          "review_rate": 0.7345,
+          "first_pass_tasks": 329,
+          "tasks_created_total": 329,
+          "tasks_without_injected_issue": 91,
+          "issue_coverage_by_tasks": {
+            "covered": 238,
+            "total": 239,
+            "recall": 0.9958
+          },
+          "false_clear_rate": 0.0,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 322,
+          "corrections": 141,
+          "decisions": 181,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 322,
+          "loop_stage_executions": 1361,
+          "loop_stage_reused": 299,
+          "loop_unnecessary_executions": 215,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.71,
+            "median": 23.005,
+            "p95": 45.081
+          },
+          "rerun_latency_ms": {
+            "n": 322,
+            "mean": 18.013,
+            "median": 14.087,
+            "p95": 34.618
+          },
+          "modelled_human_minutes_per_case": 7.03
+        },
+        "C_minus_targeted": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 238,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.9917,
+            "recall": 0.9958,
+            "f1": 0.9937
+          },
+          "detection_root_findings": {
+            "tp": 238,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.9958,
+            "recall": 0.9958,
+            "f1": 0.9958
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "tp": 11,
+              "fn": 1,
+              "precision": 1.0,
+              "recall": 0.9167,
+              "f1": 0.9565
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 16,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 7,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 10,
+              "fp": 1,
+              "precision": 0.9091,
+              "recall": 1.0,
+              "f1": 0.9524
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 18,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 19,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 57,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 163,
+            "total": 165,
+            "accuracy": 0.9879
+          },
+          "first_pass_status": {
+            "BLOCKED": 127,
+            "PREPARATION_COMPLETE": 73,
+            "NEEDS_REVIEW": 75
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 211,
+            "BLOCKED": 64
+          },
+          "first_pass_yield": 0.2655,
+          "first_pass_yield_clean_cases": 0.6636,
+          "review_rate": 0.7345,
+          "first_pass_tasks": 329,
+          "tasks_created_total": 329,
+          "tasks_without_injected_issue": 91,
+          "issue_coverage_by_tasks": {
+            "covered": 238,
+            "total": 239,
+            "recall": 0.9958
+          },
+          "false_clear_rate": 0.0,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 322,
+          "corrections": 141,
+          "decisions": 181,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 322,
+          "loop_stage_executions": 3542,
+          "loop_stage_reused": 0,
+          "loop_unnecessary_executions": 2396,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.865,
+            "median": 22.865,
+            "p95": 44.009
+          },
+          "rerun_latency_ms": {
+            "n": 322,
+            "mean": 35.871,
+            "median": 33.583,
+            "p95": 54.273
+          },
+          "modelled_human_minutes_per_case": 7.03
+        },
+        "C_minus_root_routing": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 238,
+            "fp": 2,
+            "fn": 1,
+            "precision": 0.9917,
+            "recall": 0.9958,
+            "f1": 0.9937
+          },
+          "detection_root_findings": {
+            "tp": 238,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.9958,
+            "recall": 0.9958,
+            "f1": 0.9958
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "tp": 11,
+              "fn": 1,
+              "precision": 1.0,
+              "recall": 0.9167,
+              "f1": 0.9565
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 16,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 7,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 10,
+              "fp": 1,
+              "precision": 0.9091,
+              "recall": 1.0,
+              "f1": 0.9524
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 18,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 10,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 19,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 57,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 163,
+            "total": 165,
+            "accuracy": 0.9879
+          },
+          "first_pass_status": {
+            "BLOCKED": 127,
+            "PREPARATION_COMPLETE": 73,
+            "NEEDS_REVIEW": 75
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 211,
+            "BLOCKED": 64
+          },
+          "first_pass_yield": 0.2655,
+          "first_pass_yield_clean_cases": 0.6636,
+          "review_rate": 0.7345,
+          "first_pass_tasks": 391,
+          "tasks_created_total": 391,
+          "tasks_without_injected_issue": 153,
+          "issue_coverage_by_tasks": {
+            "covered": 238,
+            "total": 239,
+            "recall": 0.9958
+          },
+          "false_clear_rate": 0.0,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 322,
+          "corrections": 141,
+          "decisions": 181,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 322,
+          "loop_stage_executions": 1361,
+          "loop_stage_reused": 299,
+          "loop_unnecessary_executions": 215,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.626,
+            "median": 22.733,
+            "p95": 42.398
+          },
+          "rerun_latency_ms": {
+            "n": 322,
+            "mean": 17.914,
+            "median": 14.312,
+            "p95": 33.48
+          },
+          "modelled_human_minutes_per_case": 7.03
+        }
+      },
+      "A_manual_model": {
+        "note": "MODELLED from ASSUMED durations; no detection metrics (no manual process was observed).",
+        "minutes_per_case": 156.73,
+        "minutes_per_case_x0_5": 78.37,
+        "minutes_per_case_x2": 313.47
+      }
+    },
+    "3": {
+      "base_db_sha256": "54e90e38e52881ceaf7a534cbbd2d591d7b0735ca5cd2be85c1be3b5f23f6792",
+      "dataset_files": {
+        "admin/claim_admin.csv": "09e2eedad7a3dc384d70cb649f3f23d0b63f84302cdffa296e5283ffd0200e18",
+        "admin/discharge_checklist.csv": "b370d4df470552f74e30f10f482d49250b7a1aadf9be9d7728e857d7d69f33d9",
+        "admin/historical_claims.csv": "772f485825c6ee9c11daf6318d81a5f98808e5d6112ce9ce28414a04b24f92b1",
+        "admin/hospital_bill_items.csv": "9de0395ddac7a52647c4dd5c283fb68d6c21f946107334839b3dfc4a5c3c749a",
+        "admin/member_policies.csv": "4ea08da50cf1100715ea1db66c51d5adedebd1b918c9c3ce05580bf2543820da",
+        "admin/tariff_inr.csv": "499d6973c9fef30aeb3cf01a3bc5975bb9070938b45aa8b79255baeb1cc3bf57",
+        "ground_truth/corrections.json": "5930491528c095c389c351ced422972901d2b2d550f9b2cb62d31e1bb06c236c",
+        "ground_truth/encounter_labels.csv": "68e5a331f54392cad41931973234a25721a49d19a579a893b9f74e2dc1e70973",
+        "ground_truth/injected_errors.csv": "c902bcebd750cb7f4e0e9cc81244eda58f509dbd8ea2bd076d4585be86ce23b6",
+        "note/discharge.csv": "3629d3074568926270657d3ee13135c1b9902a5579dfae97f0002a706d5d9855"
+      },
+      "scenario_classes": {
+        "normal": 103,
+        "single_fault": 103,
+        "multi_fault": 50,
+        "missing_information": 19
+      },
+      "arms": {
+        "B_sequential_full": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 252,
+            "fp": 6,
+            "fn": 2,
+            "precision": 0.9767,
+            "recall": 0.9921,
+            "f1": 0.9844
+          },
+          "detection_root_findings": {
+            "tp": 252,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.996,
+            "recall": 0.9921,
+            "f1": 0.9941
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "tp": 10,
+              "fn": 2,
+              "precision": 1.0,
+              "recall": 0.8333,
+              "f1": 0.9091
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 18,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 23,
+              "fp": 5,
+              "precision": 0.8214,
+              "recall": 1.0,
+              "f1": 0.902
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 20,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 15,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 61,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 169,
+            "total": 172,
+            "accuracy": 0.9826
+          },
+          "first_pass_status": {
+            "PREPARATION_COMPLETE": 74,
+            "BLOCKED": 139,
+            "NEEDS_REVIEW": 62
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 204,
+            "BLOCKED": 71
+          },
+          "first_pass_yield": 0.2691,
+          "first_pass_yield_clean_cases": 0.7184,
+          "review_rate": 0.7309,
+          "first_pass_tasks": 318,
+          "tasks_created_total": 318,
+          "tasks_without_injected_issue": 66,
+          "issue_coverage_by_tasks": {
+            "covered": 252,
+            "total": 254,
+            "recall": 0.9921
+          },
+          "false_clear_rate": 0.0,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 313,
+          "corrections": 153,
+          "decisions": 160,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 313,
+          "loop_stage_executions": 3443,
+          "loop_stage_reused": 0,
+          "loop_unnecessary_executions": 2289,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.185,
+            "median": 22.386,
+            "p95": 44.941
+          },
+          "rerun_latency_ms": {
+            "n": 313,
+            "mean": 35.529,
+            "median": 32.244,
+            "p95": 55.137
+          },
+          "modelled_human_minutes_per_case": 6.83
+        },
+        "C_parallel_targeted": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 252,
+            "fp": 6,
+            "fn": 2,
+            "precision": 0.9767,
+            "recall": 0.9921,
+            "f1": 0.9844
+          },
+          "detection_root_findings": {
+            "tp": 252,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.996,
+            "recall": 0.9921,
+            "f1": 0.9941
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "tp": 10,
+              "fn": 2,
+              "precision": 1.0,
+              "recall": 0.8333,
+              "f1": 0.9091
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 18,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 23,
+              "fp": 5,
+              "precision": 0.8214,
+              "recall": 1.0,
+              "f1": 0.902
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 20,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 15,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 61,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 169,
+            "total": 172,
+            "accuracy": 0.9826
+          },
+          "first_pass_status": {
+            "PREPARATION_COMPLETE": 74,
+            "BLOCKED": 139,
+            "NEEDS_REVIEW": 62
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 204,
+            "BLOCKED": 71
+          },
+          "first_pass_yield": 0.2691,
+          "first_pass_yield_clean_cases": 0.7184,
+          "review_rate": 0.7309,
+          "first_pass_tasks": 318,
+          "tasks_created_total": 318,
+          "tasks_without_injected_issue": 66,
+          "issue_coverage_by_tasks": {
+            "covered": 252,
+            "total": 254,
+            "recall": 0.9921
+          },
+          "false_clear_rate": 0.0,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 313,
+          "corrections": 153,
+          "decisions": 160,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 313,
+          "loop_stage_executions": 1378,
+          "loop_stage_reused": 370,
+          "loop_unnecessary_executions": 224,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.587,
+            "median": 22.43,
+            "p95": 44.547
+          },
+          "rerun_latency_ms": {
+            "n": 313,
+            "mean": 18.104,
+            "median": 16.476,
+            "p95": 30.226
+          },
+          "modelled_human_minutes_per_case": 6.83
+        },
+        "C_minus_targeted": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 252,
+            "fp": 6,
+            "fn": 2,
+            "precision": 0.9767,
+            "recall": 0.9921,
+            "f1": 0.9844
+          },
+          "detection_root_findings": {
+            "tp": 252,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.996,
+            "recall": 0.9921,
+            "f1": 0.9941
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "tp": 10,
+              "fn": 2,
+              "precision": 1.0,
+              "recall": 0.8333,
+              "f1": 0.9091
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 18,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 23,
+              "fp": 5,
+              "precision": 0.8214,
+              "recall": 1.0,
+              "f1": 0.902
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 20,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 15,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 61,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 169,
+            "total": 172,
+            "accuracy": 0.9826
+          },
+          "first_pass_status": {
+            "PREPARATION_COMPLETE": 74,
+            "BLOCKED": 139,
+            "NEEDS_REVIEW": 62
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 204,
+            "BLOCKED": 71
+          },
+          "first_pass_yield": 0.2691,
+          "first_pass_yield_clean_cases": 0.7184,
+          "review_rate": 0.7309,
+          "first_pass_tasks": 318,
+          "tasks_created_total": 318,
+          "tasks_without_injected_issue": 66,
+          "issue_coverage_by_tasks": {
+            "covered": 252,
+            "total": 254,
+            "recall": 0.9921
+          },
+          "false_clear_rate": 0.0,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 313,
+          "corrections": 153,
+          "decisions": 160,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 313,
+          "loop_stage_executions": 3443,
+          "loop_stage_reused": 0,
+          "loop_unnecessary_executions": 2289,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.617,
+            "median": 22.672,
+            "p95": 43.442
+          },
+          "rerun_latency_ms": {
+            "n": 313,
+            "mean": 36.268,
+            "median": 32.29,
+            "p95": 59.197
+          },
+          "modelled_human_minutes_per_case": 6.83
+        },
+        "C_minus_root_routing": {
+          "n_cases": 275,
+          "detection_all_findings": {
+            "tp": 252,
+            "fp": 6,
+            "fn": 2,
+            "precision": 0.9767,
+            "recall": 0.9921,
+            "f1": 0.9844
+          },
+          "detection_root_findings": {
+            "tp": 252,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.996,
+            "recall": 0.9921,
+            "f1": 0.9941
+          },
+          "detection_by_type": {
+            "BILLED_PROCEDURE_NOT_DOCUMENTED": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BILL_ARITHMETIC_ERROR": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CODED_DX_NOT_IN_NOTE": {
+              "tp": 10,
+              "fn": 2,
+              "precision": 1.0,
+              "recall": 0.8333,
+              "f1": 0.9091
+            },
+            "DUPLICATE_BILL_ITEM": {
+              "tp": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_FILING": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LATE_NOTIFICATION": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "LOS_BILLING_MISMATCH": {
+              "tp": 18,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CHARGE": {
+              "tp": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_CLAIM_DOCUMENT": {
+              "tp": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "MISSING_KYC_DOCUMENT": {
+              "tp": 23,
+              "fp": 5,
+              "precision": 0.8214,
+              "recall": 1.0,
+              "f1": 0.902
+            },
+            "NOTE_DX_NOT_CODED": {
+              "tp": 20,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "POLICY_INACTIVE": {
+              "tp": 9,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PREAUTH_LEAD_TIME_SHORT": {
+              "tp": 3,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PROCEDURE_DATE_OUT_OF_RANGE": {
+              "fp": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": null
+            },
+            "READINESS_ITEM_INCOMPLETE": {
+              "tp": 8,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "RECONCILIATION_RESIDUAL": {
+              "tp": 11,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "UNIT_PRICE_ABOVE_TARIFF": {
+              "tp": 15,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "WAITING_PERIOD_NOT_MET": {
+              "tp": 61,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "root_blocker_exact_match": {
+            "correct": 169,
+            "total": 172,
+            "accuracy": 0.9826
+          },
+          "first_pass_status": {
+            "PREPARATION_COMPLETE": 74,
+            "BLOCKED": 139,
+            "NEEDS_REVIEW": 62
+          },
+          "final_status": {
+            "PREPARATION_COMPLETE": 204,
+            "BLOCKED": 71
+          },
+          "first_pass_yield": 0.2691,
+          "first_pass_yield_clean_cases": 0.7184,
+          "review_rate": 0.7309,
+          "first_pass_tasks": 376,
+          "tasks_created_total": 376,
+          "tasks_without_injected_issue": 124,
+          "issue_coverage_by_tasks": {
+            "covered": 252,
+            "total": 254,
+            "recall": 0.9921
+          },
+          "false_clear_rate": 0.0,
+          "legitimate_outliers": {
+            "n": 0,
+            "blocked": 0
+          },
+          "review_actions": 313,
+          "corrections": 153,
+          "decisions": 160,
+          "first_pass_stage_executions": 3025,
+          "loop_runs": 313,
+          "loop_stage_executions": 1378,
+          "loop_stage_reused": 370,
+          "loop_unnecessary_executions": 224,
+          "first_pass_latency_ms": {
+            "n": 275,
+            "mean": 25.181,
+            "median": 22.627,
+            "p95": 40.668
+          },
+          "rerun_latency_ms": {
+            "n": 313,
+            "mean": 18.114,
+            "median": 15.778,
+            "p95": 31.031
+          },
+          "modelled_human_minutes_per_case": 6.83
+        }
+      },
+      "A_manual_model": {
+        "note": "MODELLED from ASSUMED durations; no detection metrics (no manual process was observed).",
+        "minutes_per_case": 160.68,
+        "minutes_per_case_x0_5": 80.34,
+        "minutes_per_case_x2": 321.37
+      }
+    }
+  },
+  "elapsed_s": 455.5,
+  "aggregate": {
+    "B_sequential_full": {
+      "detection_all_findings.f1": {
+        "mean": 0.9862,
+        "sd": 0.0067
+      },
+      "detection_all_findings.recall": {
+        "mean": 0.9879,
+        "sd": 0.0106
+      },
+      "detection_all_findings.precision": {
+        "mean": 0.9846,
+        "sd": 0.0075
+      },
+      "detection_root_findings.precision": {
+        "mean": 0.9956,
+        "sd": 0.0005
+      },
+      "root_blocker_exact_match.accuracy": {
+        "mean": 0.9766,
+        "sd": 0.0153
+      },
+      "issue_coverage_by_tasks.recall": {
+        "mean": 0.9863,
+        "sd": 0.0134
+      },
+      "first_pass_yield": {
+        "mean": 0.2715,
+        "sd": 0.0076
+      },
+      "review_rate": {
+        "mean": 0.7285,
+        "sd": 0.0076
+      },
+      "first_pass_tasks": {
+        "mean": 318.3333,
+        "sd": 10.504
+      },
+      "tasks_created_total": {
+        "mean": 318.6667,
+        "sd": 10.0167
+      },
+      "review_actions": {
+        "mean": 313.3333,
+        "sd": 8.5049
+      },
+      "loop_stage_executions": {
+        "mean": 3446.6667,
+        "sd": 93.5539
+      },
+      "loop_unnecessary_executions": {
+        "mean": 2333,
+        "sd": 55.9732
+      },
+      "loop_stage_reused": {
+        "mean": 0,
+        "sd": 0.0
+      },
+      "first_pass_stage_executions": {
+        "mean": 3025,
+        "sd": 0.0
+      },
+      "false_clear_rate": {
+        "mean": 0.0045,
+        "sd": 0.0079
+      },
+      "tasks_without_injected_issue": {
+        "mean": 88,
+        "sd": 20.664
+      },
+      "first_pass_latency_ms.median": {
+        "mean": 22.4407,
+        "sd": 0.066
+      },
+      "first_pass_latency_ms.p95": {
+        "mean": 44.2173,
+        "sd": 2.4114
+      },
+      "rerun_latency_ms.median": {
+        "mean": 32.2163,
+        "sd": 0.3433
+      },
+      "modelled_human_minutes_per_case": {
+        "mean": 6.8367,
+        "sd": 0.1901
+      }
+    },
+    "C_parallel_targeted": {
+      "detection_all_findings.f1": {
+        "mean": 0.9862,
+        "sd": 0.0067
+      },
+      "detection_all_findings.recall": {
+        "mean": 0.9879,
+        "sd": 0.0106
+      },
+      "detection_all_findings.precision": {
+        "mean": 0.9846,
+        "sd": 0.0075
+      },
+      "detection_root_findings.precision": {
+        "mean": 0.9956,
+        "sd": 0.0005
+      },
+      "root_blocker_exact_match.accuracy": {
+        "mean": 0.9766,
+        "sd": 0.0153
+      },
+      "issue_coverage_by_tasks.recall": {
+        "mean": 0.9863,
+        "sd": 0.0134
+      },
+      "first_pass_yield": {
+        "mean": 0.2715,
+        "sd": 0.0076
+      },
+      "review_rate": {
+        "mean": 0.7285,
+        "sd": 0.0076
+      },
+      "first_pass_tasks": {
+        "mean": 318.3333,
+        "sd": 10.504
+      },
+      "tasks_created_total": {
+        "mean": 318.6667,
+        "sd": 10.0167
+      },
+      "review_actions": {
+        "mean": 313.3333,
+        "sd": 8.5049
+      },
+      "loop_stage_executions": {
+        "mean": 1324.6667,
+        "sd": 78.1174
+      },
+      "loop_unnecessary_executions": {
+        "mean": 211,
+        "sd": 15.3948
+      },
+      "loop_stage_reused": {
+        "mean": 316.6667,
+        "sd": 47.0567
+      },
+      "first_pass_stage_executions": {
+        "mean": 3025,
+        "sd": 0.0
+      },
+      "false_clear_rate": {
+        "mean": 0.0045,
+        "sd": 0.0079
+      },
+      "tasks_without_injected_issue": {
+        "mean": 88,
+        "sd": 20.664
+      },
+      "first_pass_latency_ms.median": {
+        "mean": 22.6587,
+        "sd": 0.305
+      },
+      "first_pass_latency_ms.p95": {
+        "mean": 44.007,
+        "sd": 1.423
+      },
+      "rerun_latency_ms.median": {
+        "mean": 14.766,
+        "sd": 1.4913
+      },
+      "modelled_human_minutes_per_case": {
+        "mean": 6.8367,
+        "sd": 0.1901
+      }
+    },
+    "C_minus_targeted": {
+      "detection_all_findings.f1": {
+        "mean": 0.9862,
+        "sd": 0.0067
+      },
+      "detection_all_findings.recall": {
+        "mean": 0.9879,
+        "sd": 0.0106
+      },
+      "detection_all_findings.precision": {
+        "mean": 0.9846,
+        "sd": 0.0075
+      },
+      "detection_root_findings.precision": {
+        "mean": 0.9956,
+        "sd": 0.0005
+      },
+      "root_blocker_exact_match.accuracy": {
+        "mean": 0.9766,
+        "sd": 0.0153
+      },
+      "issue_coverage_by_tasks.recall": {
+        "mean": 0.9863,
+        "sd": 0.0134
+      },
+      "first_pass_yield": {
+        "mean": 0.2715,
+        "sd": 0.0076
+      },
+      "review_rate": {
+        "mean": 0.7285,
+        "sd": 0.0076
+      },
+      "first_pass_tasks": {
+        "mean": 318.3333,
+        "sd": 10.504
+      },
+      "tasks_created_total": {
+        "mean": 318.6667,
+        "sd": 10.0167
+      },
+      "review_actions": {
+        "mean": 313.3333,
+        "sd": 8.5049
+      },
+      "loop_stage_executions": {
+        "mean": 3446.6667,
+        "sd": 93.5539
+      },
+      "loop_unnecessary_executions": {
+        "mean": 2333,
+        "sd": 55.9732
+      },
+      "loop_stage_reused": {
+        "mean": 0,
+        "sd": 0.0
+      },
+      "first_pass_stage_executions": {
+        "mean": 3025,
+        "sd": 0.0
+      },
+      "false_clear_rate": {
+        "mean": 0.0045,
+        "sd": 0.0079
+      },
+      "tasks_without_injected_issue": {
+        "mean": 88,
+        "sd": 20.664
+      },
+      "first_pass_latency_ms.median": {
+        "mean": 22.7413,
+        "sd": 0.1074
+      },
+      "first_pass_latency_ms.p95": {
+        "mean": 43.667,
+        "sd": 0.3011
+      },
+      "rerun_latency_ms.median": {
+        "mean": 32.8187,
+        "sd": 0.678
+      },
+      "modelled_human_minutes_per_case": {
+        "mean": 6.8367,
+        "sd": 0.1901
+      }
+    },
+    "C_minus_root_routing": {
+      "detection_all_findings.f1": {
+        "mean": 0.9862,
+        "sd": 0.0067
+      },
+      "detection_all_findings.recall": {
+        "mean": 0.9879,
+        "sd": 0.0106
+      },
+      "detection_all_findings.precision": {
+        "mean": 0.9846,
+        "sd": 0.0075
+      },
+      "detection_root_findings.precision": {
+        "mean": 0.9956,
+        "sd": 0.0005
+      },
+      "root_blocker_exact_match.accuracy": {
+        "mean": 0.9766,
+        "sd": 0.0153
+      },
+      "issue_coverage_by_tasks.recall": {
+        "mean": 0.9879,
+        "sd": 0.0106
+      },
+      "first_pass_yield": {
+        "mean": 0.2715,
+        "sd": 0.0076
+      },
+      "review_rate": {
+        "mean": 0.7285,
+        "sd": 0.0076
+      },
+      "first_pass_tasks": {
+        "mean": 375.3333,
+        "sd": 16.0104
+      },
+      "tasks_created_total": {
+        "mean": 375.3333,
+        "sd": 16.0104
+      },
+      "review_actions": {
+        "mean": 313.3333,
+        "sd": 8.5049
+      },
+      "loop_stage_executions": {
+        "mean": 1324.6667,
+        "sd": 78.1174
+      },
+      "loop_unnecessary_executions": {
+        "mean": 211,
+        "sd": 15.3948
+      },
+      "loop_stage_reused": {
+        "mean": 316.6667,
+        "sd": 47.0567
+      },
+      "first_pass_stage_executions": {
+        "mean": 3025,
+        "sd": 0.0
+      },
+      "false_clear_rate": {
+        "mean": 0.0045,
+        "sd": 0.0079
+      },
+      "tasks_without_injected_issue": {
+        "mean": 144.6667,
+        "sd": 18.0093
+      },
+      "first_pass_latency_ms.median": {
+        "mean": 22.729,
+        "sd": 0.1001
+      },
+      "first_pass_latency_ms.p95": {
+        "mean": 41.6973,
+        "sd": 0.9106
+      },
+      "rerun_latency_ms.median": {
+        "mean": 14.648,
+        "sd": 1.005
+      },
+      "modelled_human_minutes_per_case": {
+        "mean": 6.8367,
+        "sd": 0.1901
+      }
+    },
+    "A_manual_model": {
+      "minutes_per_case": {
+        "mean": 156.08
+      }
+    }
+  }
+}

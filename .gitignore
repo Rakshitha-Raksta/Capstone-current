@@ -1,0 +1,47 @@
+# Restricted / licensed clinical data -- never commit (download with scripts/download_mimic_demo.py)
+data/mimic_iv/demo/
+data/mimic_iv/full/
+data/synthetic/admin_for_mimic*/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Runtime databases (recreate with scripts/setup_demo.py) and logs
+*.db
+*.db-journal
+*.sqlite3
+*.log
+
+# Experiment scratch output. Curated runs are committed under results/experiments/;
+# run_<id>/ folders are ad-hoc runs started from the UI's Experiments page.
+results/tmp*
+results/experiments/run_*/
+results/experiments/*/*.db
+
+# Experiments on real MIMIC-IV encounters: commit only aggregate summary.json/verification.json,
+# never per-case outputs or derived data keyed on real hadm_ids.
+results/experiments/**/mimic*/data_seed*/
+results/experiments/**/mimic*/raw_*.json
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/test-results/
+e2e/.artifacts/
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

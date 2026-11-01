@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.join(BASE, "backend"))
 os.environ.setdefault("DATABASE_URL", "sqlite:///./synthetic_check.db")
 
 from app.database.db import engine, SessionLocal
-from app.models.models import Base, Claim, PolicyVersion
+from app.models.models import Claim, PolicyVersion
 from app.database import seed as seed_module
 from app.rules.engine import validate_claim
 

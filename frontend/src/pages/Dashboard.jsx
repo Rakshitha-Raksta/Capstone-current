@@ -54,7 +54,7 @@ export default function Dashboard() {
           <tbody>
             {claims.slice(0, 8).map(c => (
               <tr key={c.claim_id} className="clickable">
-                <td><Link to={`/claims/${c.claim_id}`}>{c.claim_ref}</Link></td>
+                <td><Link to={`/legacy/claims/${c.claim_id}`}>{c.claim_ref}</Link></td>
                 <td>{c.insurer} — {c.product}</td>
                 <td>{c.policy_version_id}</td>
                 <td>{c.admission_date}</td>

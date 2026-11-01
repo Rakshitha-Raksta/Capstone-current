@@ -1,0 +1,678 @@
+{
+  "directory": "results/experiments/main_heldout",
+  "seeds": [
+    "4",
+    "5",
+    "6"
+  ],
+  "arms": [
+    "B_sequential_full",
+    "C_minus_root_routing",
+    "C_minus_targeted",
+    "C_parallel_targeted"
+  ],
+  "base_db_sha256_per_seed": {
+    "4": "0f1e601555dfdb041cdc9da47447b503618ba8721995c67edcb4c223b6abb6ab",
+    "5": "530f3add892affb0c7efeed0df6ad415be6177e393e6aa9cfaca4f7a475b5868",
+    "6": "0a8212cef893f58076cc18ec859ab15f2d9e6484f2a0e07307679573e69c09c8"
+  },
+  "mismatches": [],
+  "completeness_problems": [],
+  "loop_outcomes": {
+    "B_sequential_full/seed4": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "B_sequential_full/seed5": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "B_sequential_full/seed6": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed4": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed5": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_parallel_targeted/seed6": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_targeted/seed4": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_targeted/seed5": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_targeted/seed6": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed4": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed5": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    },
+    "C_minus_root_routing/seed6": {
+      "capped": [],
+      "ended_needs_review": [],
+      "blocked_without_policy_blocker": [],
+      "blocked_by_documented_source_anomaly": [],
+      "error_status": []
+    }
+  },
+  "documented_source_anomalies": {
+    "registry": "data/mimic_iv/known_source_anomalies.json",
+    "source_checks": {},
+    "expected_outcomes": []
+  },
+  "cohort_equivalence": {
+    "4": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    },
+    "5": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    },
+    "6": {
+      "reference_arm": "B_sequential_full",
+      "differences": [],
+      "n_differences": 0
+    }
+  },
+  "root_blocker_errors": [
+    {
+      "seed": "4",
+      "hadm_id": "98000194",
+      "injected": [
+        "CODED_DX_NOT_IN_NOTE",
+        "UNIT_PRICE_ABOVE_TARIFF"
+      ],
+      "roots": [
+        "UNIT_PRICE_ABOVE_TARIFF"
+      ],
+      "missed_entirely": [
+        "CODED_DX_NOT_IN_NOTE"
+      ],
+      "found_only_as_consequence": [],
+      "spurious_roots": [],
+      "first_status": "BLOCKED"
+    }
+  ],
+  "recomputed": {
+    "B_sequential_full": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          1804,
+          1694,
+          1782
+        ],
+        "mean": 1760,
+        "sd": 58.2065
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          1126,
+          1111,
+          1061
+        ],
+        "mean": 1099.3333,
+        "sd": 34.0343
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          164,
+          154,
+          162
+        ],
+        "mean": 160,
+        "sd": 5.2915
+      },
+      "review_actions": {
+        "per_seed": [
+          164,
+          154,
+          162
+        ],
+        "mean": 160,
+        "sd": 5.2915
+      },
+      "issues": {
+        "per_seed": [
+          130,
+          121,
+          134
+        ],
+        "mean": 128.3333,
+        "sd": 6.6583
+      },
+      "covered": {
+        "per_seed": [
+          129,
+          121,
+          134
+        ],
+        "mean": 128,
+        "sd": 6.5574
+      },
+      "tp": {
+        "per_seed": [
+          129,
+          121,
+          134
+        ],
+        "mean": 128,
+        "sd": 6.5574
+      },
+      "fp": {
+        "per_seed": [
+          7,
+          6,
+          10
+        ],
+        "mean": 7.6667,
+        "sd": 2.0817
+      },
+      "fn": {
+        "per_seed": [
+          1,
+          0,
+          0
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          92,
+          88,
+          95
+        ],
+        "mean": 91.6667,
+        "sd": 3.5119
+      },
+      "dirty": {
+        "per_seed": [
+          93,
+          88,
+          95
+        ],
+        "mean": 92,
+        "sd": 3.6056
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      }
+    },
+    "C_minus_root_routing": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          796,
+          694,
+          852
+        ],
+        "mean": 780.6667,
+        "sd": 80.1083
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          118,
+          111,
+          131
+        ],
+        "mean": 120,
+        "sd": 10.1489
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          214,
+          183,
+          223
+        ],
+        "mean": 206.6667,
+        "sd": 20.9841
+      },
+      "review_actions": {
+        "per_seed": [
+          164,
+          154,
+          162
+        ],
+        "mean": 160,
+        "sd": 5.2915
+      },
+      "issues": {
+        "per_seed": [
+          130,
+          121,
+          134
+        ],
+        "mean": 128.3333,
+        "sd": 6.6583
+      },
+      "covered": {
+        "per_seed": [
+          129,
+          121,
+          134
+        ],
+        "mean": 128,
+        "sd": 6.5574
+      },
+      "tp": {
+        "per_seed": [
+          129,
+          121,
+          134
+        ],
+        "mean": 128,
+        "sd": 6.5574
+      },
+      "fp": {
+        "per_seed": [
+          7,
+          6,
+          10
+        ],
+        "mean": 7.6667,
+        "sd": 2.0817
+      },
+      "fn": {
+        "per_seed": [
+          1,
+          0,
+          0
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          92,
+          88,
+          95
+        ],
+        "mean": 91.6667,
+        "sd": 3.5119
+      },
+      "dirty": {
+        "per_seed": [
+          93,
+          88,
+          95
+        ],
+        "mean": 92,
+        "sd": 3.6056
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      }
+    },
+    "C_minus_targeted": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          1804,
+          1694,
+          1782
+        ],
+        "mean": 1760,
+        "sd": 58.2065
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          1126,
+          1111,
+          1061
+        ],
+        "mean": 1099.3333,
+        "sd": 34.0343
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          164,
+          154,
+          162
+        ],
+        "mean": 160,
+        "sd": 5.2915
+      },
+      "review_actions": {
+        "per_seed": [
+          164,
+          154,
+          162
+        ],
+        "mean": 160,
+        "sd": 5.2915
+      },
+      "issues": {
+        "per_seed": [
+          130,
+          121,
+          134
+        ],
+        "mean": 128.3333,
+        "sd": 6.6583
+      },
+      "covered": {
+        "per_seed": [
+          129,
+          121,
+          134
+        ],
+        "mean": 128,
+        "sd": 6.5574
+      },
+      "tp": {
+        "per_seed": [
+          129,
+          121,
+          134
+        ],
+        "mean": 128,
+        "sd": 6.5574
+      },
+      "fp": {
+        "per_seed": [
+          7,
+          6,
+          10
+        ],
+        "mean": 7.6667,
+        "sd": 2.0817
+      },
+      "fn": {
+        "per_seed": [
+          1,
+          0,
+          0
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          92,
+          88,
+          95
+        ],
+        "mean": 91.6667,
+        "sd": 3.5119
+      },
+      "dirty": {
+        "per_seed": [
+          93,
+          88,
+          95
+        ],
+        "mean": 92,
+        "sd": 3.6056
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      }
+    },
+    "C_parallel_targeted": {
+      "cases": {
+        "per_seed": [
+          200,
+          200,
+          200
+        ],
+        "mean": 200,
+        "sd": 0.0
+      },
+      "loop_stage_executions": {
+        "per_seed": [
+          796,
+          694,
+          852
+        ],
+        "mean": 780.6667,
+        "sd": 80.1083
+      },
+      "loop_unnecessary_executions": {
+        "per_seed": [
+          118,
+          111,
+          131
+        ],
+        "mean": 120,
+        "sd": 10.1489
+      },
+      "first_pass_tasks": {
+        "per_seed": [
+          164,
+          154,
+          162
+        ],
+        "mean": 160,
+        "sd": 5.2915
+      },
+      "review_actions": {
+        "per_seed": [
+          164,
+          154,
+          162
+        ],
+        "mean": 160,
+        "sd": 5.2915
+      },
+      "issues": {
+        "per_seed": [
+          130,
+          121,
+          134
+        ],
+        "mean": 128.3333,
+        "sd": 6.6583
+      },
+      "covered": {
+        "per_seed": [
+          129,
+          121,
+          134
+        ],
+        "mean": 128,
+        "sd": 6.5574
+      },
+      "tp": {
+        "per_seed": [
+          129,
+          121,
+          134
+        ],
+        "mean": 128,
+        "sd": 6.5574
+      },
+      "fp": {
+        "per_seed": [
+          7,
+          6,
+          10
+        ],
+        "mean": 7.6667,
+        "sd": 2.0817
+      },
+      "fn": {
+        "per_seed": [
+          1,
+          0,
+          0
+        ],
+        "mean": 0.3333,
+        "sd": 0.5774
+      },
+      "misattributed": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      },
+      "exact": {
+        "per_seed": [
+          92,
+          88,
+          95
+        ],
+        "mean": 91.6667,
+        "sd": 3.5119
+      },
+      "dirty": {
+        "per_seed": [
+          93,
+          88,
+          95
+        ],
+        "mean": 92,
+        "sd": 3.6056
+      },
+      "false_clear": {
+        "per_seed": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0,
+        "sd": 0.0
+      }
+    }
+  },
+  "derived": {
+    "loop_execution_reduction_C_vs_B": 0.5564,
+    "unnecessary_reduction_C_vs_B": 0.8908,
+    "task_reduction_root_vs_all_findings": 0.2258,
+    "coverage_root_routing": 0.9974,
+    "coverage_all_findings": 0.9974,
+    "issues_total": 385,
+    "misattributed_issues_total": 0,
+    "detection_recall_pooled": 0.9974,
+    "detection_precision_pooled": 0.9435,
+    "false_clear_total": 0,
+    "faulty_cases_total": 276
+  },
+  "notes": [
+    "loop outcomes are inferred from final status and action counts (the raw output does not record tasks left open)"
+  ]
+}
