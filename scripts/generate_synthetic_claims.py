@@ -111,7 +111,7 @@ def main():
         "BOUNDARY_UNDER", claim_type="EMERGENCY",
         admission_date="2026-01-01", notification_date="2026-01-01", expected_severity="PASS")
     # NOTE: Claim.admission_date/notification_date are Date (not DateTime)
-    # columns in this session's schema, so day-level granularity cannot
+    # columns in the validator schema, so day-level granularity cannot
     # represent "25 hours" distinctly from "24 hours" (both round to a
     # 1-day gap). This boundary case therefore uses a clearly-over-24h gap
     # (2 days = 48h) instead of a fabricated sub-day precision the current

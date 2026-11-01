@@ -8,15 +8,13 @@ Provider abstraction: if no LLM API key is configured in the environment,
 this falls back to a purely EXTRACTIVE answer (the retrieved passage
 itself, verbatim, with a short deterministic lead-in) -- this requires no
 network call and cannot hallucinate, since it never generates new text,
-only surfaces real retrieved text. This is the default for this project
-since no LLM provider was previously configured anywhere in the codebase
-(verified by inspection) and no API key should be assumed available.
+only surfaces real retrieved text. Extractive mode is the default.
 
-If OPENAI_API_KEY or ANTHROPIC_API_KEY is present in the environment, the
-corresponding provider is used instead to produce a more natural-language
-summary of the SAME retrieved passages -- but even then, the system
-prompt explicitly forbids using outside knowledge or inferring missing
-terms, per the project's requirement.
+If ANTHROPIC_API_KEY or OPENAI_API_KEY is present in the environment (and
+the matching `anthropic` or `openai` package is installed), that provider
+produces a natural-language summary of the SAME retrieved passages. The
+system prompt forbids outside knowledge and inferring missing terms. Any
+provider error, including a missing package, falls back to extractive mode.
 """
 import os
 from abc import ABC, abstractmethod

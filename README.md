@@ -394,7 +394,7 @@ to `.env` for Docker (`.env` is git-ignored).
 | `MAX_REQUEST_BYTES` | `262144` | Request-size limit |
 | `AUTO_MIGRATE` | `true` | Run Alembic migrations at start-up |
 | `LOG_LEVEL` | `INFO` | Log level (JSON request logs) |
-| `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` | unset | Optional LLM summary in the policy explainer only. Leave unset for extractive answers, and never use it with credentialed MIMIC data |
+| `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` | unset | Optional LLM summary in the policy explainer only (also `pip install anthropic` or `openai`; without the package it stays extractive). Leave unset for extractive answers, and never use it with credentialed MIMIC data |
 | `TEST_DATABASE_URL` | unset | Run the backend tests against PostgreSQL |
 | `E2E_PYTHON`, `E2E_BROWSER` | current Python, `chrome` | Interpreter and browser for the end-to-end tests |
 

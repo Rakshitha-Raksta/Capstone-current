@@ -6,10 +6,10 @@ duplicated logic):
   - /api/*        (original routes, kept so the 18 existing pytest tests
                     that reference them keep passing unmodified)
   - /health, /policies, /claims, ...  (root-level routes matching the
-                    exact contract requested: nested source.document /
+                    validation-result contract: nested source.document /
                     source.page in every validation result)
 
-Product description (per instruction): "Explainable Pre-Submission Health
+Original validator scope: "Explainable Pre-Submission Health
 Insurance Claim Rule Validator" -- NOT an insurer approval/rejection
 predictor, NOT connected to NHCX. Checks a claim against documented
 policy rules and returns PASS / WARNING / PARTIAL_DEDUCTION / FAIL /
@@ -30,7 +30,7 @@ from app.rules.engine import validate_claim
 from app.api.qa import router as qa_router
 
 # Maps document_id (as stored in source_documents.csv / Document.document_id)
-# to the real extracted-text file this session actually produced. Used only
+# to its extracted-text file under data/raw/. Used only
 # by GET /documents/{document_id}/text (screen 8 / rule-evidence viewer) --
 # reads the file that already exists on disk, never fabricates text.
 _DATA_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "data"))
@@ -349,7 +349,7 @@ def get_document_text(document_id: str, db: Session = Depends(get_db)):
     """Serves the REAL extracted-text file for a source document (screen 8 /
     provenance viewer). Reads from disk; never fabricates or paraphrases
     the text. Returns 404 with a clear reason if the document_id is
-    unknown or its file is genuinely missing from this session's dataset."""
+    unknown or its file is missing from the dataset."""
     doc = db.query(Document).filter_by(document_id=document_id).first()
     if not doc:
         raise HTTPException(404, f"Unknown document_id: {document_id}")

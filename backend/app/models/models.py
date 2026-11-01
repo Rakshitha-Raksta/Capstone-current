@@ -1,11 +1,10 @@
 """
 SQLAlchemy models for the Provenance-First Indian Health Insurance Claim Validator.
 
-SCOPE NOTE: Uses SQLite (not Postgres) for this session's implementation pass.
+SCOPE NOTE: Uses SQLite by default; PostgreSQL is supported through DATABASE_URL.
 Rationale: no separate DB server process needed, same SQLAlchemy ORM layer,
 trivially swappable to Postgres later by changing the connection string in
-database/db.py. Documented here rather than silently deviating from the
-original Postgres instruction.
+database/db.py.
 """
 from sqlalchemy import (
     Column, Integer, String, Text, Date, DateTime, ForeignKey, Numeric, Boolean

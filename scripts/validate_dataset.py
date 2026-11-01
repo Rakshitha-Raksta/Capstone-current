@@ -31,7 +31,7 @@ def main():
         if d["hash_type"] == "EXTRACTED_TEXT":
             warnings.append(
                 f"{d['document_id']}: hash_type=EXTRACTED_TEXT (genuine environment limitation -- "
-                f"no raw PDF byte access in this session; see source_documents.csv notes)"
+                f"original PDF bytes were not archived; see source_documents.csv notes)"
             )
         if not d["sha256"] or len(d["sha256"]) != 64:
             errors.append(f"{d['document_id']}: sha256 missing or malformed")

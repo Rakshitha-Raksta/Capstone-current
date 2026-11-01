@@ -6,8 +6,7 @@ embedding API because:
   - the corpus here is tiny (a few dozen page-chunks), where TF-IDF
     performs perfectly adequately and avoids pulling in a multi-hundred-MB
     torch/transformers dependency for a project this size
-  - this satisfies the "local embedding solution preferred, do not add
-    unnecessary infrastructure" instruction directly
+  - it keeps the explainer local and adds no extra infrastructure
 
 This module ONLY builds/loads the similarity index. It has no knowledge
 of "answers" or LLMs -- that's answer.py's job.

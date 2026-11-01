@@ -11,7 +11,7 @@ import sys
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE, "backend"))
-os.environ.setdefault("DATABASE_URL", "sqlite:////home/claude/project/backend/claim_validator.db")
+os.environ.setdefault("DATABASE_URL", "sqlite:///" + os.path.join(BASE, "backend", "claim_validator.db").replace("\\", "/"))
 
 from app.rag.service import answer_question
 

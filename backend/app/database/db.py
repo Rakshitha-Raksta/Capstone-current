@@ -1,5 +1,5 @@
 """
-Database connection. Uses SQLite for this session's implementation
+Database connection. Uses SQLite by default
 (see models/models.py scope note). Swap DATABASE_URL to a Postgres DSN
 (e.g. postgresql+psycopg2://user:pass@localhost/dbname) to switch engines
 without any other code changes -- the ORM layer is engine-agnostic.
