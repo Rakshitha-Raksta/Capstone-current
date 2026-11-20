@@ -136,6 +136,7 @@ def recompute(raw, gt):
 ACTIONS = ("INITIAL", "CORRECTION", "REVIEW_DECISION")
 ARM_POLICY = {"B_sequential_full": "full", "C_minus_targeted": "full", "C_parallel_targeted": "targeted",
               "C_minus_root_routing": "targeted", "C_decision_aware_full": "decision_aware"}
+ALIGNMENT_EXCLUDED = {"C_minus_root_routing"}
 VOLATILE = {"id", "case_id", "stage_execution_id", "created_at", "updated_at", "resolved_at", "created_run_id",
             "run_id", "issue_id", "ts", "started_at", "finished_at"}
 TOL = 1e-3
@@ -332,6 +333,59 @@ def verify_new_records(d, summary, cfg_arms, cfg_seeds):
             if eq.get("equivalent") != (n > 0 and not any(diff.values())):
                 mismatches.append(dict(seed=seed, metric=f"equivalence.{name}.equivalent",
                                        recomputed=not any(diff.values()), summary=eq.get("equivalent")))
+    # arm order: the order recorded in the summary must match the order/position recorded in every raw case
+    report["arm_order"] = {}
+    for seed in cfg_seeds:
+        order = summary["seeds"][seed].get("arm_order")
+        if order is None:
+            report["arm_order"][seed] = "not available (recorded before arm-order balancing)"
+            continue
+        bad = 0
+        for pos, arm in enumerate(order):
+            f = os.path.join(d, f"raw_{arm}_seed{seed}.json")
+            if not os.path.exists(f):
+                continue
+            for h, r in json.load(open(f, encoding="utf-8")).items():
+                ae = r.get("arm_execution") or {}
+                if ae.get("arm_order") != order or ae.get("position") != pos:
+                    bad += 1
+        report["arm_order"][seed] = dict(order=order, inconsistent_case_records=bad)
+        if bad:
+            problems.append(f"seed {seed}: {bad} raw case records disagree with the recorded arm order")
+        if sorted(order) != sorted(a for a in cfg_arms if os.path.exists(os.path.join(d, f"raw_{a}_seed{seed}.json"))):
+            problems.append(f"seed {seed}: recorded arm order {order} does not match the arms that produced raw files")
+    # oracle action-sequence alignment across arms: arms that route root blockers only must perform the identical
+    # ordered sequence of oracle actions per encounter, otherwise execution counts are not comparable.
+    # C_minus_root_routing is excluded on purpose (routing all findings can legitimately change the oracle's path).
+    report["action_alignment"] = {}
+    for seed in cfg_seeds:
+        seqs = {}
+        for arm in cfg_arms:
+            f = os.path.join(d, f"raw_{arm}_seed{seed}.json")
+            if arm in ALIGNMENT_EXCLUDED or not os.path.exists(f):
+                continue
+            raw = json.load(open(f, encoding="utf-8"))
+            if any("runs" not in r for r in raw.values()):
+                seqs = None
+                break
+            seqs[arm] = {h: [(x["action"], x.get("correction_op"), x.get("decision")) for x in r["runs"]
+                             if x["action"] != "INITIAL"] for h, r in raw.items()}
+        if seqs is None:
+            report["action_alignment"][seed] = "not available (recorded before per-run trigger records)"
+            continue
+        arms_here = sorted(seqs)
+        bad = []
+        for a in arms_here[1:]:
+            ref = arms_here[0]
+            for h in sorted(set(seqs[ref]) | set(seqs[a])):
+                if seqs[ref].get(h) != seqs[a].get(h):
+                    bad.append(dict(arm_pair=[ref, a], hadm_id=h))
+        report["action_alignment"][seed] = dict(arms=arms_here, mismatches=len(bad), first=bad[:10])
+        for m in bad[:10]:
+            problems.append(f"seed {seed} encounter {m['hadm_id']}: oracle action sequence differs between "
+                            f"{m['arm_pair'][0]} and {m['arm_pair'][1]}")
+        if len(bad) > 10:
+            problems.append(f"seed {seed}: {len(bad) - 10} further action-sequence mismatches")
     # reductions recomputed from per-run records (sum over seeds = ratio of seed means, equal seeds per arm)
     C = "C_parallel_targeted"
     der = summary.get("derived") or {}
@@ -508,7 +562,8 @@ def main(argv=None):
                root_blocker_errors=rb_errors, recomputed=table, derived=derived,
                run_records=new_report["run_records"], root_attribution=new_report["root_attribution"],
                equivalence=new_report["equivalence"], latency_recomputed=new_report["latency"],
-               derived_from_run_records=new_report["derived"],
+               derived_from_run_records=new_report["derived"], arm_order=new_report.get("arm_order"),
+               action_alignment=new_report.get("action_alignment"),
                notes=["loop outcomes are inferred from final status and action counts (the raw output does "
                       "not record tasks left open)",
                       "run_records / root_attribution / equivalence checks apply only to runs recorded with "

@@ -27,6 +27,10 @@ def main():
                     help="default: the four original arms; C_decision_aware_full is opt-in")
     ap.add_argument("--mimic-root", default=None,
                     help="Run on real MIMIC-format encounters (e.g. data/mimic_iv/demo); admin layer is synthetic")
+    ap.add_argument("--fixed-arm-order", action="store_true",
+                    help="run arms in the given order instead of the per-seed Williams Latin square (diagnostics only)")
+    ap.add_argument("--no-warmup", action="store_true",
+                    help="skip the per-arm warm-up encounter (diagnostics only)")
     ap.add_argument("--overwrite", action="store_true",
                     help="Allow writing into a results folder that already holds a summary.json")
     a = ap.parse_args()
@@ -34,7 +38,8 @@ def main():
     if os.path.exists(os.path.join(out, "summary.json")) and not a.overwrite:
         sys.exit(f"{out} already contains recorded results; choose another --name or pass --overwrite.")
     res = run_experiment(out, seeds=a.seeds, n_encounters=a.n, error_rate=a.error_rate, arms=a.arms,
-                         log=lambda m: print(m, flush=True),
+                         log=lambda m: print(m, flush=True), warmup=not a.no_warmup,
+                         balance_order=not a.fixed_arm_order,
                          mimic_root=os.path.join(ROOT, a.mimic_root) if a.mimic_root and not os.path.isabs(a.mimic_root) else a.mimic_root)
     print(json.dumps(res["aggregate"], indent=2))
     print(f"elapsed {res['elapsed_s']} s -> {out}/summary.json")

@@ -62,6 +62,7 @@ from app.clearclaim.models import (
 from app.clearclaim.orchestrator import Orchestrator, audit
 from app.datasets.error_types import ERROR_TYPES
 from app.datasets.synthetic import generate_synthetic_dataset
+from app.experiments.arm_order import canonical as canonical_arms, order_for_seed, position_balance
 from app.experiments.equivalence import capture_case, compare_arms
 from app.experiments.metrics import root_attribution
 
@@ -81,6 +82,15 @@ ALL_ARMS = {**ARMS, **RESEARCH_ARMS}
 EQUIVALENCE_PAIRS = [("B_sequential_full", "C_parallel_targeted"), ("C_minus_targeted", "C_parallel_targeted"),
                      ("C_decision_aware_full", "C_parallel_targeted")]
 ACTIONS = ("INITIAL", "CORRECTION", "REVIEW_DECISION")
+TIMING_DEFINITIONS = dict(
+    wall_ms="pipeline only: orchestrator run start (after the run row is inserted) to the end of the last stage "
+            "wave; excludes outcome application, issue-memory synchronisation and the commit",
+    harness_action_ms="complete harness call that produced the run: pipeline + outcome application + issue-memory "
+                      "synchronisation + commit, and for loop runs also applying the correction or recording the "
+                      "decision; None when one call produced several runs",
+    warmup="one warm-up encounter per arm on the arm's own engine before measurement; its database changes are "
+           "discarded (file restored from the base copy, SHA-256 checked); reported under seeds.<s>.warmup only",
+    status="exploratory: single machine, SQLite; not a latency claim")
 
 # ASSUMED manual effort per stage per encounter, in minutes. These are NOT
 # measurements: no time-and-motion study was performed. They exist only to
@@ -199,14 +209,58 @@ def _new_runs(db, case_id, before_ids):
             if r.id not in before_ids]
 
 
-def run_arm(base_db, arm_db, arm_name, arm_cfg, gt_issues, gt_corr):
-    shutil.copyfile(base_db, arm_db)  # identical starting state for every arm (hash recorded per seed)
-    eng = create_engine(f"sqlite:///{arm_db}", connect_args={"check_same_thread": False})
-    db = sessionmaker(bind=eng, autoflush=False, autocommit=False)()
+def _sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for block in iter(lambda: f.read(1 << 20), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def _arm_context(db, arm_cfg):
     ctx = build_context(db)
     ctx.settings.update(execution_mode=arm_cfg["execution_mode"],
                         rerun_policy="full" if arm_cfg["rerun_policy"] == "decision_aware" else arm_cfg["rerun_policy"],
                         routing_policy=arm_cfg["routing_policy"])
+    return ctx
+
+
+def _warm_up(eng, S, base_db, arm_db, arm_cfg):
+    """Process the first encounter once on the arm's own engine (statement caches, thread pool, file cache),
+    then dispose the connections and restore the arm database from the base copy. The restore is checked
+    by SHA-256, so the warm-up cannot leave any state behind in the counted experiment."""
+    db = S()
+    try:
+        ctx = _arm_context(db, arm_cfg)
+        orch_initial, _, _ = _orchestrators(db, arm_cfg, ctx)
+        c = db.query(ClaimCase).order_by(ClaimCase.id).first()
+        t0 = time.perf_counter()
+        run = orch_initial.process(c, trigger="INITIAL")
+        call_ms = (time.perf_counter() - t0) * 1000
+        info = dict(hadm_id=c.encounter.hadm_id, wall_ms=run.wall_ms, harness_action_ms=call_ms,
+                    stages_executed=run.stages_executed)
+    finally:
+        db.close()
+        eng.dispose()                       # closes every pooled connection; compiled caches stay on the engine
+    shutil.copyfile(base_db, arm_db)
+    base_sha, arm_sha = _sha256(base_db), _sha256(arm_db)
+    if base_sha != arm_sha:
+        raise RuntimeError("warm-up restore failed: arm database differs from the base database")
+    info.update(db_restored_from_base=True, restored_sha256=arm_sha,
+                note="excluded from every counted metric and timing summary; the database was restored afterwards")
+    return info
+
+
+def run_arm(base_db, arm_db, arm_name, arm_cfg, gt_issues, gt_corr, warmup=False, arm_execution=None):
+    """warmup=True: one warm-up encounter on this arm's engine before measurement (see _warm_up).
+    arm_execution: metadata copied into every raw case record (arm order of the seed, position)."""
+    shutil.copyfile(base_db, arm_db)  # identical starting state for every arm (hash recorded per seed)
+    eng = create_engine(f"sqlite:///{arm_db}", connect_args={"check_same_thread": False})
+    S = sessionmaker(bind=eng, autoflush=False, autocommit=False)
+    warm = _warm_up(eng, S, base_db, arm_db, arm_cfg) if warmup else None
+    meta = dict(arm_execution or {}, warmup=warm)
+    db = S()
+    ctx = _arm_context(db, arm_cfg)
     orch_initial, orch_corr, orch_dec = _orchestrators(db, arm_cfg, ctx)
 
     cases = db.query(ClaimCase).order_by(ClaimCase.id).all()
@@ -223,7 +277,7 @@ def run_arm(base_db, arm_db, arm_name, arm_cfg, gt_issues, gt_corr):
         cur = db.query(Finding).filter_by(case_id=c.id, is_current=True).all()
         tasks = db.query(ReviewTask).filter_by(case_id=c.id, status="OPEN").all()
         per_case[hid] = dict(
-            case_id=c.id, first_status=c.status, first_wall_ms=run.wall_ms, first_executed=run.stages_executed,
+            case_id=c.id, subject_id=c.encounter.subject_id, arm_execution=meta, first_status=c.status, first_wall_ms=run.wall_ms, first_executed=run.stages_executed,
             findings=sorted({f.code for f in cur}),
             roots=sorted({f.code for f in cur if f.role == "ROOT"}),
             consequences=sorted({f.code for f in cur if f.role == "CONSEQUENCE"}),
@@ -376,6 +430,12 @@ def evaluate_arm(per_case, gt_issues, labels):
         loop_stage_reused=sum(r["loop_stage_reused"] for r in per_case.values()),
         loop_unnecessary_executions=sum(r["loop_unnecessary_executions"] for r in per_case.values()),
         first_pass_latency_ms=_summ([r["first_wall_ms"] for r in per_case.values()]),
+        # complete harness-call time (pipeline + outcome application + issue-memory sync + commit [+ applying
+        # the correction / decision for loop runs]); exploratory, never a latency claim
+        first_pass_harness_ms=_summ([x["harness_action_ms"] for r in per_case.values() for x in r.get("runs", [])
+                                     if x["action"] == "INITIAL" and x["harness_action_ms"] is not None]),
+        rerun_harness_ms=_summ([x["harness_action_ms"] for r in per_case.values() for x in r.get("runs", [])
+                                if x["action"] != "INITIAL" and x["harness_action_ms"] is not None]),
         rerun_latency_ms=_summ([x for r in per_case.values() for x in r["loop_wall_ms"]]),
         loop_by_trigger=loop_by_trigger(per_case),
     )
@@ -411,13 +471,17 @@ def automated_model(per_case, factor=1.0):
 
 
 def run_experiment(out_dir, seeds=(1, 2, 3), n_encounters=200, error_rate=0.35, arms=None, log=print,
-                   mimic_root=None, mimic_label="MIMIC_IV_DEMO_2.2"):
+                   mimic_root=None, mimic_label="MIMIC_IV_DEMO_2.2", warmup=True, balance_order=True):
     """mimic_root: run on REAL MIMIC-format encounters; only the synthetic admin layer (bills, documents,
-    checklist, derived notes, policies) is generated per seed, and only it receives injected faults."""
+    checklist, derived notes, policies) is generated per seed, and only it receives injected faults.
+    balance_order: arms run in a Williams Latin-square order per seed (arm_order.py); False = the given order.
+    warmup: one warm-up encounter per arm before measurement, excluded from every metric (see _warm_up)."""
     arms = arms or list(ARMS)
     unknown = [a for a in arms if a not in ALL_ARMS]
     if unknown:
         raise ValueError(f"unknown arm(s) {unknown}; choose from {sorted(ALL_ARMS)}")
+    arms = canonical_arms(arms, list(ALL_ARMS))
+    orders = {seed: (order_for_seed(seed, arms, list(ALL_ARMS)) if balance_order else list(arms)) for seed in seeds}
     os.makedirs(out_dir, exist_ok=True)
     started = time.time()
     results = dict(config=dict(seeds=list(seeds), n_encounters=n_encounters if not mimic_root else None,
@@ -447,11 +511,15 @@ def run_experiment(out_dir, seeds=(1, 2, 3), n_encounters=200, error_rate=0.35, 
         seed_res = dict(base_db_sha256=base_db_sha, dataset_files={k: v["sha256"] for k, v in manifest["files"].items()},
                         scenario_classes=dict(Counter(l["scenario_class"] for l in labels.values())), arms={})
         per_arm = {}
-        for arm in arms:
-            log(f"seed {seed}: arm {arm}")
+        seed_res["arm_order"] = orders[seed]
+        seed_res["warmup"] = {}
+        for position, arm in enumerate(orders[seed]):
+            log(f"seed {seed}: arm {arm} (position {position + 1}/{len(arms)})")
             arm_db = os.path.join(out_dir, f"arm_{arm}_seed{seed}.db")
-            per_case, _ = run_arm(base_db, arm_db, arm, ALL_ARMS[arm], gt_issues, gt_corr)
+            per_case, _ = run_arm(base_db, arm_db, arm, ALL_ARMS[arm], gt_issues, gt_corr, warmup=warmup,
+                                  arm_execution=dict(seed=seed, position=position, arm_order=orders[seed]))
             per_arm[arm] = per_case
+            seed_res["warmup"][arm] = next(iter(per_case.values()))["arm_execution"]["warmup"] if per_case else None
             ev = evaluate_arm(per_case, gt_issues, labels)
             ev["modelled_human_minutes_per_case"] = automated_model(per_case)
             seed_res["arms"][arm] = ev
@@ -471,6 +539,11 @@ def run_experiment(out_dir, seeds=(1, 2, 3), n_encounters=200, error_rate=0.35, 
     results["elapsed_s"] = round(time.time() - started, 1)
     results["aggregate"] = aggregate(results)
     results["derived"] = derived(results)
+    results["arm_order"] = dict(
+        design="Williams Latin square over the canonical arm order; seed s uses row s mod rows" if balance_order
+        else "fixed order as given", per_seed={str(k): v for k, v in orders.items()},
+        position_balance=position_balance(orders), warmup=warmup)
+    results["timing_definitions"] = TIMING_DEFINITIONS
     with open(os.path.join(out_dir, "summary.json"), "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, default=str)
     return results
@@ -490,7 +563,9 @@ def aggregate(results):
     paths = [("root_attribution", "precision"), ("root_attribution", "recall"), ("root_attribution", "f1")]
     for action in ACTIONS[1:]:
         paths += [("loop_by_trigger", action, "runs"), ("loop_by_trigger", action, "stage_executions"),
-                  ("loop_by_trigger", action, "unnecessary_executions"), ("loop_by_trigger", action, "wall_ms", "median")]
+                  ("loop_by_trigger", action, "unnecessary_executions"), ("loop_by_trigger", action, "wall_ms", "median"),
+                  ("loop_by_trigger", action, "harness_action_ms", "median")]
+    paths += [("first_pass_harness_ms", "median"), ("rerun_harness_ms", "median")]
     out = {}
     arms = results["config"]["arms"]
     for arm in arms:
@@ -529,7 +604,9 @@ def derived(results):
         for action in ACTIONS[1:]:
             out[f"loop_execution_reduction_{action}_C_vs_{base}"] = red(
                 C, base, f"loop_by_trigger.{action}.stage_executions")
-        out[f"rerun_median_latency_reduction_C_vs_{base}"] = red(C, base, "rerun_latency_ms.median")
+        out.setdefault("EXPLORATORY_latency", dict(
+            status="EXPLORATORY: single machine, SQLite, pipeline-only wall_ms medians; not a latency claim"))[
+            f"rerun_median_wall_ms_reduction_C_vs_{base}"] = red(C, base, "rerun_latency_ms.median")
     out["note"] = ("C_vs_C_minus_targeted and C_vs_C_decision_aware_full hold scheduling constant (all parallel); "
                    "C_vs_B_sequential_full also changes sequential->parallel and is confounded for latency.")
     return out
