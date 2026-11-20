@@ -31,9 +31,13 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Iterable, Optional
 
+from sqlalchemy import text
+
 from app.clearclaim import dag
 from app.clearclaim.context import get_context
 from app.clearclaim.findings import stage_status
+from app.clearclaim.identity import issue_key
+from app.clearclaim.issues import IssueTracker
 from app.clearclaim.models import (
     AuditEvent, ClaimCase, ClaimPacket, Finding, PipelineRun, ReviewTask, StageExecution,
 )
@@ -151,8 +155,13 @@ def _call_stage(stage, inputs, upstream, ctx, max_retries):
 
 class Orchestrator:
     def __init__(self, db, execution_mode: Optional[str] = None, rerun_policy: Optional[str] = None,
-                 actor: str = "system", ctx=None, on_event: Optional[Callable[[dict], None]] = None):
+                 actor: str = "system", ctx=None, on_event: Optional[Callable[[dict], None]] = None,
+                 reuse_unchanged: bool = True):
         self.db = db
+        # reuse_unchanged=False (experiment baselines only): a planned stage whose input hash is unchanged
+        # is executed again instead of being REUSED. Planning (which stages are considered) is unchanged.
+        # The application never sets it; the default keeps behaviour identical.
+        self.reuse_unchanged = reuse_unchanged
         # Optional observer (used by the Execution Studio). It receives what the orchestrator actually
         # decides and does, as it happens; it can never change the run, and its errors are ignored.
         self.on_event = on_event
@@ -184,9 +193,26 @@ class Orchestrator:
                 .all())
         return {r.stage: r for r in rows}
 
-    def process(self, case: ClaimCase, trigger: str = "INITIAL", changed_domains: Iterable[str] = ()) -> PipelineRun:
+    def _lock_case(self, case):
+        """Serialise runs of the same case across sessions/processes BEFORE any state is read.
+        Postgres: row lock (SELECT ... FOR UPDATE). SQLite: a no-op UPDATE takes the database write
+        lock, so a concurrent run waits here instead of planning from stale 'current' executions."""
+        if self.db.get_bind().dialect.name == "sqlite":
+            # BEGIN IMMEDIATE takes the write lock up front and waits (busy timeout) WITHOUT holding a
+            # shared lock; a deferred transaction would hold SHARED while waiting and deadlock the writer.
+            raw = self.db.connection().connection.dbapi_connection
+            if not raw.in_transaction:
+                raw.execute("BEGIN IMMEDIATE")
+            self.db.execute(text("UPDATE cc_cases SET version = version WHERE id = :id"), {"id": case.id})
+        else:
+            self.db.query(ClaimCase.id).filter(ClaimCase.id == case.id).with_for_update().one()
+
+    def process(self, case: ClaimCase, trigger: str = "INITIAL", changed_domains: Iterable[str] = (),
+                correction=None) -> PipelineRun:
         db, ctx = self.db, self.ctx
         changed_domains = sorted(set(changed_domains))
+        self._lock_case(case)
+        self._correction = correction          # the correction that triggered this run, if any
         current = self.current_executions(case.id)
         first_run = not current
         force = self.rerun_policy == "full" or first_run
@@ -246,7 +272,8 @@ class Orchestrator:
             for s in to_eval:
                 inputs, upstream, h = _stage_inputs(s, snapshot, outputs, ctx_fp)
                 prev = current.get(s)
-                if not force and prev is not None and prev.input_hash == h and prev.status in ("SUCCEEDED", "REUSED"):
+                if (not force and self.reuse_unchanged and prev is not None and prev.input_hash == h
+                        and prev.status in ("SUCCEEDED", "REUSED")):
                     reused += 1
                     db.add(StageExecution(run_id=run.id, case_id=case.id, stage=s, status="REUSED", input_hash=h,
                                           output_hash=prev.output_hash, stage_status=prev.stage_status,
@@ -352,7 +379,11 @@ class Orchestrator:
             if x:
                 f.role, f.caused_by = x["role"], x.get("caused_by")
 
-        self._sync_tasks(case, run, rr["tasks"], trigger)
+        # Persistent issue memory + idempotent task routing (never changes findings, roles or status).
+        current_keys = {issue_key(x["code"], x.get("evidence") or {})
+                        for x in rb["roots"] + rb["consequences"] if x["severity"] in ("BLOCKING", "REVIEW")}
+        IssueTracker(db, case, run, trigger, actor=self.actor, correction=getattr(self, "_correction", None),
+                     audit=audit).sync(rr["tasks"], current_keys)
 
         if "claim_generation" in changed_outputs or db.query(ClaimPacket).filter_by(case_id=case.id).count() == 0:
             db.query(ClaimPacket).filter_by(case_id=case.id, is_current=True).update({"is_current": False})
@@ -373,33 +404,3 @@ class Orchestrator:
         case.priority = round(100 * n_block + 10 * rr["open_count"] + min(50.0, (rb["amount_at_risk"] or 0) / 10000), 2)
         if prev_status != case.status:
             audit(db, "CASE_STATUS_CHANGED", f"{prev_status} -> {case.status}", self.actor, case.id, "case", case.id)
-
-    def _sync_tasks(self, case, run, tasks, trigger):
-        db = self.db
-        existing = {t.task_key: t for t in db.query(ReviewTask).filter_by(case_id=case.id).all()
-                    if t.status in ("OPEN", "ACCEPTED_WITH_JUSTIFICATION", "CONFIRMED_BLOCKED")}
-        seen = set()
-        for t in tasks:
-            seen.add(t["task_key"])
-            row = existing.get(t["task_key"])
-            if row is None:
-                row = ReviewTask(case_id=case.id, task_key=t["task_key"], code=t["code"], severity=t["severity"],
-                                 owner_stage=t["owner_stage"], input_domain=t["input_domain"], title=t["title"],
-                                 reason=t["reason"], evidence=t["evidence"], recommended_action=t["recommended_action"],
-                                 required_reruns=t["required_reruns"], allowed_decisions=t["allowed_decisions"],
-                                 status="OPEN" if t["state"] == "OPEN" else t["state"], created_run_id=run.id)
-                db.add(row)
-                db.flush()
-                audit(db, "REVIEW_TASK_CREATED", f"{t['code']}: {t['title']}", "system", case.id, "review_task", row.id,
-                      severity=t["severity"], owner_stage=t["owner_stage"])
-            else:
-                row.reason, row.evidence = t["reason"], t["evidence"]
-                if t["state"] != "OPEN" and row.status == "OPEN":
-                    row.status = t["state"]
-        for key, row in existing.items():
-            if key not in seen and row.status == "OPEN":
-                row.status = "RESOLVED_BY_CORRECTION" if trigger == "CORRECTION" else "SUPERSEDED"
-                row.resolved_at = dt.datetime.utcnow()
-                row.resolved_by = self.actor
-                audit(db, "REVIEW_TASK_RESOLVED", f"{row.code} no longer raised after {trigger.lower()} run",
-                      self.actor, case.id, "review_task", row.id, status=row.status)

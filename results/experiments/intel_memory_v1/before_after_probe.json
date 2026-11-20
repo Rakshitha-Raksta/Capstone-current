@@ -1,0 +1,204 @@
+{
+ "description": "Same probe script run on an isolated copy of the 200-encounter demo database, first with the code at commit bdb0c3c (before), then with issue memory (after; migrated + backfilled copy). The 'after' dismissal scenario records the decision with an evidence fingerprint, as POST /review-tasks/{id}/decision now does.",
+ "before": {
+  "code": "bdb0c3c",
+  "repeated_reruns": {
+   "cases": 40,
+   "reruns_per_case": 6,
+   "tasks_before": 169,
+   "tasks_after": 169,
+   "open_duplicates": 0
+  },
+  "concurrent_reruns": {
+   "cases": 8,
+   "threads_per_case": 4,
+   "open_task_duplicates": 0,
+   "cases_with_multiple_current_stage_executions": 8,
+   "errors": 0
+  },
+  "resolve_then_reappear": {
+   "case_id": 9,
+   "original_task": 9,
+   "original_status_after_fix": "RESOLVED_BY_CORRECTION",
+   "tasks_before": 2,
+   "tasks_after": 3,
+   "new_task_rows": [
+    {
+     "id": 170,
+     "status": "OPEN"
+    }
+   ],
+   "link_to_previous_occurrence": "none (no issue/history model)"
+  },
+  "dismissed_then_new_evidence": {
+   "case_id": 8,
+   "code": "CODED_DX_NOT_IN_NOTE",
+   "correction": "update_diagnosis",
+   "evidence_before": {
+    "expected": "Urinary tract infection, site not specified",
+    "actual": "Type 2 diabetes mellitus; Anemia",
+    "item_code": null
+   },
+   "evidence_after": {
+    "expected": "Unspecified acute appendicitis",
+    "actual": "Type 2 diabetes mellitus; Anemia",
+    "item_code": null
+   },
+   "task_status_after": "ACCEPTED_WITH_JUSTIFICATION",
+   "tasks_for_code": [
+    {
+     "id": 7,
+     "status": "ACCEPTED_WITH_JUSTIFICATION"
+    }
+   ],
+   "case_status": "BLOCKED"
+  }
+ },
+ "after": {
+  "code": "working tree with issue memory",
+  "repeated_reruns": {
+   "cases": 40,
+   "reruns_per_case": 6,
+   "tasks_before": 169,
+   "tasks_after": 169,
+   "open_duplicates": 0
+  },
+  "concurrent_reruns": {
+   "cases": 8,
+   "threads_per_case": 4,
+   "open_task_duplicates": 0,
+   "cases_with_multiple_current_stage_executions": 0,
+   "errors": 0
+  },
+  "resolve_then_reappear": {
+   "case_id": 9,
+   "original_task": 9,
+   "original_status_after_fix": "RESOLVED_BY_CORRECTION",
+   "tasks_before": 2,
+   "tasks_after": 3,
+   "new_task_rows": [
+    {
+     "id": 170,
+     "status": "OPEN"
+    }
+   ],
+   "link_to_previous_occurrence": "none (no issue/history model)",
+   "issues": [
+    {
+     "id": 9,
+     "status": "RESOLVED",
+     "reopen_count": 0,
+     "detection_count": 11,
+     "events": [
+      "BACKFILLED",
+      "RESOLVED"
+     ]
+    },
+    {
+     "id": 170,
+     "status": "PENDING_REVIEW",
+     "reopen_count": 0,
+     "detection_count": 1,
+     "events": [
+      "DETECTED"
+     ]
+    }
+   ]
+  },
+  "dismissed_then_new_evidence": {
+   "case_id": 8,
+   "code": "CODED_DX_NOT_IN_NOTE",
+   "correction": "update_diagnosis",
+   "evidence_before": {
+    "expected": "Urinary tract infection, site not specified",
+    "actual": "Type 2 diabetes mellitus; Anemia",
+    "item_code": null
+   },
+   "evidence_after": {
+    "expected": "Urinary tract infection, site not specified",
+    "actual": "Type 2 diabetes mellitus; Anemia",
+    "item_code": null
+   },
+   "task_status_after": "ACCEPTED_WITH_JUSTIFICATION",
+   "tasks_for_code": [
+    {
+     "id": 7,
+     "status": "ACCEPTED_WITH_JUSTIFICATION"
+    },
+    {
+     "id": 171,
+     "status": "OPEN"
+    }
+   ],
+   "case_status": "BLOCKED",
+   "issues": [
+    {
+     "id": 7,
+     "status": "PENDING_REVIEW",
+     "reopen_count": 1,
+     "detection_count": 14,
+     "events": [
+      "BACKFILLED",
+      "DECISION_RECORDED",
+      "DECISION_APPLIED",
+      "REOPENED"
+     ]
+    }
+   ]
+  },
+  "issue_memory": {
+   "tracked_issues": 170,
+   "by_status": {
+    "OPEN": 2,
+    "PENDING_REVIEW": 165,
+    "RESOLVED": 3
+   },
+   "total_detections": 590,
+   "repeat_detections": 420,
+   "reopened": 1,
+   "review_attempts": 3,
+   "duplicate_tasks_prevented": 412,
+   "open_task_duplicates": 0,
+   "tasks_without_issue": 0,
+   "events": {
+    "BACKFILLED": 169,
+    "DECISION_APPLIED": 1,
+    "DECISION_RECORDED": 1,
+    "DETECTED": 1,
+    "REOPENED": 1,
+    "RESOLVED": 1
+   },
+   "pending_by_department": [
+    {
+     "owner_stage": "billing",
+     "department": "Billing",
+     "pending": 41
+    },
+    {
+     "owner_stage": "data_validation",
+     "department": "Medical records / coding",
+     "pending": 42
+    },
+    {
+     "owner_stage": "discharge_readiness",
+     "department": "Discharge desk",
+     "pending": 7
+    },
+    {
+     "owner_stage": "eligibility",
+     "department": "Insurance desk",
+     "pending": 75
+    }
+   ],
+   "notes": [
+    "duplicate_tasks_prevented counts re-detections where an existing review task was retained (from REVIEW_TASK_DEDUPLICATED audit events).",
+    "tasks_without_issue are review tasks created before issue memory and not yet linked (run scripts/backfill_issue_memory.py or re-run the case)."
+   ]
+  }
+ },
+ "notes": [
+  "Identical reruns created no duplicate tasks before or after: the existing task_key sync already handled that case.",
+  "resolve_then_reappear re-enters a deleted duplicate bill line with add_bill_line, which assigns a NEW line number: a different charge, therefore correctly a separate issue in 'after'. Same-identity reappearance is measured in seed*.json (reappearance) and tested in tests/test_issue_memory.py.",
+  "Before: the accepted CODED_DX_NOT_IN_NOTE decision stayed applied after the principal diagnosis changed (false suppression). After: the issue is reopened with a new task."
+ ]
+}

@@ -18,8 +18,11 @@ export interface CaseState {
 export function caseState(detail: any): CaseState {
   const status: string = detail?.case?.status || 'NEW';
   const roots: any[] = detail?.root_blocker?.roots || [];
-  const blockers = roots.filter((r) => r.severity === 'BLOCKING' || r.severity === 'REVIEW');
   const openTasks: any[] = (detail?.tasks || []).filter((t: any) => t.status === 'OPEN');
+  // a REVIEW root that a reviewer accepted with a justification (and that has no open task) is no longer a blocker
+  const accepted = new Set((detail?.tasks || []).filter((t: any) => t.status === 'ACCEPTED_WITH_JUSTIFICATION').map((t: any) => t.code));
+  const pending = new Set(openTasks.map((t: any) => t.code));
+  const blockers = roots.filter((r) => r.severity === 'BLOCKING' || (r.severity === 'REVIEW' && !(accepted.has(r.code) && !pending.has(r.code))));
   const complete = status === 'PREPARATION_COMPLETE' && blockers.length === 0 && openTasks.length === 0;
   const inconsistent = status === 'PREPARATION_COMPLETE' && !complete;
   const nBlock = blockers.filter((b) => b.severity === 'BLOCKING').length;

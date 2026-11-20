@@ -14,7 +14,7 @@ data/.../ground_truth/ and are only read by the offline experiment harness.
 import datetime as dt
 
 from sqlalchemy import (
-    Boolean, Column, Date, DateTime, Float, ForeignKey, Index, Integer, JSON, String, Text, UniqueConstraint,
+    Boolean, Column, Date, DateTime, Float, ForeignKey, Index, Integer, JSON, String, Text, UniqueConstraint, text,
 )
 from sqlalchemy.orm import declarative_base, relationship
 
@@ -314,7 +314,92 @@ class ReviewTask(CCBase):
     resolved_at = Column(DateTime)
     resolved_by = Column(String(64))
     resolution_note = Column(Text)
-    __table_args__ = (Index("ix_task_case_key", "case_id", "task_key"),)
+    # persistent issue this task belongs to (NULL only for tasks created before issue memory existed
+    # and not yet adopted by a run or by scripts/backfill_issue_memory.py)
+    issue_id = Column(Integer, ForeignKey("cc_issues.id", ondelete="SET NULL"), index=True)
+    __table_args__ = (
+        Index("ix_task_case_key", "case_id", "task_key"),
+        # database-level idempotency: at most one OPEN task per issue identity, whatever the caller does
+        Index("uq_task_open_key", "case_id", "task_key", unique=True,
+              sqlite_where=text("status = 'OPEN'"), postgresql_where=text("status = 'OPEN'")),
+        Index("uq_task_open_issue", "issue_id", unique=True,
+              sqlite_where=text("status = 'OPEN' AND issue_id IS NOT NULL"),
+              postgresql_where=text("status = 'OPEN' AND issue_id IS NOT NULL")),
+    )
+
+
+class TrackedIssue(CCBase):
+    """
+    Persistent memory of one underlying issue on one encounter, across every pipeline run.
+
+    Identity (issue_key) = finding code + the evidence that names WHICH thing is wrong (bill line,
+    diagnosis/procedure sequence, document, checklist item, note phrase, field). Two bill lines with
+    the same code are two issues. The cited policy rules are deliberately not part of the identity,
+    so a change in which rules fire does not create a second issue for the same problem.
+
+    evidence_fingerprint = hash of the material evidence (expected/actual/amount/severity/rules and
+    item/ICD codes). A change means the issue is materially different from what a reviewer saw.
+
+    status: OPEN               present, no review pending (e.g. reviewer confirmed it blocks, or it is
+                               currently explained as a consequence of another root)
+            PENDING_REVIEW     present, a review task is open
+            RESOLVED           no longer detected after an actual data correction
+            DISMISSED          reviewer accepted it with a justification
+            NO_LONGER_DETECTED no longer detected, but NOT after a correction (never claimed resolved)
+    """
+    __tablename__ = "cc_issues"
+    id = Column(Integer, primary_key=True)
+    case_id = Column(Integer, ForeignKey("cc_cases.id", ondelete="CASCADE"), nullable=False, index=True)
+    encounter_id = Column(Integer, ForeignKey("cc_encounters.id", ondelete="CASCADE"), nullable=False, index=True)
+    issue_key = Column(String(80), nullable=False)
+    code = Column(String(64), nullable=False, index=True)
+    issue_type = Column(String(32))          # stage that raised it
+    title = Column(Text)
+    identity = Column(JSON)                  # the identity evidence, e.g. {"line_no": "4"}
+    evidence_fingerprint = Column(String(64))
+    evidence = Column(JSON)                  # latest evidence as routed
+    severity = Column(String(16))
+    status = Column(String(24), nullable=False, default="OPEN", index=True)
+    review_outcome = Column(String(32))      # CONFIRMED_BLOCKED | ACCEPTED_WITH_JUSTIFICATION | None
+    is_present = Column(Boolean, nullable=False, default=True)
+    owner_stage = Column(String(32))         # department queue (dag.STAGES[...]['owner'])
+    input_domain = Column(String(32))
+    reviewer = Column(String(64))
+    reviewer_notes = Column(JSON)            # [{ts, actor, note}]
+    previous_actions = Column(JSON)          # [{ts, actor, kind, ...}] corrections and decisions against it
+    task_id = Column(Integer)                # current / most recent review task
+    first_detected_at = Column(DateTime, default=_now)
+    last_detected_at = Column(DateTime, default=_now)
+    first_run_id = Column(Integer)
+    last_run_id = Column(Integer)
+    detection_count = Column(Integer, nullable=False, default=0)
+    review_attempts = Column(Integer, nullable=False, default=0)
+    reopen_count = Column(Integer, nullable=False, default=0)
+    last_dedup_run_id = Column(Integer)      # last run in which an existing task was retained
+    resolution_action = Column(JSON)         # what closed it (correction id/op, decision) - only real actions
+    resolved_at = Column(DateTime)
+    resolved_by = Column(String(64))
+    backfilled = Column(Boolean, nullable=False, default=False)
+    created_at = Column(DateTime, default=_now)
+    updated_at = Column(DateTime, default=_now, onupdate=_now)
+    __table_args__ = (UniqueConstraint("case_id", "issue_key", name="uq_issue_case_key"),)
+
+
+class IssueEvent(CCBase):
+    """Append-only lifecycle history of a tracked issue (detections that changed something, routing,
+    deduplication, decisions, resolution, reopening)."""
+    __tablename__ = "cc_issue_events"
+    id = Column(Integer, primary_key=True)
+    issue_id = Column(Integer, ForeignKey("cc_issues.id", ondelete="CASCADE"), nullable=False, index=True)
+    case_id = Column(Integer, nullable=False, index=True)
+    run_id = Column(Integer)
+    task_id = Column(Integer)
+    event = Column(String(32), nullable=False)
+    from_status = Column(String(24))
+    to_status = Column(String(24))
+    actor = Column(String(64), nullable=False, default="system")
+    details = Column(JSON)
+    ts = Column(DateTime, default=_now, nullable=False)
 
 
 class Correction(CCBase):
@@ -344,6 +429,9 @@ class ReviewDecision(CCBase):
     note = Column(Text, nullable=False)
     actor = Column(String(64), nullable=False)
     created_at = Column(DateTime, default=_now)
+    # Evidence the reviewer actually saw. When set, the decision only applies while the issue's material
+    # evidence is unchanged; NULL (decisions recorded before issue memory) keeps the original behaviour.
+    evidence_fingerprint = Column(String(64))
 
 
 class ClaimPacket(CCBase):

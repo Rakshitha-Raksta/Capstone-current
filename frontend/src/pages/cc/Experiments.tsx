@@ -157,7 +157,49 @@ export default function Experiments() {
             </Card>
             <div className="callout small">Caveat: the fault injector and the detectors were written by the same team, so detection metrics on this synthetic benchmark are an upper bound, not evidence of real-world accuracy. See the Limitations section of README.md.</div>
           </>))}
+        <ExtensionResults />
       </div>
     </>
+  );
+}
+
+/** Separate evaluation of historical-case intelligence and issue memory (results/experiments/intel_memory_v1). */
+function ExtensionResults() {
+  const { data, error } = useApi<any>(() => api.extensionResults());
+  if (error) return <Card title="Historical intelligence &amp; issue memory"><ErrorState message={error} /></Card>;
+  if (!data) return <Card title="Historical intelligence &amp; issue memory"><Skeleton rows={3} /></Card>;
+  if (!data.available) return <Card title="Historical intelligence &amp; issue memory"><EmptyState title="Not evaluated yet">{data.reason}</EmptyState></Card>;
+  const groups: [string, string][] = [['main', 'Seeds 1–3'], ['main_heldout', 'Held-out 4–6'], ['all', 'All seeds']];
+  const v = (g: string, k: string) => data.aggregate?.[g]?.[k];
+  const fmt = (x: any, p = false) => (x?.mean == null ? '—' : `${p ? pct(x.mean) : n(x.mean, x.mean % 1 ? 3 : 0)}${x.sd != null ? ` ± ${p ? pct(x.sd) : n(x.sd, 3)}` : ''}`);
+  const rows: [string, string, boolean][] = [
+    ['Issue prediction F1 (similar neighbours)', 'intel.prediction.f1', false],
+    ['Issue prediction F1 (random-neighbour baseline)', 'intel.prediction.random_baseline.f1', false],
+    ['Issue prediction precision / recall', 'intel.prediction.precision', false],
+    ['Retrieval precision@5 (proxy) · similar', 'intel.precision_at_5.similar', true],
+    ['Retrieval precision@5 (proxy) · random', 'intel.precision_at_5.random', true],
+    ['Recommendation evidence coverage', 'intel.recommendation.evidence_coverage', true],
+    ['Recommendation insufficient-data rate', 'intel.recommendation.insufficient_data_rate', true],
+    ['Reruns executed', 'memory.reruns', false],
+    ['Review tasks created by reruns', 'memory.tasks_created_during_reruns', false],
+    ['Open duplicate tasks', 'memory.open_task_duplicates', false],
+    ['Re-detections that kept the existing task', 'memory.duplicate_tasks_prevented', false],
+    ['Genuine reappearances reopened (same issue)', 'memory.reappearance.reopened_same_issue', false],
+    ['New issue merged with an old one', 'memory.multi_line.merged', false],
+    ['Dismissals reopened on material change (with fingerprint)', 'memory.dismissal.with_fp.reopened', false],
+    ['False suppression · with fingerprint', 'memory.dismissal.with_fp.false_suppression', false],
+    ['False suppression · before (no fingerprint)', 'memory.dismissal.without_fp.false_suppression', false],
+    ['False reopen (unchanged evidence)', 'memory.dismissal.with_fp.false_reopen_rerun', false],
+  ];
+  return (
+    <Card title="Historical intelligence &amp; issue memory" meta={`separate evaluation · ${data.path}`} flush>
+      <div className="table-wrap"><table className="tbl">
+        <thead><tr><th>Metric (mean ± sd over seeds)</th>{groups.map(([g, l]) => <th key={g} className="num">{l}</th>)}</tr></thead>
+        <tbody>{rows.map(([label, k, p]) => (
+          <tr key={k}><td className="small">{label}</td>{groups.map(([g]) => <td key={g} className="num">{k === 'intel.prediction.precision'
+            ? `${fmt(v(g, 'intel.prediction.precision'))} / ${fmt(v(g, 'intel.prediction.recall'))}` : fmt(v(g, k), p)}</td>)}</tr>))}</tbody>
+      </table></div>
+      <ul className="small" style={{ padding: '8px 28px' }}>{(data.notes || []).map((x: string) => <li key={x}>{x}</li>)}</ul>
+    </Card>
   );
 }

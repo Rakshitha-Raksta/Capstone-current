@@ -21,10 +21,14 @@ from app.clearclaim.config import settings
 from app.clearclaim.context import DEFAULT_SETTINGS, get_context, invalidate_context
 from app.clearclaim.corrections import OP_DOMAINS, ConflictError, CorrectionError, apply_correction
 from app.clearclaim.findings import TITLES
+from app.clearclaim.issues import (
+    LABELS, add_task_note, case_issues, dedup_note, department, issue_for_task, lifecycle, memory_summary,
+    record_decision_on_issue, task_fingerprint,
+)
 from app.clearclaim.stages.analysis import NEXT_ACTIONS
 from app.clearclaim.models import (
     AppSetting, AuditEvent, ClaimCase, ClaimPacket, Correction, DatasetImport, Encounter, Finding,
-    MemberPolicy, PipelineRun, ReviewDecision, ReviewTask, StageExecution,
+    MemberPolicy, PipelineRun, ReviewDecision, ReviewTask, StageExecution, TrackedIssue,
 )
 from app.clearclaim.orchestrator import Orchestrator, audit, verify_audit_chain
 from app.database.db import get_db
@@ -79,16 +83,24 @@ def finding_row(f: Finding) -> dict:
                 caused_by=f.caused_by)
 
 
-def task_row(t: ReviewTask, case: Optional[ClaimCase] = None) -> dict:
+def task_row(t: ReviewTask, case: Optional[ClaimCase] = None, issue: Optional[TrackedIssue] = None) -> dict:
     d = dict(id=t.id, case_id=t.case_id, code=t.code, severity=t.severity, owner_stage=t.owner_stage,
              input_domain=t.input_domain, title=t.title, reason=t.reason, evidence=t.evidence,
              recommended_action=t.recommended_action, required_reruns=t.required_reruns,
              allowed_decisions=t.allowed_decisions, status=t.status, assignee=t.assignee,
              created_at=_iso(t.created_at), resolved_at=_iso(t.resolved_at), resolved_by=t.resolved_by,
-             resolution_note=t.resolution_note, task_key=t.task_key)
+             resolution_note=t.resolution_note, task_key=t.task_key, issue_id=t.issue_id,
+             department=department(t.owner_stage))
     if case is not None:
         d["case_ref"] = case.case_ref
         d["case_status"] = case.status
+    if issue is not None:
+        d["issue"] = dict(id=issue.id, status=issue.status, lifecycle=lifecycle(issue), lifecycle_label=LABELS.get(lifecycle(issue)),
+                          detection_count=issue.detection_count, reopen_count=issue.reopen_count,
+                          first_detected_at=_iso(issue.first_detected_at), last_detected_at=_iso(issue.last_detected_at),
+                          review_attempts=issue.review_attempts, reviewer_notes=issue.reviewer_notes or [],
+                          is_current_task=issue.task_id == t.id,
+                          dedup_note=dedup_note(issue, t, case.last_run_id if case is not None else None))
     return d
 
 
@@ -185,6 +197,7 @@ def overview(db: Session = Depends(get_db)):
         amounts=dict(billed=round(totals[0] or 0, 2), at_risk=round(totals[1] or 0, 2),
                      estimated_eligible=round(totals[2] or 0, 2)),
         recent_events=[event_row(e) for e in events],
+        issue_memory=memory_summary(db),
     )
 
 
@@ -230,6 +243,7 @@ def get_case(case_id: int, db: Session = Depends(get_db)):
     mp = db.query(MemberPolicy).filter_by(subject_id=e.subject_id).first()
     findings = db.query(Finding).filter_by(case_id=c.id, is_current=True).order_by(Finding.id).all()
     tasks = db.query(ReviewTask).filter_by(case_id=c.id).order_by(ReviewTask.id).all()
+    issue_by_id = {i.id: i for i in db.query(TrackedIssue).filter_by(case_id=c.id)}
     corrections = db.query(Correction).filter_by(case_id=c.id).order_by(Correction.id).all()
     packet = db.query(ClaimPacket).filter_by(case_id=c.id, is_current=True).first()
     ca = e.claim_admin
@@ -263,7 +277,9 @@ def get_case(case_id: int, db: Session = Depends(get_db)):
         data_validation=out("data_validation"),
         stages={s: dict(status=x.status, stage_status=x.stage_status, duration_ms=x.duration_ms, run_id=x.run_id)
                 for s, x in cur.items()},
-        findings=[finding_row(f) for f in findings], tasks=[task_row(t) for t in tasks],
+        findings=[finding_row(f) for f in findings],
+        tasks=[task_row(t, c, issue_by_id.get(t.issue_id)) for t in tasks],
+        issues=case_issues(db, c),
         corrections=[dict(id=x.id, op=x.op, domain=x.domain, payload=x.payload, before=x.before, after=x.after,
                           actor=x.actor, reason=x.reason, run_id=x.run_id, created_at=_iso(x.created_at))
                      for x in corrections],
@@ -418,7 +434,10 @@ def list_tasks(db: Session = Depends(get_db), status: str = "OPEN", severity: Op
     total = qry.count()
     rows = (qry.order_by((ReviewTask.severity == "BLOCKING").desc(), ClaimCase.priority.desc(), ReviewTask.id)
             .offset((page - 1) * page_size).limit(page_size).all())
-    return dict(total=total, page=page, page_size=page_size, items=[task_row(t, c) for t, c in rows])
+    iids = [t.issue_id for t, _ in rows if t.issue_id]
+    issues = {i.id: i for i in db.query(TrackedIssue).filter(TrackedIssue.id.in_(iids))} if iids else {}
+    return dict(total=total, page=page, page_size=page_size,
+                items=[task_row(t, c, issues.get(t.issue_id)) for t, c in rows])
 
 
 class DecisionIn(BaseModel):
@@ -437,15 +456,40 @@ def decide(task_id: int, body: DecisionIn, db: Session = Depends(get_db), actor:
         raise HTTPException(422, f"decision {body.decision} not allowed for this task; allowed: {t.allowed_decisions}")
     c = _case_or_404(db, t.case_id)
     with _process_lock:
+        # the decision is bound to the evidence the reviewer saw: if that evidence later changes
+        # materially, the routing stage stops applying it and the issue is reopened for review
+        fp = task_fingerprint(t)
         db.add(ReviewDecision(case_id=c.id, task_id=t.id, code=t.code, task_key=t.task_key, decision=body.decision,
-                              note=body.note, actor=actor))
+                              note=body.note, actor=actor, evidence_fingerprint=fp))
         t.resolved_at, t.resolved_by, t.resolution_note = dt.datetime.utcnow(), actor, body.note
-        audit(db, "REVIEW_DECISION", f"{body.decision} on {t.code}", actor, c.id, "review_task", t.id, note=body.note)
+        issue = record_decision_on_issue(db, t, body.decision, body.note, actor)
+        audit(db, "REVIEW_DECISION", f"{body.decision} on {t.code}", actor, c.id, "review_task", t.id, note=body.note,
+              issue_id=issue.id if issue else None, evidence_fingerprint=fp[:16])
         db.flush()
         run = Orchestrator(db, actor=actor).process(c, trigger="REVIEW_DECISION", changed_domains=["reviews"])
     stages = db.query(StageExecution).filter_by(run_id=run.id).order_by(StageExecution.id).all()
     db.refresh(t)
-    return dict(task=task_row(t, c), run=run_row(run, stages), case=case_row(c))
+    return dict(task=task_row(t, c, issue_for_task(db, t)), run=run_row(run, stages), case=case_row(c))
+
+
+class TaskNoteIn(BaseModel):
+    note: str = Field(..., min_length=3, max_length=1000)
+    assignee: Optional[str] = Field(None, max_length=64)
+
+
+@router.post("/review-tasks/{task_id}/note")
+def task_note(task_id: int, body: TaskNoteIn, db: Session = Depends(get_db), actor: str = Depends(require_writer)):
+    """Reviewer note and/or assignee on a task. Kept across reruns (the task is never recreated while pending)."""
+    t = db.get(ReviewTask, task_id)
+    if t is None:
+        raise HTTPException(404, "task not found")
+    c = _case_or_404(db, t.case_id)
+    with _process_lock:
+        issue = add_task_note(db, t, body.note.strip(), actor, (body.assignee or "").strip() or None)
+        audit(db, "REVIEW_NOTE_ADDED", f"note on {t.code}" + (f" (assigned to {body.assignee})" if body.assignee else ""),
+              actor, c.id, "review_task", t.id, note=body.note, assignee=body.assignee, issue_id=issue.id if issue else None)
+        db.commit()
+    return dict(task=task_row(t, c, issue_for_task(db, t)))
 
 
 # ---------------------------------------------------------------------------

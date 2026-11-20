@@ -10,6 +10,7 @@ import { Waterfall } from '../../components/charts';
 import { useMeta } from '../../components/AppShell';
 import AuditTimeline from '../../components/AuditTimeline';
 import CorrectionDialog, { draftFor } from './CorrectionDialog';
+import { LifecycleBadge } from './ReviewQueue';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const WHY: Record<string, string> = {
@@ -421,9 +422,13 @@ function TaskItem({ t, detail, onCorrect, onDone }: { t: any; detail: any; onCor
   };
   return (
     <div role="group" aria-labelledby={titleId} data-task-id={t.id} style={{ borderTop: '1px solid var(--border)', paddingTop: 10 }}>
-      <div className="row"><Badge value={t.severity} /><strong className="small" id={titleId}>{t.title}</strong><Badge value={t.status} /></div>
+      <div className="row"><Badge value={t.severity} /><strong className="small" id={titleId}>{t.title}</strong><Badge value={t.status} />
+        {t.issue && <LifecycleBadge issue={t.issue} />}</div>
       <div className="small muted" style={{ marginTop: 4 }}>{t.recommended_action}</div>
-      <div className="small faint">Owner: {stageLabel(t.owner_stage)}</div>
+      <div className="small faint">Owner: {stageLabel(t.owner_stage)}{t.department ? ` · ${t.department}` : ''}
+        {t.issue ? ` · detected ${t.issue.detection_count}× since ${dateTime(t.issue.first_detected_at)}` : ''}</div>
+      {t.issue?.dedup_note && <div className="small dedup-line">{t.issue.dedup_note}</div>}
+      {t.issue && !t.issue.is_current_task && <div className="small faint">Earlier occurrence of an issue that was later reopened with a newer task.</div>}
       {t.status === 'OPEN' && (
         <form className="stack" style={{ gap: 6, marginTop: 8 }} noValidate onSubmit={(e) => { e.preventDefault(); submit(); }}>
           {t.allowed_decisions.includes('CORRECT_DATA') && draftFor(finding, detail) && (

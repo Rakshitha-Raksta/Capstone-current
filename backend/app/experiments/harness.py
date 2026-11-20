@@ -24,6 +24,21 @@ Arms
   C_minus_targeted       parallel, full rerun (ablation: no targeted rerun)
   C_minus_root_routing   parallel, targeted, route ALL findings incl. consequences (ablation)
   A_manual_model         no software; modelled minutes from documented ASSUMED durations
+
+Research arm (RESEARCH_ARMS; not part of the default arm list, select it explicitly)
+  C_decision_aware_full  decision-aware FULL-revalidation baseline, same scheduling as C (parallel):
+                         - initial run and every data correction: all 11 stages executed (full);
+                         - reviewer decision: the stages the dependency graph invalidates for the
+                           changed input domain (dag.invalidated_by(["reviews"]), derived at run time,
+                           not hard-coded) are ALL executed, never reused by hash.
+                         It differs from C only in hash reuse / targeted planning for corrections, so
+                         it is the fair baseline for "how much does targeted revalidation save".
+
+Per-run records (per_case[...]["runs"]): every pipeline run is recorded by the harness at the moment
+it performs the action that caused it: action (INITIAL / CORRECTION / REVIEW_DECISION, set by the
+harness), trigger and changed domains (as stored by the orchestrator), planned / executed / reused /
+failed / dependency-skipped / not-rerun stages, unnecessary executions, run wall_ms and the harness
+call time. Nothing is inferred afterwards.
 """
 import copy
 import hashlib
@@ -38,6 +53,7 @@ from collections import Counter, defaultdict
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from app.clearclaim import dag
 from app.clearclaim.context import build_context
 from app.clearclaim.corrections import apply_correction
 from app.clearclaim.models import (
@@ -46,6 +62,8 @@ from app.clearclaim.models import (
 from app.clearclaim.orchestrator import Orchestrator, audit
 from app.datasets.error_types import ERROR_TYPES
 from app.datasets.synthetic import generate_synthetic_dataset
+from app.experiments.equivalence import capture_case, compare_arms
+from app.experiments.metrics import root_attribution
 
 ARMS = {
     "B_sequential_full": dict(execution_mode="sequential", rerun_policy="full", routing_policy="root"),
@@ -53,6 +71,16 @@ ARMS = {
     "C_minus_targeted": dict(execution_mode="parallel", rerun_policy="full", routing_policy="root"),
     "C_minus_root_routing": dict(execution_mode="parallel", rerun_policy="targeted", routing_policy="all_findings"),
 }
+# Opt-in research arms. Kept out of ARMS so the default arm list (CLI default, application experiments
+# page) and every recorded result stay exactly as they were.
+RESEARCH_ARMS = {
+    "C_decision_aware_full": dict(execution_mode="parallel", rerun_policy="decision_aware", routing_policy="root"),
+}
+ALL_ARMS = {**ARMS, **RESEARCH_ARMS}
+# Full-revalidation arms compared with the targeted treatment for output equivalence (reference, other).
+EQUIVALENCE_PAIRS = [("B_sequential_full", "C_parallel_targeted"), ("C_minus_targeted", "C_parallel_targeted"),
+                     ("C_decision_aware_full", "C_parallel_targeted")]
+ACTIONS = ("INITIAL", "CORRECTION", "REVIEW_DECISION")
 
 # ASSUMED manual effort per stage per encounter, in minutes. These are NOT
 # measurements: no time-and-motion study was performed. They exist only to
@@ -118,22 +146,80 @@ def _summ(xs):
                 median=round(statistics.median(xs), 3) if xs else None, p95=_percentile(xs, 0.95) and round(_percentile(xs, 0.95), 3))
 
 
+def _orchestrators(db, arm_cfg, ctx):
+    """(initial, correction, decision) orchestrators for an arm. Only the decision-aware baseline uses
+    different ones: full revalidation for the initial run and corrections; for reviewer decisions the
+    dependency-planned stages are all executed (no hash reuse)."""
+    mode, policy = arm_cfg["execution_mode"], arm_cfg["rerun_policy"]
+    if policy == "decision_aware":
+        full = Orchestrator(db, mode, "full", actor="experiment", ctx=ctx)
+        dec = Orchestrator(db, mode, "targeted", actor="experiment", ctx=ctx, reuse_unchanged=False)
+        return full, full, dec
+    o = Orchestrator(db, mode, policy, actor="experiment", ctx=ctx)
+    return o, o, o
+
+
+def _run_record(db, case_id, r, hid, arm_name, action, harness_ms, op=None, decision=None):
+    """One pipeline run, as recorded at the time it happened. The stage partition is exhaustive."""
+    rows = db.query(StageExecution).filter_by(run_id=r.id).order_by(StageExecution.id).all()
+    by = defaultdict(list)
+    unnecessary = []
+    for se in rows:
+        by[se.status].append(se.stage)
+        if se.status == "SUCCEEDED":
+            # an execution is "unnecessary" if it reproduced the stage's previous output exactly
+            prior = (db.query(StageExecution)
+                     .filter(StageExecution.case_id == case_id, StageExecution.stage == se.stage,
+                             StageExecution.status == "SUCCEEDED", StageExecution.id < se.id)
+                     .order_by(StageExecution.id.desc()).first())
+            if prior is not None and prior.output_hash == se.output_hash:
+                unnecessary.append(se.stage)
+    seen = {s for lst in by.values() for s in lst}
+
+    def order(xs):
+        xs = set(xs)
+        return [s for s in dag.STAGE_ORDER if s in xs]
+    return dict(
+        run_id=r.id, hadm_id=hid, arm=arm_name, action=action, trigger=r.trigger,
+        changed_domains=list(r.changed_domains or []), planned_stages=list(r.invalidated_stages or []),
+        correction_op=op, decision=decision, rerun_policy=r.rerun_policy, execution_mode=r.execution_mode,
+        status=r.status, stages_executed=order(by["SUCCEEDED"]), stages_reused=order(by["REUSED"]),
+        stages_failed=order(by["FAILED"]), stages_skipped_dependency_failed=order(by["SKIPPED_DEPENDENCY_FAILED"]),
+        stages_not_rerun=[s for s in dag.STAGE_ORDER if s not in seen], unnecessary_stages=order(unnecessary),
+        n_executed=r.stages_executed or 0, n_reused=r.stages_reused or 0,
+        wall_ms=r.wall_ms,
+        # wall time of the harness call that produced this run: includes applying the correction or the
+        # decision, outcome application and the commit. None when one call produced several runs.
+        harness_action_ms=harness_ms,
+    )
+
+
+def _new_runs(db, case_id, before_ids):
+    return [r for r in db.query(PipelineRun).filter_by(case_id=case_id).order_by(PipelineRun.id)
+            if r.id not in before_ids]
+
+
 def run_arm(base_db, arm_db, arm_name, arm_cfg, gt_issues, gt_corr):
     shutil.copyfile(base_db, arm_db)  # identical starting state for every arm (hash recorded per seed)
     eng = create_engine(f"sqlite:///{arm_db}", connect_args={"check_same_thread": False})
     db = sessionmaker(bind=eng, autoflush=False, autocommit=False)()
     ctx = build_context(db)
-    ctx.settings.update(execution_mode=arm_cfg["execution_mode"], rerun_policy=arm_cfg["rerun_policy"],
+    ctx.settings.update(execution_mode=arm_cfg["execution_mode"],
+                        rerun_policy="full" if arm_cfg["rerun_policy"] == "decision_aware" else arm_cfg["rerun_policy"],
                         routing_policy=arm_cfg["routing_policy"])
-    orch = Orchestrator(db, arm_cfg["execution_mode"], arm_cfg["rerun_policy"], actor="experiment", ctx=ctx)
+    orch_initial, orch_corr, orch_dec = _orchestrators(db, arm_cfg, ctx)
 
     cases = db.query(ClaimCase).order_by(ClaimCase.id).all()
     per_case = {}
     t_first = []
     for c in cases:
-        run = orch.process(c, trigger="INITIAL")
-        t_first.append(run.wall_ms)
         hid = c.encounter.hadm_id
+        before = {r.id for r in db.query(PipelineRun.id).filter_by(case_id=c.id)}
+        t0 = time.perf_counter()
+        run = orch_initial.process(c, trigger="INITIAL")
+        call_ms = (time.perf_counter() - t0) * 1000
+        t_first.append(run.wall_ms)
+        new = _new_runs(db, c.id, before)
         cur = db.query(Finding).filter_by(case_id=c.id, is_current=True).all()
         tasks = db.query(ReviewTask).filter_by(case_id=c.id, status="OPEN").all()
         per_case[hid] = dict(
@@ -142,6 +228,8 @@ def run_arm(base_db, arm_db, arm_name, arm_cfg, gt_issues, gt_corr):
             roots=sorted({f.code for f in cur if f.role == "ROOT"}),
             consequences=sorted({f.code for f in cur if f.role == "CONSEQUENCE"}),
             first_tasks=sorted(t.code for t in tasks), n_first_tasks=len(tasks),
+            runs=[_run_record(db, c.id, r, hid, arm_name, "INITIAL", call_ms if len(new) == 1 else None) for r in new],
+            outputs=dict(first_pass=capture_case(db, c)),
         )
 
     # ---------------- correction loop (oracle reviewer) ----------------
@@ -150,7 +238,7 @@ def run_arm(base_db, arm_db, arm_name, arm_cfg, gt_issues, gt_corr):
         rec = per_case[hid]
         pending_ops = copy.deepcopy(gt_corr.get(hid, []))
         actions = corrections = decisions = 0
-        loop_runs, loop_exec, loop_reused, unchanged_exec, loop_ms = 0, 0, 0, 0, []
+        loop_records = []
         for _ in range(MAX_LOOP_ITERATIONS):
             db.refresh(c)
             tasks = (db.query(ReviewTask).filter_by(case_id=c.id, status="OPEN")
@@ -162,9 +250,12 @@ def run_arm(base_db, arm_db, arm_name, arm_cfg, gt_issues, gt_corr):
             prev_runs = {r.id for r in db.query(PipelineRun.id).filter_by(case_id=c.id)}
             if op is not None and op["op"] != "review_decision" and "CORRECT_DATA" in (t.allowed_decisions or []):
                 pending_ops.remove(op)
+                t0 = time.perf_counter()
                 apply_correction(db, c, op["op"], _payload(op), actor="experiment.oracle",
-                                 reason=f"oracle correction for {t.code}", review_task_id=t.id, orchestrator=orch)
+                                 reason=f"oracle correction for {t.code}", review_task_id=t.id, orchestrator=orch_corr)
+                call_ms = (time.perf_counter() - t0) * 1000
                 corrections += 1
+                action, op_name, decision = "CORRECTION", op["op"], None
             else:
                 if op is not None and op["op"] == "review_decision" and op["decision"] in (t.allowed_decisions or []):
                     decision = op["decision"]
@@ -175,33 +266,30 @@ def run_arm(base_db, arm_db, arm_name, arm_cfg, gt_issues, gt_corr):
                     decision = "CONFIRM_BLOCKED"
                 else:  # correctable BLOCKING task with no recorded fix: reviewer cannot resolve it
                     break
+                t0 = time.perf_counter()
                 db.add(ReviewDecision(case_id=c.id, task_id=t.id, code=t.code, task_key=t.task_key, decision=decision,
                                       note="experiment oracle decision", actor="experiment.oracle"))
                 audit(db, "REVIEW_DECISION", f"{decision} on {t.code}", "experiment.oracle", c.id, "review_task", t.id)
                 db.flush()
-                orch.process(c, trigger="REVIEW_DECISION", changed_domains=["reviews"])
+                orch_dec.process(c, trigger="REVIEW_DECISION", changed_domains=["reviews"])
+                call_ms = (time.perf_counter() - t0) * 1000
                 decisions += 1
+                action, op_name = "REVIEW_DECISION", None
             actions += 1
-            for r in db.query(PipelineRun).filter_by(case_id=c.id).all():
-                if r.id in prev_runs:
-                    continue
-                loop_runs += 1
-                loop_exec += r.stages_executed or 0
-                loop_reused += r.stages_reused or 0
-                loop_ms.append(r.wall_ms)
-                # an execution is "unnecessary" if it reproduced the stage's previous output exactly
-                for se in db.query(StageExecution).filter_by(run_id=r.id, status="SUCCEEDED").all():
-                    prior = (db.query(StageExecution)
-                             .filter(StageExecution.case_id == c.id, StageExecution.stage == se.stage,
-                                     StageExecution.status == "SUCCEEDED", StageExecution.id < se.id)
-                             .order_by(StageExecution.id.desc()).first())
-                    if prior is not None and prior.output_hash == se.output_hash:
-                        unchanged_exec += 1
+            new = _new_runs(db, c.id, prev_runs)
+            for r in new:
+                loop_records.append(_run_record(db, c.id, r, hid, arm_name, action, call_ms if len(new) == 1 else None,
+                                                op=op_name, decision=decision))
         db.refresh(c)
+        rec["runs"] += loop_records
         rec.update(final_status=c.status, review_actions=actions, corrections=corrections, decisions=decisions,
-                   loop_runs=loop_runs, loop_stage_executions=loop_exec, loop_stage_reused=loop_reused,
-                   loop_unnecessary_executions=unchanged_exec, loop_wall_ms=loop_ms,
+                   loop_runs=len(loop_records),
+                   loop_stage_executions=sum(x["n_executed"] for x in loop_records),
+                   loop_stage_reused=sum(x["n_reused"] for x in loop_records),
+                   loop_unnecessary_executions=sum(len(x["unnecessary_stages"]) for x in loop_records),
+                   loop_wall_ms=[x["wall_ms"] for x in loop_records],
                    tasks_created_total=db.query(ReviewTask).filter_by(case_id=c.id).count())
+        rec["outputs"]["final"] = capture_case(db, c)
     db.close()
     eng.dispose()
     return per_case, t_first
@@ -257,7 +345,13 @@ def evaluate_arm(per_case, gt_issues, labels):
     return dict(
         n_cases=n,
         detection_all_findings=dict(tp=tp, fp=fp, fn=fn, **prf(tp, fp, fn)),
-        detection_root_findings=dict(tp=tp_root, fp=fp_root, fn=fn, **prf(tp_root, fp_root, fn)),
+        # LEGACY (kept only for comparison with recorded runs): fn here is the ALL-FINDINGS false-negative
+        # count, so its recall/F1 are NOT root metrics. Use root_attribution instead.
+        detection_root_findings=dict(tp=tp_root, fp=fp_root, fn=fn, **prf(tp_root, fp_root, fn),
+                                     legacy_note="fn is the all-findings FN; recall/F1 are not valid root metrics"),
+        root_attribution=root_attribution(
+            [dict(hadm_id=h, findings=r["findings"], roots=r["roots"]) for h, r in per_case.items()],
+            {str(h): v for h, v in gt_issues.items()}, reg),
         detection_by_type={k: dict(v, **prf(v["tp"], v["fp"], v["fn"])) for k, v in sorted(by_type.items())},
         root_blocker_exact_match=dict(correct=root_exact, total=root_total,
                                       accuracy=round(root_exact / root_total, 4) if root_total else None),
@@ -283,7 +377,22 @@ def evaluate_arm(per_case, gt_issues, labels):
         loop_unnecessary_executions=sum(r["loop_unnecessary_executions"] for r in per_case.values()),
         first_pass_latency_ms=_summ([r["first_wall_ms"] for r in per_case.values()]),
         rerun_latency_ms=_summ([x for r in per_case.values() for x in r["loop_wall_ms"]]),
+        loop_by_trigger=loop_by_trigger(per_case),
     )
+
+
+def loop_by_trigger(per_case):
+    """Correction-loop work split by the action that caused each run (recorded per run, not inferred)."""
+    out = {}
+    for action in ACTIONS[1:]:
+        runs = [x for r in per_case.values() for x in r.get("runs", []) if x["action"] == action]
+        out[action] = dict(runs=len(runs), stage_executions=sum(x["n_executed"] for x in runs),
+                           stage_reused=sum(x["n_reused"] for x in runs),
+                           unnecessary_executions=sum(len(x["unnecessary_stages"]) for x in runs),
+                           wall_ms=_summ([x["wall_ms"] for x in runs if x["wall_ms"] is not None]),
+                           harness_action_ms=_summ([x["harness_action_ms"] for x in runs
+                                                    if x["harness_action_ms"] is not None]))
+    return out
 
 
 def manual_model(per_case_ref, factor=1.0):
@@ -306,6 +415,9 @@ def run_experiment(out_dir, seeds=(1, 2, 3), n_encounters=200, error_rate=0.35, 
     """mimic_root: run on REAL MIMIC-format encounters; only the synthetic admin layer (bills, documents,
     checklist, derived notes, policies) is generated per seed, and only it receives injected faults."""
     arms = arms or list(ARMS)
+    unknown = [a for a in arms if a not in ALL_ARMS]
+    if unknown:
+        raise ValueError(f"unknown arm(s) {unknown}; choose from {sorted(ALL_ARMS)}")
     os.makedirs(out_dir, exist_ok=True)
     started = time.time()
     results = dict(config=dict(seeds=list(seeds), n_encounters=n_encounters if not mimic_root else None,
@@ -338,7 +450,7 @@ def run_experiment(out_dir, seeds=(1, 2, 3), n_encounters=200, error_rate=0.35, 
         for arm in arms:
             log(f"seed {seed}: arm {arm}")
             arm_db = os.path.join(out_dir, f"arm_{arm}_seed{seed}.db")
-            per_case, _ = run_arm(base_db, arm_db, arm, ARMS[arm], gt_issues, gt_corr)
+            per_case, _ = run_arm(base_db, arm_db, arm, ALL_ARMS[arm], gt_issues, gt_corr)
             per_arm[arm] = per_case
             ev = evaluate_arm(per_case, gt_issues, labels)
             ev["modelled_human_minutes_per_case"] = automated_model(per_case)
@@ -346,6 +458,9 @@ def run_experiment(out_dir, seeds=(1, 2, 3), n_encounters=200, error_rate=0.35, 
             with open(os.path.join(out_dir, f"raw_{arm}_seed{seed}.json"), "w", encoding="utf-8") as f:
                 json.dump({str(k): v for k, v in per_case.items()}, f, indent=1)
             os.remove(arm_db)
+        # full output equivalence: each full-revalidation arm vs the targeted treatment
+        seed_res["equivalence"] = {f"{a}__vs__{b}": compare_arms(per_arm[a], per_arm[b], a, b)
+                                   for a, b in EQUIVALENCE_PAIRS if a in per_arm and b in per_arm}
         ref = per_arm.get("C_parallel_targeted") or next(iter(per_arm.values()))
         seed_res["A_manual_model"] = dict(
             note="MODELLED from ASSUMED durations; no detection metrics (no manual process was observed).",
@@ -355,6 +470,7 @@ def run_experiment(out_dir, seeds=(1, 2, 3), n_encounters=200, error_rate=0.35, 
         os.remove(base_db)
     results["elapsed_s"] = round(time.time() - started, 1)
     results["aggregate"] = aggregate(results)
+    results["derived"] = derived(results)
     with open(os.path.join(out_dir, "summary.json"), "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, default=str)
     return results
@@ -370,20 +486,50 @@ def aggregate(results):
             ("first_pass_stage_executions", None), ("false_clear_rate", None), ("tasks_without_injected_issue", None),
             ("first_pass_latency_ms", "median"), ("first_pass_latency_ms", "p95"), ("rerun_latency_ms", "median"),
             ("modelled_human_minutes_per_case", None)]
+    # metrics added with per-run trigger records and corrected root attribution (absent in older runs)
+    paths = [("root_attribution", "precision"), ("root_attribution", "recall"), ("root_attribution", "f1")]
+    for action in ACTIONS[1:]:
+        paths += [("loop_by_trigger", action, "runs"), ("loop_by_trigger", action, "stage_executions"),
+                  ("loop_by_trigger", action, "unnecessary_executions"), ("loop_by_trigger", action, "wall_ms", "median")]
     out = {}
     arms = results["config"]["arms"]
     for arm in arms:
         out[arm] = {}
-        for k, sub in keys:
+        for path in [tuple(x for x in k if x is not None) for k in keys] + paths:
             vals = []
             for s in results["seeds"].values():
-                v = s["arms"][arm][k]
-                v = v.get(sub) if sub else v
+                v = s["arms"][arm]
+                for p_ in path:
+                    v = v.get(p_) if isinstance(v, dict) else None
                 if v is not None:
                     vals.append(v)
-            name = f"{k}.{sub}" if sub else k
-            out[arm][name] = dict(mean=round(statistics.mean(vals), 4) if vals else None,
-                                  sd=round(statistics.stdev(vals), 4) if len(vals) > 1 else None)
+            out[arm][".".join(path)] = dict(mean=round(statistics.mean(vals), 4) if vals else None,
+                                            sd=round(statistics.stdev(vals), 4) if len(vals) > 1 else None,
+                                            n_seeds=len(vals))
     out["A_manual_model"] = dict(minutes_per_case=dict(
         mean=round(statistics.mean(s["A_manual_model"]["minutes_per_case"] for s in results["seeds"].values()), 2)))
+    return out
+
+
+def derived(results):
+    """Reductions on seed means (= pooled ratios, equal seeds per arm). None when a denominator is 0 or
+    an arm is absent. Recomputed independently from raw per-run records by scripts/verify_results.py."""
+    agg = results["aggregate"]
+
+    def mean(arm, key):
+        return (agg.get(arm, {}).get(key) or {}).get("mean")
+
+    def red(t, b, key):
+        tv, bv = mean(t, key), mean(b, key)
+        return None if tv is None or not bv else round(1 - tv / bv, 4)
+    C, B, CT, DA = "C_parallel_targeted", "B_sequential_full", "C_minus_targeted", "C_decision_aware_full"
+    out = {}
+    for base in (B, CT, DA):
+        out[f"loop_execution_reduction_C_vs_{base}"] = red(C, base, "loop_stage_executions")
+        for action in ACTIONS[1:]:
+            out[f"loop_execution_reduction_{action}_C_vs_{base}"] = red(
+                C, base, f"loop_by_trigger.{action}.stage_executions")
+        out[f"rerun_median_latency_reduction_C_vs_{base}"] = red(C, base, "rerun_latency_ms.median")
+    out["note"] = ("C_vs_C_minus_targeted and C_vs_C_decision_aware_full hold scheduling constant (all parallel); "
+                   "C_vs_B_sequential_full also changes sequential->parallel and is confounded for latency.")
     return out

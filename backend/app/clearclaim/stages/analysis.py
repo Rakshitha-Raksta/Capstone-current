@@ -8,6 +8,7 @@ import statistics
 
 from app.clearclaim.dag import STAGES, STAGE_INDEX, DOMAIN_OWNER, rerun_plan_for_domain
 from app.clearclaim.findings import finding, SEVERITY_RANK
+from app.clearclaim.identity import evidence_fingerprint
 from app.datasets.error_types import ERROR_TYPES
 
 # ---------------------------------------------------------------------------
@@ -313,7 +314,7 @@ def run_review_routing(inp, up, ctx):
         candidates = rb["roots"]
     decisions = {}
     for d in inp["reviews"]:
-        decisions[d["task_key"]] = d["decision"]
+        decisions[d["task_key"]] = d          # latest decision per task key wins
     tasks = []
     for x in group_findings([c for c in candidates if c["severity"] in ("BLOCKING", "REVIEW")]):
         rule_ids = [r["rule_id"] or "" for r in x["group_rules"]]
@@ -325,10 +326,8 @@ def run_review_routing(inp, up, ctx):
             allowed = ["CONFIRM_BLOCKED"]
         else:
             allowed = ["ACCEPT_WITH_JUSTIFICATION"] + (["CORRECT_DATA"] if corr else [])
-        state = {"ACCEPT_WITH_JUSTIFICATION": "ACCEPTED_WITH_JUSTIFICATION",
-                 "CONFIRM_BLOCKED": "CONFIRMED_BLOCKED"}.get(decisions.get(key), "OPEN")
         dom = x.get("owner_domain") or owner_domain(x["code"])
-        tasks.append(dict(task_key=key, code=x["code"], severity=x["severity"], title=x["title"], role=x.get("role"),
+        task = dict(task_key=key, code=x["code"], severity=x["severity"], title=x["title"], role=x.get("role"),
                           stage=x["stage"], owner_stage=x.get("owner_stage") or DOMAIN_OWNER.get(dom, x["stage"]),
                           input_domain=dom, reason=x["message"],
                           evidence=dict(rule_id=x.get("rule_id"), source_document=x.get("source_document"),
@@ -338,7 +337,21 @@ def run_review_routing(inp, up, ctx):
                                         **(x.get("evidence") or {})),
                           recommended_action=x.get("next_action") or NEXT_ACTIONS.get(x["code"], "Review the evidence."),
                           required_reruns=x.get("rerun_stages") or rerun_plan_for_domain(dom),
-                          allowed_decisions=allowed, state=state))
+                          allowed_decisions=allowed)
+        dec = decisions.get(key)
+        state = "OPEN"
+        if dec is not None:
+            mapped = {"ACCEPT_WITH_JUSTIFICATION": "ACCEPTED_WITH_JUSTIFICATION",
+                      "CONFIRM_BLOCKED": "CONFIRMED_BLOCKED"}.get(dec["decision"], "OPEN")
+            fp = dec.get("evidence_fingerprint")
+            if fp is None or fp == evidence_fingerprint(task):
+                state = mapped
+            else:
+                # The reviewer decided on different evidence; the decision is not silently carried over.
+                task["prior_decision"] = dict(decision=dec["decision"], status="NOT_APPLIED_EVIDENCE_CHANGED",
+                                              reason="the material evidence changed after this decision was recorded")
+        task["state"] = state
+        tasks.append(task)
     open_tasks = [t for t in tasks if t["state"] == "OPEN"]
     return dict(data=dict(routing_policy=policy, tasks=tasks, open_count=len(open_tasks),
                           confirmed_blocked=sum(1 for t in tasks if t["state"] == "CONFIRMED_BLOCKED")),

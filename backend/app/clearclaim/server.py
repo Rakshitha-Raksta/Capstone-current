@@ -90,6 +90,8 @@ def install(app: FastAPI):
     from app.clearclaim.control_room import router as control_room_router
     from app.clearclaim.workspace import router as workspace_router
     from app.clearclaim.intel import router as intel_router
+    from app.clearclaim.issues import router as issues_router
+    from app.clearclaim.case_intel import router as case_intel_router
 
     app.title = "ClearClaim API"
     app.version = settings.app_version
@@ -143,6 +145,8 @@ def install(app: FastAPI):
     app.include_router(control_room_router)
     app.include_router(workspace_router)
     app.include_router(intel_router)
+    app.include_router(issues_router)
+    app.include_router(case_intel_router)
     app.include_router(explain_router)
 
     @app.on_event("startup")

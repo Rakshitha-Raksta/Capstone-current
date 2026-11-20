@@ -121,6 +121,14 @@ export const api = {
   intelRules: (caseId?: number) => get<any>(`/api/v1/intel/rules${qs({ case_id: caseId })}`),
   intelHistorical: (caseId: number, sample = 40) => get<any>(`/api/v1/intel/cases/${caseId}/historical${qs({ sample })}`),
   intelResearch: () => get<any>('/api/v1/intel/research'),
+  // historical-case intelligence (advisory, read-only; never creates findings or tasks)
+  similarCases: (caseId: number, k = 10, kPred = 25) => get<any>(`/api/v1/intel/cases/${caseId}/similar-cases${qs({ k, k_pred: kPred })}`),
+  extensionResults: () => get<any>('/api/v1/intel/extension-results'),
+  // persistent issue memory
+  caseIssues: (caseId: number) => get<any>(`/api/v1/cases/${caseId}/issues`),
+  issues: (p: Record<string, unknown>) => get<any>(`/api/v1/issues${qs(p)}`),
+  issueSummary: () => get<any>('/api/v1/issues/summary'),
+  taskNote: (taskId: number, body: { note: string; assignee?: string }) => send<any>('POST', `/api/v1/review-tasks/${taskId}/note`, body),
   // existing (legacy) policy endpoints, reused by the Policy Library
   policies: () => get<any[]>('/policies'),
 };

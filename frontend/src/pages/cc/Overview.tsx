@@ -104,6 +104,31 @@ export default function Overview() {
             </Card>
           </div>
 
+          {data.issue_memory && (() => {
+            const m = data.issue_memory;
+            const s = m.by_status || {};
+            return (
+              <Card title="Issue memory" meta="persistent issues across workflow runs">
+                <div className="grid g-4">
+                  <Stat label="Pending review" value={n(s.PENDING_REVIEW || 0, 0)} hint="one open task per issue" />
+                  <Stat label="Duplicate tasks prevented" value={n(m.duplicate_tasks_prevented, 0)} hint="re-detections that kept the existing task" />
+                  <Stat label="Repeat detections linked" value={n(m.repeat_detections, 0)} hint={`${n(m.total_detections, 0)} detections of ${n(m.tracked_issues, 0)} issues`} />
+                  <Stat label="Reopened" value={n(m.reopened, 0)} hint="came back after resolution or dismissal" />
+                </div>
+                <dl className="kv" style={{ marginTop: 10 }}>
+                  <dt>Resolved by a correction</dt><dd>{s.RESOLVED || 0}</dd>
+                  <dt>Dismissed with justification</dt><dd>{s.DISMISSED || 0}</dd>
+                  <dt>Present, no review pending</dt><dd>{s.OPEN || 0} <span className="faint small">confirmed blocking, or explained as a consequence</span></dd>
+                  <dt>No longer detected</dt><dd>{s.NO_LONGER_DETECTED || 0} <span className="faint small">without a correction; not claimed resolved</span></dd>
+                  <dt>Open duplicate tasks</dt><dd>{m.open_task_duplicates}</dd>
+                  {m.tasks_without_issue > 0 && <><dt>Tasks not yet linked</dt><dd>{m.tasks_without_issue} <span className="faint small">created before issue memory</span></dd></>}
+                </dl>
+                {(m.pending_by_department || []).length > 0 && (
+                  <BarList label="Pending issues by department" items={m.pending_by_department.map((x: any) => ({ key: x.owner_stage, label: x.department, value: x.pending }))
+                    .sort((a: any, b: any) => b.value - a.value)} />)}
+              </Card>);
+          })()}
+
           <Card title="Recent system events" flush actions={<Link to="/workflow#audit">Full audit trail →</Link>}>
             {data.recent_events.length === 0 ? <EmptyState title="No events yet" /> : (
               <div className="table-wrap"><table className="tbl">

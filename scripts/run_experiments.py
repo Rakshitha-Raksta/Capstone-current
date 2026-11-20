@@ -14,7 +14,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "backend"))
 os.chdir(os.path.join(ROOT, "backend"))
 
-from app.experiments.harness import run_experiment, ARMS  # noqa: E402
+from app.experiments.harness import run_experiment, ARMS, ALL_ARMS  # noqa: E402
 
 
 def main():
@@ -23,7 +23,8 @@ def main():
     ap.add_argument("--seeds", type=int, nargs="+", default=[1, 2, 3])
     ap.add_argument("--n", type=int, default=200)
     ap.add_argument("--error-rate", type=float, default=0.35)
-    ap.add_argument("--arms", nargs="+", default=list(ARMS), choices=list(ARMS))
+    ap.add_argument("--arms", nargs="+", default=list(ARMS), choices=list(ALL_ARMS),
+                    help="default: the four original arms; C_decision_aware_full is opt-in")
     ap.add_argument("--mimic-root", default=None,
                     help="Run on real MIMIC-format encounters (e.g. data/mimic_iv/demo); admin layer is synthetic")
     ap.add_argument("--overwrite", action="store_true",

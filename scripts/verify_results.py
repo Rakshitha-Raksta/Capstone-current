@@ -126,8 +126,234 @@ def recompute(raw, gt):
     return m
 
 
-def main():
-    args = sys.argv[1:]
+# ---------------------------------------------------------------------------
+# Checks for runs recorded with per-run trigger records, root attribution and full outputs.
+# Independent re-implementations over the RAW records: nothing from app.experiments is imported.
+# The stage list and the dependency plan come from the workflow definition (app.clearclaim.dag),
+# which is the specification the policies are checked against, not evaluation code.
+# ---------------------------------------------------------------------------
+
+ACTIONS = ("INITIAL", "CORRECTION", "REVIEW_DECISION")
+ARM_POLICY = {"B_sequential_full": "full", "C_minus_targeted": "full", "C_parallel_targeted": "targeted",
+              "C_minus_root_routing": "targeted", "C_decision_aware_full": "decision_aware"}
+VOLATILE = {"id", "case_id", "stage_execution_id", "created_at", "updated_at", "resolved_at", "created_run_id",
+            "run_id", "issue_id", "ts", "started_at", "finished_at"}
+TOL = 1e-3
+
+
+def _close(a, b, tol=TOL):
+    if a is None or b is None:
+        return a is None and b is None
+    return abs(float(a) - float(b)) <= tol
+
+
+def _ratio(n, d):
+    return None if d == 0 else n / d
+
+
+def check_run_records(raw, arm):
+    """Returns (problems, per-trigger totals, loop wall times) or None when the run has no per-run records."""
+    from app.clearclaim import dag
+    stages = list(dag.STAGE_ORDER)
+    if not raw or any("runs" not in r for r in raw.values()):
+        return None
+    policy = ARM_POLICY.get(arm)
+    problems, totals, walls = [], {a: dict(runs=0, stage_executions=0, unnecessary_executions=0) for a in ACTIONS[1:]}, []
+    for h, r in raw.items():
+        runs = r["runs"]
+        initial = [x for x in runs if x["action"] == "INITIAL"]
+        loop = [x for x in runs if x["action"] != "INITIAL"]
+        if len(initial) != 1:
+            problems.append(f"{arm} {h}: {len(initial)} INITIAL run records (expected 1)")
+        for x in runs:
+            if x["action"] not in ACTIONS:
+                problems.append(f"{arm} {h} run {x.get('run_id')}: unknown action {x['action']}")
+            if x["trigger"] != x["action"]:
+                problems.append(f"{arm} {h} run {x['run_id']}: harness action {x['action']} != recorded trigger {x['trigger']}")
+            parts = [x["stages_executed"], x["stages_reused"], x["stages_failed"], x["stages_skipped_dependency_failed"],
+                     x["stages_not_rerun"]]
+            flat = [s for p in parts for s in p]
+            if sorted(flat) != sorted(stages):
+                problems.append(f"{arm} {h} run {x['run_id']}: stage lists are not a partition of the 11 stages")
+            if len(x["stages_executed"]) != x["n_executed"] or len(x["stages_reused"]) != x["n_reused"]:
+                problems.append(f"{arm} {h} run {x['run_id']}: stage counts disagree with stage lists")
+            if not set(x["unnecessary_stages"]) <= set(x["stages_executed"]):
+                problems.append(f"{arm} {h} run {x['run_id']}: unnecessary stages not among executed stages")
+            ran = set(x["stages_executed"]) | set(x["stages_failed"]) | set(x["stages_skipped_dependency_failed"])
+            if policy == "full" or (policy == "decision_aware" and x["action"] in ("INITIAL", "CORRECTION")):
+                if ran != set(stages):
+                    problems.append(f"{arm} {h} run {x['run_id']}: full revalidation expected, {len(ran)} stages ran")
+            if policy == "decision_aware" and x["action"] == "REVIEW_DECISION":
+                expected = set(dag.invalidated_by(x["changed_domains"]))
+                if ran != expected or x["stages_reused"]:
+                    problems.append(f"{arm} {h} run {x['run_id']}: decision-aware run executed {sorted(ran)}, "
+                                    f"dependency plan is {sorted(expected)}")
+            if policy == "targeted" and x["action"] == "REVIEW_DECISION":
+                if not (ran | set(x["stages_reused"])) <= set(dag.invalidated_by(x["changed_domains"])):
+                    problems.append(f"{arm} {h} run {x['run_id']}: targeted decision run touched stages outside its plan")
+        # case-level totals must equal the sums of the per-run records
+        checks = [("loop_runs", len(loop)), ("loop_stage_executions", sum(len(x["stages_executed"]) for x in loop)),
+                  ("loop_stage_reused", sum(len(x["stages_reused"]) for x in loop)),
+                  ("loop_unnecessary_executions", sum(len(x["unnecessary_stages"]) for x in loop)),
+                  ("corrections", sum(1 for x in loop if x["action"] == "CORRECTION")),
+                  ("decisions", sum(1 for x in loop if x["action"] == "REVIEW_DECISION"))]
+        for k, v in checks:
+            if r.get(k) != v:
+                problems.append(f"{arm} {h}: {k}={r.get(k)} but per-run records give {v}")
+        if [x["wall_ms"] for x in loop] != r.get("loop_wall_ms"):
+            problems.append(f"{arm} {h}: loop_wall_ms differs from per-run wall times")
+        for x in loop:
+            t = totals[x["action"]]
+            t["runs"] += 1
+            t["stage_executions"] += len(x["stages_executed"])
+            t["unnecessary_executions"] += len(x["unnecessary_stages"])
+            if x["wall_ms"] is not None:
+                walls.append(x["wall_ms"])
+    return problems, totals, walls
+
+
+def root_counts(raw, gt):
+    """Root TP/FP/FN from predicted ROOT codes and injected codes (registry codes only)."""
+    tp = fp = fn = 0
+    for h, r in raw.items():
+        truth = gt.get(h, set()) & REG
+        roots = set(r["roots"]) & REG
+        tp += len(roots & truth)
+        fp += len(roots - truth)
+        fn += len(truth - roots)
+    p, rc = _ratio(tp, tp + fp), _ratio(tp, tp + fn)
+    f1 = None if p is None or rc is None else (0.0 if p + rc == 0 else 2 * p * rc / (p + rc))
+    return dict(tp=tp, fp=fp, fn=fn, precision=p, recall=rc, f1=f1)
+
+
+def _clean(v):
+    if isinstance(v, dict):
+        return {k: _clean(x) for k, x in v.items() if k not in VOLATILE}
+    if isinstance(v, list):
+        return [_clean(x) for x in v]
+    return v
+
+
+def _phase_canon(ph):
+    ph = _clean(ph or {})
+    for k in ("findings", "tasks"):
+        ph[k] = sorted(json.dumps(x, sort_keys=True, default=str) for x in ph.get(k, []))
+    return json.dumps(ph, sort_keys=True, default=str)
+
+
+def phase_differences(raw_a, raw_b, phases=("first_pass", "final")):
+    """Whole-phase canonical comparison (multisets, volatile fields dropped). Returns (n compared, {phase: set(hadm)})
+    or None when outputs were not recorded."""
+    common = sorted(set(raw_a) & set(raw_b))
+    if not common or any("outputs" not in raw_a[h] or "outputs" not in raw_b[h] for h in common):
+        return None
+    diff = {p: set() for p in phases}
+    for h in common:
+        for p in phases:
+            if _phase_canon(raw_a[h]["outputs"].get(p)) != _phase_canon(raw_b[h]["outputs"].get(p)):
+                diff[p].add(h)
+    return len(common), diff
+
+
+def verify_new_records(d, summary, cfg_arms, cfg_seeds):
+    """All checks for the newer raw format. Returns (mismatches, problems, report)."""
+    mismatches, problems = [], []
+    report = dict(run_records={}, root_attribution={}, equivalence={}, latency={}, derived={})
+    per_seed_exec = {}
+    for seed in cfg_seeds:
+        gt = gt_for(d, seed)
+        raws = {}
+        for arm in cfg_arms:
+            f = os.path.join(d, f"raw_{arm}_seed{seed}.json")
+            if os.path.exists(f):
+                raws[arm] = json.load(open(f, encoding="utf-8"))
+        for arm, raw in raws.items():
+            s = summary["seeds"][seed]["arms"][arm]
+            res = check_run_records(raw, arm)
+            key = f"{arm}/seed{seed}"
+            if res is None:
+                report["run_records"][key] = "not available (recorded before per-run trigger records)"
+            else:
+                probs, totals, walls = res
+                problems += probs
+                report["run_records"][key] = dict(problems=len(probs), by_trigger=totals)
+                per_seed_exec.setdefault(arm, {})[seed] = dict(
+                    total=sum(t["stage_executions"] for t in totals.values()),
+                    **{a: t["stage_executions"] for a, t in totals.items()})
+                lbt = s.get("loop_by_trigger")
+                if lbt is None:
+                    mismatches.append(dict(arm=arm, seed=seed, metric="loop_by_trigger", recomputed=totals, summary=None))
+                else:
+                    for a, t in totals.items():
+                        for k in ("runs", "stage_executions", "unnecessary_executions"):
+                            if lbt.get(a, {}).get(k) != t[k]:
+                                mismatches.append(dict(arm=arm, seed=seed, metric=f"loop_by_trigger.{a}.{k}",
+                                                       recomputed=t[k], summary=lbt.get(a, {}).get(k)))
+                med = round(statistics.median(walls), 3) if walls else None
+                if not _close(med, (s.get("rerun_latency_ms") or {}).get("median")):
+                    mismatches.append(dict(arm=arm, seed=seed, metric="rerun_latency_ms.median", recomputed=med,
+                                           summary=(s.get("rerun_latency_ms") or {}).get("median")))
+                report["latency"][key] = dict(rerun_median_ms=med, n_runs=len(walls))
+            ra = s.get("root_attribution")
+            mine = root_counts(raw, gt)
+            if ra is None:
+                report["root_attribution"][key] = "not available (recorded before corrected root metrics)"
+            else:
+                report["root_attribution"][key] = {k: (round(v, 4) if isinstance(v, float) else v) for k, v in mine.items()}
+                for k in ("tp", "fp", "fn"):
+                    if ra.get(k) != mine[k]:
+                        mismatches.append(dict(arm=arm, seed=seed, metric=f"root_attribution.{k}", recomputed=mine[k],
+                                               summary=ra.get(k)))
+                for k in ("precision", "recall", "f1"):
+                    if not _close(ra.get(k), mine[k]):
+                        mismatches.append(dict(arm=arm, seed=seed, metric=f"root_attribution.{k}", recomputed=mine[k],
+                                               summary=ra.get(k)))
+        for name, eq in (summary["seeds"][seed].get("equivalence") or {}).items():
+            a, b = eq["reference_arm"], eq["other_arm"]
+            res = phase_differences(raws.get(a, {}), raws.get(b, {}))
+            if res is None:
+                report["equivalence"][f"{name}/seed{seed}"] = "not available (outputs not recorded)"
+                continue
+            n, diff = res
+            report["equivalence"][f"{name}/seed{seed}"] = dict(n_cases=n, cases_with_differences={p: len(v) for p, v in diff.items()},
+                                                               differing_cases={p: sorted(v)[:20] for p, v in diff.items()})
+            if eq["n_cases_compared"] != n:
+                mismatches.append(dict(seed=seed, metric=f"equivalence.{name}.n_cases_compared", recomputed=n,
+                                       summary=eq["n_cases_compared"]))
+            for p, v in diff.items():
+                if eq["cases_with_differences"].get(p) != len(v):
+                    mismatches.append(dict(seed=seed, metric=f"equivalence.{name}.cases_with_differences.{p}",
+                                           recomputed=len(v), summary=eq["cases_with_differences"].get(p)))
+            if not eq.get("mismatches_truncated"):
+                listed = {m["hadm_id"] for m in eq.get("mismatches", [])}
+                if listed != set().union(*diff.values()):
+                    mismatches.append(dict(seed=seed, metric=f"equivalence.{name}.differing_cases",
+                                           recomputed=sorted(set().union(*diff.values()))[:20], summary=sorted(listed)[:20]))
+            if eq.get("equivalent") != (n > 0 and not any(diff.values())):
+                mismatches.append(dict(seed=seed, metric=f"equivalence.{name}.equivalent",
+                                       recomputed=not any(diff.values()), summary=eq.get("equivalent")))
+    # reductions recomputed from per-run records (sum over seeds = ratio of seed means, equal seeds per arm)
+    C = "C_parallel_targeted"
+    der = summary.get("derived") or {}
+    if C in per_seed_exec:
+        for base in ("B_sequential_full", "C_minus_targeted", "C_decision_aware_full"):
+            if base not in per_seed_exec:
+                continue
+            seeds = sorted(set(per_seed_exec[C]) & set(per_seed_exec[base]))
+            for part, key in (("total", f"loop_execution_reduction_C_vs_{base}"),
+                              ("CORRECTION", f"loop_execution_reduction_CORRECTION_C_vs_{base}"),
+                              ("REVIEW_DECISION", f"loop_execution_reduction_REVIEW_DECISION_C_vs_{base}")):
+                cs = sum(per_seed_exec[C][s][part] for s in seeds)
+                bs = sum(per_seed_exec[base][s][part] for s in seeds)
+                val = None if bs == 0 else round(1 - cs / bs, 4)
+                report["derived"][key] = val
+                if key in der and not _close(der[key], val, 1e-4):
+                    mismatches.append(dict(metric=f"derived.{key}", recomputed=val, summary=der[key]))
+    return mismatches, problems, report
+
+
+def main(argv=None):
+    args = list(sys.argv[1:] if argv is None else argv)
     mimic_root = os.path.join(ROOT, "data", "mimic_iv", "demo")
     if "--mimic-root" in args:
         i = args.index("--mimic-root")
@@ -266,6 +492,11 @@ def main():
                                   found_only_as_consequence=sorted((truth & cons) - roots),
                                   spurious_roots=sorted(roots - truth), first_status=r["first_status"]))
 
+    # ---- newer raw format: per-run trigger records, corrected root attribution, full output equivalence ----
+    new_mm, new_problems, new_report = verify_new_records(d, summary, cfg_arms, cfg_seeds)
+    mismatches += new_mm
+    problems += new_problems
+
     out = dict(directory=os.path.relpath(d, ROOT).replace(os.sep, "/"), seeds=sorted(summary["seeds"]),
                arms=sorted(per), base_db_sha256_per_seed=base_hashes, mismatches=mismatches,
                completeness_problems=problems, loop_outcomes=loop_issues,
@@ -275,8 +506,13 @@ def main():
                    expected_outcomes=expected_anomalies),
                cohort_equivalence=equivalence,
                root_blocker_errors=rb_errors, recomputed=table, derived=derived,
+               run_records=new_report["run_records"], root_attribution=new_report["root_attribution"],
+               equivalence=new_report["equivalence"], latency_recomputed=new_report["latency"],
+               derived_from_run_records=new_report["derived"],
                notes=["loop outcomes are inferred from final status and action counts (the raw output does "
-                      "not record tasks left open)"])
+                      "not record tasks left open)",
+                      "run_records / root_attribution / equivalence checks apply only to runs recorded with "
+                      "per-run trigger records; older runs report them as not available"])
     with open(os.path.join(d, "verification.json"), "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2)
     print(f"{out['directory']}: seeds {out['seeds']}, arms {len(out['arms'])}, raw files {len(files)}")
@@ -299,8 +535,10 @@ def main():
     print(f"  root-blocker errors (treatment arm): {len(rb_errors)}")
     for e in rb_errors:
         print("   ", e)
-    sys.exit(1 if (mismatches or problems) else 0)
+    for k, v in new_report["derived"].items():
+        print(f"  {k:55s} {v}  (from per-run records)")
+    return 1 if (mismatches or problems) else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

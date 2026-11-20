@@ -63,11 +63,15 @@ export default function CommandCenter() {
   const [hist, setHist] = useState<any>(null);
   const [auditEv, setAuditEv] = useState<any[] | null>(null);
   const [chain, setChain] = useState<any>(null);
+  const [sim, setSim] = useState<any>(null);
 
   const refreshIntel = useCallback(async (caseId: number) => {
+    setSim(null);
     const [r, h, ev] = await Promise.all([
       api.intelRules(caseId).catch(() => null), api.intelHistorical(caseId, 400).catch(() => null), api.caseEvents(caseId).catch(() => null)]);
     setRules(r); setHist(h); setAuditEv(ev);
+    // advisory historical-case intelligence loads after the authoritative data
+    api.similarCases(caseId).then(setSim).catch((e) => setSim({ status: 'ERROR', reason: (e as Error).message }));
   }, []);
 
   const load = useCallback(async (h: string) => {
@@ -244,7 +248,7 @@ export default function CommandCenter() {
   const st = STATION[view];
   const ctx = {
     view, go, stages, waves, ids, detail, enc, lastRun, state, roots, rootIdx, setRootIdx, root, stage, setStage, snaps,
-    rules, rule, setRule, hist, peer, setPeer, auditEv, chain, auditSel, setAuditSel, department, setDepartment,
+    rules, rule, setRule, hist, sim, peer, setPeer, auditEv, chain, auditSel, setAuditSel, department, setDepartment,
     overview: overview.data, attention: attention.data, load, draft, task, preview, run, setRun, applyCorrection, decide, replay, total, outcome,
     labJob, labRec, labErr, runCompare, runCorrectionCompare, labReplay, bar, setBar, meta: meta.data, openRecord,
   };

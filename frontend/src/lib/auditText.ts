@@ -51,6 +51,22 @@ export function describe(e: any): AuditStory {
         text: `${DOMAIN_LABELS[domain] || humanize(domain)} corrected by ${e.actor}.${reason ? ` Reason given: “${reason}”.` : ''}`,
         changes: changedFields(d.before, d.after) };
     }
+    case 'REVIEW_TASK_DEDUPLICATED': {
+      const items: any[] = d.items || [];
+      const depts = Array.from(new Set(items.map((x) => x.department).filter(Boolean)));
+      return { kind: 'task', routine: true, title: 'Existing review task(s) kept',
+        text: `${items.length} issue(s) were detected again${depts.length ? ` (${depts.join(', ')})` : ''}. The existing task was retained for each; no duplicate task was created.` };
+    }
+    case 'ISSUE_REOPENED':
+      return { kind: 'task', routine: false, title: 'Issue reopened', text: s };
+    case 'ISSUE_RESOLVED':
+      return { kind: 'task', routine: false, title: 'Issue resolved by a correction', text: s };
+    case 'ISSUE_NOT_DETECTED':
+      return { kind: 'task', routine: true, title: 'Issue no longer detected', text: `${s}. No correction was recorded, so it is not claimed as resolved.` };
+    case 'REVIEW_NOTE_ADDED':
+      return { kind: 'decision', routine: false, title: 'Reviewer note', text: `${e.actor}: “${d.note || ''}”${d.assignee ? ` (assigned to ${d.assignee})` : ''}.` };
+    case 'ISSUE_MEMORY_BACKFILLED':
+      return { kind: 'system', routine: false, title: 'Issue memory initialised', text: s };
     case 'REVIEW_DECISION': {
       const [decision, code] = s.split(' on ');
       return { kind: 'decision', routine: false, title: `Reviewer decision: ${humanize(decision)}`,

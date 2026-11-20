@@ -10,8 +10,9 @@ after the edit. An inconsistent header is only changed by set_bill_header_total.
 import datetime as dt
 import hashlib
 
+from app.clearclaim.issues import record_correction_on_issue
 from app.clearclaim.models import (
-    BillLine, ChecklistItem, ClaimCase, Correction, EncounterDiagnosis,
+    BillLine, ChecklistItem, ClaimCase, Correction, EncounterDiagnosis, ReviewTask,
 )
 from app.clearclaim.orchestrator import Orchestrator, audit
 from app.datasets import catalog as C
@@ -202,11 +203,15 @@ def apply_correction(db, case: ClaimCase, op: str, payload: dict, actor: str, re
     db.flush()
     audit(db, "CORRECTION_APPLIED", f"{op} on {domain}: {reason}", actor, case.id, "correction", corr.id,
           before=before, after=after)
+    if review_task_id is not None:
+        task = db.get(ReviewTask, review_task_id)
+        if task is not None and task.case_id == case.id:
+            record_correction_on_issue(db, task, corr)
     run = None
     if rerun:
         db.flush()
         db.expire(case.encounter)
-        run = orch.process(case, trigger="CORRECTION", changed_domains=[domain])
+        run = orch.process(case, trigger="CORRECTION", changed_domains=[domain], correction=corr)
         corr.run_id = run.id
         db.commit()
     return corr, run

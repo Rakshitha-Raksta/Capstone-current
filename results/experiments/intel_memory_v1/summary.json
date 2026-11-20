@@ -1,0 +1,627 @@
+{
+  "config": {
+    "runs": [
+      [
+        "main",
+        1
+      ],
+      [
+        "main",
+        2
+      ],
+      [
+        "main",
+        3
+      ],
+      [
+        "main_heldout",
+        4
+      ],
+      [
+        "main_heldout",
+        5
+      ],
+      [
+        "main_heldout",
+        6
+      ]
+    ],
+    "k_pred": 25,
+    "ks": [
+      5,
+      10
+    ],
+    "min_corpus": 10,
+    "min_comparable": 5,
+    "min_reviewed": 3,
+    "profiles": {
+      "general": {
+        "diagnoses": 0.25,
+        "procedures": 0.15,
+        "drg": 0.15,
+        "length_of_stay": 0.1,
+        "bill": 0.15,
+        "policy": 0.1,
+        "admin": 0.1
+      },
+      "coding": {
+        "diagnoses": 0.4,
+        "procedures": 0.25,
+        "drg": 0.2,
+        "length_of_stay": 0.05,
+        "bill": 0.0,
+        "policy": 0.0,
+        "admin": 0.1
+      },
+      "billing": {
+        "diagnoses": 0.05,
+        "procedures": 0.2,
+        "drg": 0.15,
+        "length_of_stay": 0.2,
+        "bill": 0.35,
+        "policy": 0.0,
+        "admin": 0.05
+      },
+      "readiness": {
+        "diagnoses": 0.05,
+        "procedures": 0.05,
+        "drg": 0.05,
+        "length_of_stay": 0.05,
+        "bill": 0.1,
+        "policy": 0.2,
+        "admin": 0.5
+      },
+      "insurance": {
+        "diagnoses": 0.15,
+        "procedures": 0.05,
+        "drg": 0.05,
+        "length_of_stay": 0.05,
+        "bill": 0.05,
+        "policy": 0.45,
+        "admin": 0.2
+      }
+    }
+  },
+  "aggregate": {
+    "main": {
+      "intel.prediction.f1": {
+        "mean": 0.0671,
+        "sd": 0.023,
+        "n": 3
+      },
+      "intel.prediction.precision": {
+        "mean": 0.0554,
+        "sd": 0.0166,
+        "n": 3
+      },
+      "intel.prediction.recall": {
+        "mean": 0.0857,
+        "sd": 0.0346,
+        "n": 3
+      },
+      "intel.prediction.random_baseline.f1": {
+        "mean": 0.0183,
+        "sd": 0.0053,
+        "n": 3
+      },
+      "intel.precision_at_5.similar": {
+        "mean": 0.0607,
+        "sd": 0.0131,
+        "n": 3
+      },
+      "intel.precision_at_5.random": {
+        "mean": 0.0505,
+        "sd": 0.0182,
+        "n": 3
+      },
+      "intel.precision_at_10.similar": {
+        "mean": 0.0629,
+        "sd": 0.0172,
+        "n": 3
+      },
+      "intel.precision_at_10.random": {
+        "mean": 0.0519,
+        "sd": 0.0145,
+        "n": 3
+      },
+      "intel.recommendation.evidence_coverage": {
+        "mean": 0.5961,
+        "sd": 0.0298,
+        "n": 3
+      },
+      "intel.recommendation.insufficient_data_rate": {
+        "mean": 0.4039,
+        "sd": 0.0298,
+        "n": 3
+      },
+      "intel.recommendation.agreement_with_gt_op": {
+        "mean": 1.0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "intel.prediction_items.insufficient_data_rate": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.reruns": {
+        "mean": 600,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.tasks_created_during_reruns": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.open_task_duplicates": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.duplicate_tasks_prevented": {
+        "mean": 71,
+        "sd": 32.078,
+        "n": 3
+      },
+      "memory.repeat_detections_linked": {
+        "mean": 243,
+        "sd": 31.749,
+        "n": 3
+      },
+      "memory.reappearance.attempted": {
+        "mean": 24.6667,
+        "sd": 1.1547,
+        "n": 3
+      },
+      "memory.reappearance.reopened_same_issue": {
+        "mean": 24.6667,
+        "sd": 1.1547,
+        "n": 3
+      },
+      "memory.reappearance.extra_issue_rows": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.false_suppression_after_reruns": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.identities_merged": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.resolved_without_correction": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.reopened": {
+        "mean": 40,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.false_suppression": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.false_reopen_rerun": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.false_reopen_unrelated": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.without_fp.false_suppression": {
+        "mean": 40,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.without_fp.case_complete_despite_new_evidence": {
+        "mean": 39.6667,
+        "sd": 0.5774,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.case_complete_despite_new_evidence": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.multi_line.cases": {
+        "mean": 20,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.multi_line.merged": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.multi_line.fix_one_other_still_pending": {
+        "mean": 20,
+        "sd": 0.0,
+        "n": 3
+      },
+      "intel.history.corrections": {
+        "mean": 82,
+        "sd": 3.0,
+        "n": 3
+      },
+      "intel.history.decisions": {
+        "mean": 81,
+        "sd": 10.583,
+        "n": 3
+      }
+    },
+    "main_heldout": {
+      "intel.prediction.f1": {
+        "mean": 0.0574,
+        "sd": 0.0304,
+        "n": 3
+      },
+      "intel.prediction.precision": {
+        "mean": 0.05,
+        "sd": 0.0248,
+        "n": 3
+      },
+      "intel.prediction.recall": {
+        "mean": 0.0679,
+        "sd": 0.0388,
+        "n": 3
+      },
+      "intel.prediction.random_baseline.f1": {
+        "mean": 0.0434,
+        "sd": 0.0087,
+        "n": 3
+      },
+      "intel.precision_at_5.similar": {
+        "mean": 0.0504,
+        "sd": 0.0226,
+        "n": 3
+      },
+      "intel.precision_at_5.random": {
+        "mean": 0.0611,
+        "sd": 0.0202,
+        "n": 3
+      },
+      "intel.precision_at_10.similar": {
+        "mean": 0.0535,
+        "sd": 0.0154,
+        "n": 3
+      },
+      "intel.precision_at_10.random": {
+        "mean": 0.0516,
+        "sd": 0.0067,
+        "n": 3
+      },
+      "intel.recommendation.evidence_coverage": {
+        "mean": 0.6659,
+        "sd": 0.0038,
+        "n": 3
+      },
+      "intel.recommendation.insufficient_data_rate": {
+        "mean": 0.3341,
+        "sd": 0.0038,
+        "n": 3
+      },
+      "intel.recommendation.agreement_with_gt_op": {
+        "mean": 1.0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "intel.prediction_items.insufficient_data_rate": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.reruns": {
+        "mean": 600,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.tasks_created_during_reruns": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.open_task_duplicates": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.duplicate_tasks_prevented": {
+        "mean": 58,
+        "sd": 13.5277,
+        "n": 3
+      },
+      "memory.repeat_detections_linked": {
+        "mean": 207,
+        "sd": 18.735,
+        "n": 3
+      },
+      "memory.reappearance.attempted": {
+        "mean": 29,
+        "sd": 9.5394,
+        "n": 3
+      },
+      "memory.reappearance.reopened_same_issue": {
+        "mean": 29,
+        "sd": 9.5394,
+        "n": 3
+      },
+      "memory.reappearance.extra_issue_rows": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.false_suppression_after_reruns": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.identities_merged": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.resolved_without_correction": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.reopened": {
+        "mean": 40,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.false_suppression": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.false_reopen_rerun": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.false_reopen_unrelated": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.without_fp.false_suppression": {
+        "mean": 40,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.without_fp.case_complete_despite_new_evidence": {
+        "mean": 40,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.dismissal.with_fp.case_complete_despite_new_evidence": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.multi_line.cases": {
+        "mean": 20,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.multi_line.merged": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 3
+      },
+      "memory.multi_line.fix_one_other_still_pending": {
+        "mean": 20,
+        "sd": 0.0,
+        "n": 3
+      },
+      "intel.history.corrections": {
+        "mean": 91,
+        "sd": 8.544,
+        "n": 3
+      },
+      "intel.history.decisions": {
+        "mean": 69,
+        "sd": 6.245,
+        "n": 3
+      }
+    },
+    "all": {
+      "intel.prediction.f1": {
+        "mean": 0.0622,
+        "sd": 0.0247,
+        "n": 6
+      },
+      "intel.prediction.precision": {
+        "mean": 0.0527,
+        "sd": 0.0191,
+        "n": 6
+      },
+      "intel.prediction.recall": {
+        "mean": 0.0768,
+        "sd": 0.0343,
+        "n": 6
+      },
+      "intel.prediction.random_baseline.f1": {
+        "mean": 0.0308,
+        "sd": 0.0151,
+        "n": 6
+      },
+      "intel.precision_at_5.similar": {
+        "mean": 0.0556,
+        "sd": 0.0175,
+        "n": 6
+      },
+      "intel.precision_at_5.random": {
+        "mean": 0.0558,
+        "sd": 0.0182,
+        "n": 6
+      },
+      "intel.precision_at_10.similar": {
+        "mean": 0.0582,
+        "sd": 0.0155,
+        "n": 6
+      },
+      "intel.precision_at_10.random": {
+        "mean": 0.0518,
+        "sd": 0.0101,
+        "n": 6
+      },
+      "intel.recommendation.evidence_coverage": {
+        "mean": 0.631,
+        "sd": 0.0427,
+        "n": 6
+      },
+      "intel.recommendation.insufficient_data_rate": {
+        "mean": 0.369,
+        "sd": 0.0427,
+        "n": 6
+      },
+      "intel.recommendation.agreement_with_gt_op": {
+        "mean": 1.0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "intel.prediction_items.insufficient_data_rate": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.reruns": {
+        "mean": 600,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.tasks_created_during_reruns": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.open_task_duplicates": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.duplicate_tasks_prevented": {
+        "mean": 64.5,
+        "sd": 23.1409,
+        "n": 6
+      },
+      "memory.repeat_detections_linked": {
+        "mean": 225,
+        "sd": 30.5352,
+        "n": 6
+      },
+      "memory.reappearance.attempted": {
+        "mean": 26.8333,
+        "sd": 6.5243,
+        "n": 6
+      },
+      "memory.reappearance.reopened_same_issue": {
+        "mean": 26.8333,
+        "sd": 6.5243,
+        "n": 6
+      },
+      "memory.reappearance.extra_issue_rows": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.false_suppression_after_reruns": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.identities_merged": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.resolved_without_correction": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.dismissal.with_fp.reopened": {
+        "mean": 40,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.dismissal.with_fp.false_suppression": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.dismissal.with_fp.false_reopen_rerun": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.dismissal.with_fp.false_reopen_unrelated": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.dismissal.without_fp.false_suppression": {
+        "mean": 40,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.dismissal.without_fp.case_complete_despite_new_evidence": {
+        "mean": 39.8333,
+        "sd": 0.4082,
+        "n": 6
+      },
+      "memory.dismissal.with_fp.case_complete_despite_new_evidence": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.multi_line.cases": {
+        "mean": 20,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.multi_line.merged": {
+        "mean": 0,
+        "sd": 0.0,
+        "n": 6
+      },
+      "memory.multi_line.fix_one_other_still_pending": {
+        "mean": 20,
+        "sd": 0.0,
+        "n": 6
+      },
+      "intel.history.corrections": {
+        "mean": 86.5,
+        "sd": 7.5565,
+        "n": 6
+      },
+      "intel.history.decisions": {
+        "mean": 75,
+        "sd": 10.1784,
+        "n": 6
+      }
+    }
+  },
+  "elapsed_s": 1131.5,
+  "notes": [
+    "Datasets are the existing synthetic experiment cohorts (read only; MANIFEST hashes verified before and after).",
+    "Historical outcomes come from the harness's oracle reviewer (ground-truth corrections), not humans.",
+    "Similarity weights were fixed before evaluation (no tuning); seeds 4-6 are a held-out repetition.",
+    "Synthetic errors are injected at random with respect to clinical features, so little predictive signal from similarity is expected; the random-neighbour baseline is reported alongside.",
+    "Retrieval recall@K is not reported: no ground-truth similarity set exists.",
+    "Recommendation agreement with the ground-truth correction op is near-tautological on this data: each synthetic error type has one canonical correction op in the generator, and the oracle history applied exactly those ops. It shows the recommendation cites the recorded action correctly, not clinical insight."
+  ]
+}

@@ -1,0 +1,157 @@
+{
+ "seed": 1,
+ "data_dir": "results/experiments/main/data_seed1",
+ "manifest_check": {
+  "files": 20,
+  "mismatched": []
+ },
+ "history": {
+  "corrections": 79,
+  "decisions": 69,
+  "tasks": 148,
+  "issues": 148
+ },
+ "intel": {
+  "n_queries": 200,
+  "queries_with_injected_issue": 91,
+  "k_pred": 25,
+  "issue_prediction": {
+   "similar_neighbours": {
+    "tp": 14,
+    "fp": 175,
+    "fn": 101,
+    "precision": 0.0741,
+    "recall": 0.1217,
+    "f1": 0.0921
+   },
+   "random_neighbours_baseline": {
+    "tp": 3,
+    "fp": 153,
+    "fn": 112,
+    "precision": 0.0192,
+    "recall": 0.0261,
+    "f1": 0.0221
+   },
+   "rule": "predicted iff Wilson lower bound among k neighbours > base rate (pre-specified)"
+  },
+  "prediction_item_status": {
+   "ESTIMATED": 3520
+  },
+  "insufficient_data_rate_items": 0.0,
+  "retrieval_precision_at_k": {
+   "5": {
+    "similar": 0.0484,
+    "random_baseline": 0.0418,
+    "n_queries": 91
+   },
+   "10": {
+    "similar": 0.044,
+    "random_baseline": 0.0374,
+    "n_queries": 91
+   }
+  },
+  "retrieval_precision_proxy": "a neighbour is counted relevant if it shares >= 1 injected (ground-truth) issue type with the query; there is no ground-truth similarity set",
+  "retrieval_recall_at_k": null,
+  "retrieval_recall_reason": "not computable: no ground-truth set of 'truly similar' encounters exists",
+  "recommendations": {
+   "total": 118,
+   "by_status": {
+    "RECOMMENDED": 68,
+    "INSUFFICIENT_DATA": 50
+   },
+   "evidence_coverage": 0.5763,
+   "insufficient_data_rate": 0.4237,
+   "agreement_with_ground_truth_op": {
+    "with_gt_op": 65,
+    "agree": 65,
+    "rate": 1.0
+   }
+  },
+  "prediction_vs_rules": {
+   "predicted_also_found_by_rules": 15,
+   "predicted_total": 189
+  },
+  "history_provenance": "outcomes in the history were recorded by the experiment harness's ORACLE reviewer (ground-truth corrections), not by human reviewers"
+ },
+ "issue_memory": {
+  "lifecycle_after_oracle_loop": {
+   "resolved_without_correction": 0,
+   "not_detected_marked_resolved": 0,
+   "closed_but_present": 0,
+   "status_RESOLVED": 79,
+   "status_DISMISSED": 57,
+   "status_OPEN": 12,
+   "tasks_total": 148,
+   "tasks_without_issue": 0,
+   "open_task_duplicates": 0
+  },
+  "false_suppression": {
+   "routed_open": 0,
+   "without_open_task": 0
+  },
+  "merge_check": {
+   "current_identities": 69,
+   "same_code_multi_identity_groups": 0,
+   "identities_merged": 0
+  },
+  "repeated_detection": {
+   "reruns": 600,
+   "tasks_created_during_reruns": 0,
+   "open_task_duplicates": 0,
+   "repeat_detections_linked": 207,
+   "duplicate_tasks_prevented": 36,
+   "note": "duplicate_tasks_prevented = re-detections where the existing review task was retained, i.e. tasks a router that inserts one task per detection would have created. The pre-change task_key sync also created none on identical reruns (see before_after probe)."
+  },
+  "reappearance": {
+   "attempted": 24,
+   "reopened_same_issue": 24,
+   "did_not_reappear": 0,
+   "extra_issue_rows_for_same_code": 0,
+   "skipped_not_invertible": 55
+  },
+  "false_suppression_after_reruns": {
+   "routed_open": 24,
+   "without_open_task": 0
+  },
+  "merge_check_after": {
+   "current_identities": 116,
+   "same_code_multi_identity_groups": 0,
+   "identities_merged": 0
+  },
+  "audit_chain_ok": true,
+  "dismissal_injection": {
+   "with_fingerprint": {
+    "injection_not_detected": 0,
+    "dismissed": 40,
+    "false_reopen_after_rerun": 0,
+    "false_reopen_after_unrelated_change": 0,
+    "material_changes": 40,
+    "reopened_on_material_change": 40,
+    "false_suppression": 0,
+    "case_complete_despite_new_evidence": 0
+   },
+   "without_fingerprint_pre_change_behaviour": {
+    "injection_not_detected": 0,
+    "dismissed": 40,
+    "false_reopen_after_rerun": 0,
+    "false_reopen_after_unrelated_change": 0,
+    "material_changes": 40,
+    "reopened_on_material_change": 0,
+    "false_suppression": 40,
+    "case_complete_despite_new_evidence": 40
+   }
+  },
+  "multi_line_injection": {
+   "cases": 20,
+   "two_separate_issues": 20,
+   "merged": 0,
+   "fix_one_other_still_pending": 20
+  }
+ },
+ "manifest_check_after": {
+  "files": 20,
+  "mismatched": []
+ },
+ "elapsed_s": 185.4,
+ "group": "main"
+}

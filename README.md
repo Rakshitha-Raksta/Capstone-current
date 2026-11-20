@@ -304,7 +304,7 @@ public deployment, or send it to an external LLM API.
   | 2 | Investigate | Root blockers, evidence and dependencies; click any stage block |
   | 3 | Departments | Which desk owns each stage, and its open work |
   | 4 | Policy | The 59 cited rules, coloured by this encounter's recorded outcome |
-  | 5 | History | Historical peers, with method and limitations |
+  | 5 | History | Similar historical encounters, predictions and evidence-based recommendations (advisory); DRG peer outlier screen |
   | 6 | Lab | Sequential vs parallel, or full vs targeted, on isolated database copies, replayed as Gantt lanes |
   | 7 | Correct | Preview the rerun plan, confirm with a reason, apply; see executed, reused and not-re-run stages |
   | 8 | Audit | Verify the hash chain and read the recorded research results |
@@ -317,6 +317,14 @@ public deployment, or send it to an external LLM API.
   correction and streams stage events.
 - **Targeted reruns** with input-hash reuse, and a full-rerun mode for comparison.
 - **Review queue** with one task per root issue, and recorded reviewer decisions.
+- **Persistent issue memory.** Each underlying issue (code + the bill line / diagnosis / document it is
+  about) is tracked across runs: re-detection keeps the existing review task, owner and notes (no
+  duplicates, enforced by database constraints and a per-case run lock); a resolved issue that genuinely
+  returns is reopened with history; a dismissal is kept until the evidence changes materially.
+- **Historical-case intelligence (advisory).** Weighted nearest-neighbour retrieval over processed
+  encounters, explained feature by feature, with base-rate-checked predictions and recommendations
+  only where outcomes were recorded; otherwise an explicit insufficient-data state. It never creates
+  findings or decisions. See [docs/ISSUE_MEMORY_AND_CASE_INTELLIGENCE.md](docs/ISSUE_MEMORY_AND_CASE_INTELLIGENCE.md).
 - **Policy rule references.** Every rule finding links to its source document and page; the policy
   library and the explainer show the quoted text.
 - **Audit history.** `GET /api/v1/audit-events/verify` recomputes the hash chain.

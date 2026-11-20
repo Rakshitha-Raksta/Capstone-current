@@ -5,8 +5,47 @@ import { useApi } from '../../lib/hooks';
 import { dateTime, DOMAIN_LABELS, humanize, money, stageLabel } from '../../lib/format';
 import { Badge, Button, Card, EmptyState, ErrorState, Field, PageHead, Pager, Skeleton, Tabs, useToast } from '../../components/ui';
 import { useMeta } from '../../components/AppShell';
+import { LIFECYCLE_BADGE, LIFECYCLE_LABEL, LIFECYCLE_TONE, lifecycleOf } from '../../lib/issues';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+export function LifecycleBadge({ issue }: { issue: any }) {
+  const lc = lifecycleOf(issue);
+  return <span className={`badge ${LIFECYCLE_BADGE[LIFECYCLE_TONE[lc]]}`} title={`Issue #${issue.id}: detected ${issue.detection_count} time(s)`}>
+    <span className="dot" aria-hidden="true" />{LIFECYCLE_LABEL[lc]}</span>;
+}
+
+/** Reviewer note / assignment on a pending task; stored on the task and its issue, kept across reruns. */
+function NoteForm({ t, onSaved }: { t: any; onSaved: () => void }) {
+  const toast = useToast();
+  const [note, setNote] = useState('');
+  const [assignee, setAssignee] = useState(t.assignee || '');
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState('');
+  const save = async () => {
+    if (note.trim().length < 3) { setErr('Write a note of at least 3 characters.'); return; }
+    setBusy(true); setErr('');
+    try {
+      await api.taskNote(t.id, { note: note.trim(), assignee: assignee.trim() || undefined });
+      toast('Note saved; it stays with this task on every rerun.'); setNote(''); onSaved();
+    } catch (e) { setErr((e as Error).message); } finally { setBusy(false); }
+  };
+  return (
+    <details className="small">
+      <summary>Add a note / assign</summary>
+      <div className="stack" style={{ gap: 6, marginTop: 6 }}>
+        <Field label={<>Assignee<span className="visually-hidden"> for: {t.title}</span></>} htmlFor={`rq-a-${t.id}`}>
+          <input id={`rq-a-${t.id}`} className="input" value={assignee} maxLength={64} onChange={(e) => setAssignee(e.target.value)} />
+        </Field>
+        <Field label={<>Note<span className="visually-hidden"> for: {t.title}</span></>} htmlFor={`rq-nn-${t.id}`}>
+          <textarea id={`rq-nn-${t.id}`} className="textarea" value={note} maxLength={1000} onChange={(e) => setNote(e.target.value)} />
+        </Field>
+        {err && <div role="alert" style={{ color: 'var(--blocked)' }}>{err}</div>}
+        <Button size="sm" busy={busy} onClick={save}>Save note</Button>
+      </div>
+    </details>
+  );
+}
+
 export default function ReviewQueue() {
   const toast = useToast();
   const { refreshCounts } = useMeta();
@@ -66,7 +105,10 @@ export default function ReviewQueue() {
                     <Fragment key={t.id}>
                       <tr>
                         <td><Badge value={t.severity} /></td>
-                        <td><strong className="small">{t.title}</strong><div className="small muted" style={{ maxWidth: 520 }}>{t.reason}</div></td>
+                        <td><strong className="small">{t.title}</strong>
+                          {t.issue && <> <LifecycleBadge issue={t.issue} /></>}
+                          <div className="small muted" style={{ maxWidth: 520 }}>{t.reason}</div>
+                          {t.issue?.dedup_note && <div className="small dedup-line">{t.issue.dedup_note}</div>}</td>
                         <td className="small"><Link to={`/claims/${t.case_id}`}>{t.case_ref}</Link><div><Badge value={t.case_status} /></div></td>
                         <td className="small">{stageLabel(t.owner_stage)}<div className="faint">{DOMAIN_LABELS[t.input_domain] || t.input_domain}</div></td>
                         <td><Badge value={t.status} /></td>
@@ -85,6 +127,15 @@ export default function ReviewQueue() {
                               </div>
                               <div className="small">Re-runs on resolution: {(t.required_reruns || []).map(stageLabel).join(' → ')}</div>
                               {t.resolution_note && <div className="small faint">“{t.resolution_note}” — {t.resolved_by}, {dateTime(t.resolved_at)}</div>}
+                              {t.issue && (
+                                <div className="evidence small">
+                                  <div><strong>Issue memory</strong> (issue #{t.issue_id}, {t.department})</div>
+                                  <div>First detected {dateTime(t.issue.first_detected_at)} · last detected {dateTime(t.issue.last_detected_at)} · {t.issue.detection_count} detection(s)
+                                    {t.issue.reopen_count ? ` · reopened ${t.issue.reopen_count}×` : ''}{t.issue.review_attempts ? ` · ${t.issue.review_attempts} review attempt(s)` : ''}</div>
+                                  {!t.issue.is_current_task && <div className="faint">An earlier occurrence; the issue now has a newer task.</div>}
+                                  {(t.issue.reviewer_notes || []).slice(-3).map((n: any, k: number) => <div key={k} className="faint">“{n.note}” — {n.actor}{n.assignee ? ` (assigned ${n.assignee})` : ''}</div>)}
+                                </div>)}
+                              {t.status === 'OPEN' && <NoteForm t={t} onSaved={reload} />}
                             </div>
                             {t.status === 'OPEN' && (
                               <div className="stack" style={{ gap: 8 }}>

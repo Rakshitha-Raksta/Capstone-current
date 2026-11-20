@@ -66,6 +66,9 @@ def build_snapshot(db, case: ClaimCase) -> dict:
             insured_age_at_entry=mp.insured_age_at_entry, deductible_opted=bool(mp.deductible_opted),
             deductible_amount=mp.deductible_amount, provenance=mp.provenance, rules=rules,
         )
-    snap["reviews"] = [dict(task_key=r.task_key, code=r.code, decision=r.decision)
+    # evidence_fingerprint is included only when recorded, so decisions made before issue memory keep
+    # byte-identical snapshots (and therefore identical stage input hashes)
+    snap["reviews"] = [dict(task_key=r.task_key, code=r.code, decision=r.decision,
+                            **({"evidence_fingerprint": r.evidence_fingerprint} if r.evidence_fingerprint else {}))
                        for r in db.query(ReviewDecision).filter_by(case_id=case.id).order_by(ReviewDecision.id)]
     return snap

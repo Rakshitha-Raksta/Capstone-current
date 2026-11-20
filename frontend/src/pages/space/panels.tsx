@@ -5,6 +5,7 @@ import { DOMAIN_LABELS, dateTime, humanize, money, n, stageLabel } from '../../l
 import { fmtMs, STATE_LABEL } from '../../lib/controlRoom';
 import { findingDiff, outputDiff } from '../one/model';
 import { DEPARTMENTS, departmentOf, type ViewId } from '../../world/stations';
+import { EVENT_TEXT, issueForFinding, issueSentence, LIFECYCLE_LABEL, LIFECYCLE_TONE, lifecycleOf, type Lifecycle } from '../../lib/issues';
 import { KV, Sev, show } from './parts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -17,6 +18,32 @@ const dom = (d: string) => DOMAIN_LABELS[d] || d;
 function Next({ c, to, children }: { c: C; to: ViewId; children: React.ReactNode }) {
   return <button type="button" className="next" onClick={() => c.go(to)}>{children} <span aria-hidden="true">→</span></button>;
 }
+/* ---------- persistent issue memory (shared) ---------- */
+export function LifecycleChip({ lc, title }: { lc: Lifecycle; title?: string }) {
+  return <span className={`chip sm tone-${LIFECYCLE_TONE[lc]}`} title={title}>{LIFECYCLE_LABEL[lc]}</span>;
+}
+function IssueMemory({ issue, open = false }: { issue: any; open?: boolean }) {
+  if (!issue) return null;
+  const lc = lifecycleOf(issue);
+  return (
+    <section className="issue-mem" aria-label="Issue history">
+      <div className="im-head"><LifecycleChip lc={lc} /><span className="small">{issueSentence(issue)}</span></div>
+      <KV rows={[['Department', issue.department], ['First detected', dateTime(issue.first_detected_at)],
+        ['Last detected', `${dateTime(issue.last_detected_at)} · ${issue.detection_count} detection(s)`],
+        ['Review task', issue.task_id ? `#${issue.task_id} (${humanize(issue.task_status || '—')})${issue.assignee ? ` · assigned to ${issue.assignee}` : ''}` : '—'],
+        ['Review attempts', issue.review_attempts || undefined], ['Reopened', issue.reopen_count ? `${issue.reopen_count} time(s)` : undefined]]} />
+      {issue.reviewer_notes?.length > 0 && <ul className="checks">{issue.reviewer_notes.slice(-3).map((n: any, k: number) => <li key={k}>“{n.note}” — {n.actor}{n.kind && n.kind !== 'NOTE' ? ` (${humanize(n.kind)})` : ''}</li>)}</ul>}
+      {issue.history?.length > 0 && (
+        <details open={open}><summary>Lifecycle history ({issue.history.length})</summary>
+          <ol className="im-hist">{issue.history.map((e: any) => (
+            <li key={e.id}><span className="mono">{dateTime(e.ts)}</span> {EVENT_TEXT[e.event] || humanize(e.event)}
+              {e.from_status && e.to_status && e.from_status !== e.to_status ? <span className="faint"> · {humanize(e.from_status)} → {humanize(e.to_status)}</span> : null}
+              {e.details?.reason ? <span className="faint"> · {e.details.reason}</span> : null}{e.run_id ? <span className="faint"> · run #{e.run_id}</span> : null}</li>))}</ol>
+        </details>)}
+    </section>
+  );
+}
+
 function NoCase({ c }: { c: C }) {
   if (c.detail) return null;
   return <p className="muted">Load an encounter in the top bar. {c.attention?.items?.length ? 'The highest-priority blocked encounter loads automatically.' : 'No blocked or review encounters are loaded; run scripts/setup_demo.py.'}</p>;
@@ -46,6 +73,7 @@ export function OverviewPanel({ c }: { c: C }) {
           <div className="eyebrow">Highest-priority blocker · {stageLabel(r.stage)}</div>
           <h2>{r.title}</h2>
           <KV rows={[['Expected', show(r.expected)], ['Recorded', show(r.actual)], ['Owner', r.owner_team], ['Evidence', r.rule_id ? `${r.rule_id} · ${r.source_document} p.${r.source_page}` : 'case data (see Investigate)']]} />
+          {(() => { const iss = issueForFinding(c.detail.issues, r); return iss ? <p className="small"><LifecycleChip lc={lifecycleOf(iss)} /> {issueSentence(iss)}</p> : null; })()}
           <p className="next-action"><strong>Next action:</strong> {r.next_action}</p>
           <Next c={c} to="investigate">Investigate this blocker</Next>
         </section>
@@ -115,18 +143,26 @@ export function InvestigatePanel({ c }: { c: C }) {
   const { roots, root, detail } = c;
   if (!detail) return <NoCase c={c} />;
   const cons = root ? (detail.root_blocker?.consequences || []).filter((x: any) => x.caused_by === root.code) : [];
+  const rootIssue = root ? issueForFinding(detail.issues, root) : null;
+  // resolved / dismissed / no-longer-detected issues are shown as history, never as active blockers
+  const closed = (detail.issues || []).filter((i: any) => !i.is_present || ['RESOLVED', 'NO_LONGER_DETECTED'].includes(i.status) || (i.status === 'DISMISSED'));
   return (
     <>
       {c.stage && <StageInspector c={c} id={c.stage} />}
       <h3 className="h3">Root blockers ({roots.length})</h3>
       {!roots.length && <p className="ok-line">No root blockers on this encounter.</p>}
       <ul className="roots" role="listbox" aria-label="Root blockers">
-        {roots.map((r: any, i: number) => (
-          <li key={`${r.code}-${i}`} role="option" aria-selected={i === c.rootIdx}>
-            <button type="button" className={i === c.rootIdx ? 'on' : ''} onClick={() => { c.setRootIdx(i); c.setStage(null); }}>
-              <Sev s={r.severity} /> <span className="r-title">{r.title}</span><span className="r-stage">{stageLabel(r.stage)}</span>
-            </button>
-          </li>))}
+        {roots.map((r: any, i: number) => {
+          const iss = issueForFinding(detail.issues, r);
+          return (
+            <li key={`${r.code}-${i}`} role="option" aria-selected={i === c.rootIdx}>
+              <button type="button" className={i === c.rootIdx ? 'on' : ''} onClick={() => { c.setRootIdx(i); c.setStage(null); }}>
+                <Sev s={r.severity} /> <span className="r-title">{r.title}</span>
+                {iss && <span className={`lc-dot tone-${LIFECYCLE_TONE[lifecycleOf(iss)]}`} title={LIFECYCLE_LABEL[lifecycleOf(iss)]}>{LIFECYCLE_LABEL[lifecycleOf(iss)]}</span>}
+                <span className="r-stage">{stageLabel(r.stage)}</span>
+              </button>
+            </li>);
+        })}
       </ul>
       {root && !c.stage && (
         <section className="card blocker" aria-label="Selected blocker">
@@ -144,11 +180,27 @@ export function InvestigatePanel({ c }: { c: C }) {
           <p className="small">{cons.length ? `${cons.length} downstream finding(s) are consequences of this root and are not routed separately: ${cons.map((x: any) => x.title).join('; ')}.` : 'No downstream findings were attributed to it.'}</p>
           <p className="small">A correction to <b>{dom(root.owner_domain)}</b> re-evaluates: {(root.rerun_stages || []).map(stageLabel).join(' → ')}.</p>
           <p className="next-action"><strong>Next action:</strong> {root.next_action}</p>
+          {rootIssue && <><h3 className="h3">Issue memory</h3><IssueMemory issue={rootIssue} /></>}
+          {(() => {
+            const rec = (c.sim?.recommendations || []).find((x: any) => x.code === root.code);
+            if (!rec) return null;
+            return (
+              <p className="small hist-hint"><LifecycleChip lc="PREDICTION_ONLY" title="Historical evidence, advisory only" />{' '}
+                {rec.status === 'RECOMMENDED'
+                  ? <>Similar past cases: <b>{humanize(rec.action.op)}</b> resolved this in {rec.support.resolved_with_action} of {rec.support.reviewed} reviewed case(s).</>
+                  : <>Similar past cases: not enough recorded outcomes to recommend an action ({rec.n_reviewed} reviewed of {rec.n_similar_with_issue}).</>}
+                {' '}<button type="button" className="link" onClick={() => c.go('history')}>See the evidence</button></p>);
+          })()}
           <div className="row-actions">
             <Next c={c} to="correct">{root.correctable ? 'Preview the correction' : 'Record a review decision'}</Next>
             {root.rule_id && <button type="button" className="link" onClick={() => { c.setRule(root.rule_id); c.go('policy'); }}>Open rule {root.rule_id}</button>}
           </div>
         </section>)}
+      {closed.length > 0 && (
+        <details className="closed-issues"><summary>Earlier issues on this encounter, not active blockers ({closed.length})</summary>
+          <ul className="checks">{closed.map((i: any) => (
+            <li key={i.id}><LifecycleChip lc={lifecycleOf(i)} /> <b>{i.title}</b>{i.identity?.line_no ? ` · line ${i.identity.line_no}` : ''} — {issueSentence(i)}</li>))}</ul>
+        </details>)}
       <p className="fine">Tip: click any block in the 3D deck (or its label) to inspect that stage; upstream and downstream stages stay lit.</p>
     </>
   );
@@ -178,6 +230,8 @@ export function DepartmentsPanel({ c }: { c: C }) {
                 <span className="dept-q">{c.detail ? `${mine.length} open task(s) on this encounter · ` : ''}{q} open across all encounters</span>
               </button>
               {c.department === d.id && <p className="fine">{d.note}{mine.length ? ` Open here: ${mine.map((t: any) => t.title).join('; ')}.` : ''}</p>}
+              {c.department === d.id && mine.filter((t: any) => t.issue?.dedup_note).map((t: any) => (
+                <p key={t.id} className="small dedup-note"><LifecycleChip lc={lifecycleOf(t.issue)} /> {t.title}: {t.issue.dedup_note}</p>))}
             </li>);
         })}
       </ul>
@@ -260,8 +314,114 @@ function RuleCard({ r, c }: { r: any; c: C }) {
 
 /* ============================================================ 5. history */
 export function HistoryPanel({ c }: { c: C }) {
-  const h = c.hist;
+  const [tab, setTab] = useState<'similar' | 'peers'>('similar');
   if (!c.detail) return <NoCase c={c} />;
+  return (
+    <>
+      <div className="seg-tabs" role="tablist" aria-label="Historical views">
+        <button type="button" role="tab" aria-selected={tab === 'similar'} className={tab === 'similar' ? 'on' : ''} onClick={() => setTab('similar')}>Similar encounters &amp; predictions</button>
+        <button type="button" role="tab" aria-selected={tab === 'peers'} className={tab === 'peers' ? 'on' : ''} onClick={() => setTab('peers')}>DRG peer outlier screen</button>
+      </div>
+      {tab === 'similar' ? <SimilarCases c={c} /> : <PeerScreen c={c} />}
+    </>
+  );
+}
+
+const OUTCOME_TEXT: Record<string, string> = {
+  RESOLVED: 'resolved by correction', DISMISSED: 'dismissed', CONFIRMED_BLOCKED: 'confirmed blocking',
+  UNREVIEWED: 'never reviewed', UNKNOWN: 'closed, outcome unknown',
+};
+const SIGNAL_TEXT: Record<string, string> = {
+  ELEVATED_VS_BASE_RATE: 'Above base rate', NOT_DISTINGUISHABLE_FROM_BASE_RATE: 'Not distinguishable from base rate', LOWER_THAN_BASE_RATE: 'Below base rate',
+};
+const pct = (v: number | null | undefined) => (v == null ? '—' : `${(v * 100).toFixed(0)}%`);
+
+function SimilarCases({ c }: { c: C }) {
+  const s = c.sim;
+  const [sel, setSel] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  if (!s) return <p className="muted" role="status">Retrieving similar historical encounters…</p>;
+  if (s.status === 'ERROR') return <p className="p-error" role="alert">Historical intelligence unavailable: {s.reason}</p>;
+  const db = s.data_basis || {};
+  const pred = s.predictions;
+  const items: any[] = pred?.items || [];
+  const shown = showAll ? items : items.filter((i) => i.signal === 'ELEVATED_VS_BASE_RATE' || i.deterministic_status === 'CONFIRMED_BY_RULE').slice(0, 12);
+  const picked = sel !== null ? s.similar[sel] : null;
+  return (
+    <>
+      <p className="callout" role="note"><b>Prediction and historical evidence only.</b> {s.notice}</p>
+      <KV rows={[['This encounter', `${s.current.case_ref} · DRG ${s.current.drg_code || '—'} · ${s.current.los ?? '—'} day(s) · ${money(s.current.bill_total)}`],
+        ['Rule findings now', s.current.deterministic_issues.length ? s.current.deterministic_issues.map(humanize).join(', ') : 'none'],
+        ['Historical basis', `${db.historical_encounters} processed encounter(s) · ${db.recorded_corrections} correction(s) and ${db.recorded_decisions} decision(s) recorded · ${pct(db.reviewed_share)} of past issue occurrences have a review outcome`]]} />
+      {s.status === 'INSUFFICIENT_DATA' && <p className="callout">Insufficient data: {s.reason}</p>}
+
+      <h3 className="h3">Most similar processed encounters</h3>
+      <div className="tbl-wrap" tabIndex={0} role="region" aria-label="Similar encounters">
+        <table className="tbl small-tbl"><thead><tr><th>Encounter</th><th>Similarity</th><th>Matched on</th><th>Issues found then</th></tr></thead>
+          <tbody>{s.similar.map((x: any, i: number) => (
+            <tr key={x.case_id} className={sel === i ? 'on' : ''} onClick={() => setSel(sel === i ? null : i)}>
+              <td><button type="button" className="link mono" onClick={() => setSel(sel === i ? null : i)}>{x.hadm_id}</button></td>
+              <td><span className="simbar" style={{ ['--w' as any]: `${Math.round(x.similarity * 100)}%` }}>{x.similarity.toFixed(2)}</span></td>
+              <td className="small">{x.matched.slice(0, 2).join('; ') || '—'}</td>
+              <td className="small">{x.issue_outcomes.length ? x.issue_outcomes.slice(0, 3).map((o: any) => `${humanize(o.code)} (${OUTCOME_TEXT[o.outcome] || o.outcome})`).join('; ')
+                : x.issues_observed.length ? x.issues_observed.slice(0, 3).map(humanize).join(', ') : 'none'}</td>
+            </tr>))}</tbody></table>
+      </div>
+      {picked && (
+        <section className="card" aria-label="Why this encounter is similar">
+          <div className="eyebrow">{picked.case_ref} · similarity {picked.similarity.toFixed(3)} · feature coverage {pct(picked.coverage)}</div>
+          <table className="tbl small-tbl"><thead><tr><th>Feature</th><th>Weight</th><th>Match</th><th>Explanation</th></tr></thead>
+            <tbody>{picked.features.map((f: any) => (
+              <tr key={f.feature}><td>{f.label}</td><td>{f.weight.toFixed(2)}</td><td>{f.used ? f.similarity.toFixed(2) : 'not compared'}</td><td className="small">{f.why}</td></tr>))}</tbody></table>
+          <p className="fine">Score = Σ weight × match ÷ Σ weights of compared features. Status then: {humanize(picked.status)}.</p>
+        </section>)}
+
+      <h3 className="h3">Issue patterns among those encounters</h3>
+      <p className="small">{(s.issue_patterns || []).slice(0, 6).map((p: any) => `${p.title} ${p.n_similar}/${p.of}`).join(' · ') || 'No actionable issues were found on the similar encounters.'}</p>
+
+      <h3 className="h3">Predicted issue categories</h3>
+      {!pred || pred.status !== 'OK' ? <p className="callout">Insufficient data for predictions{pred?.reason ? `: ${pred.reason}` : '.'}</p> : (
+        <>
+          <p className="fine">{pred.rule}</p>
+          {shown.length === 0 && <p className="small">No issue category is above its base rate among the {pred.k} most similar encounters. Nothing is predicted.</p>}
+          <ul className="preds">{shown.map((i: any) => (
+            <li key={i.code} className="card pred">
+              <div className="im-head"><LifecycleChip lc="PREDICTION_ONLY" title={i.label} />
+                {i.deterministic_status === 'CONFIRMED_BY_RULE' && <span className="chip sm tone-complete">Also found by a rule</span>}
+                <b>{i.title}</b></div>
+              {i.status === 'ESTIMATED' ? (
+                <KV rows={[['Comparable encounters', i.n_comparable], ['Issue observed in', `${i.n_observed} (${pct(i.likelihood)}; 95% interval ${pct(i.interval[0])}–${pct(i.interval[1])})`],
+                  ['Base rate', `${pct(i.base_rate)} of ${i.base_rate_n}`], ['Signal', SIGNAL_TEXT[i.signal] || i.signal],
+                  ['Past outcomes', `${i.historical_outcomes.resolved} resolved · ${i.historical_outcomes.dismissed} dismissed · ${i.historical_outcomes.confirmed_blocked} confirmed · ${i.historical_outcomes.unreviewed} unreviewed · ${i.historical_outcomes.unknown} unknown`],
+                  ['Evidence', i.evidence.slice(0, 4).map((e: any) => `${e.case_ref} (${e.similarity.toFixed(2)})`).join(', ') || '—']]} />)
+                : <p className="small">Insufficient data: {i.reason}</p>}
+            </li>))}</ul>
+          {items.length > shown.length && <button type="button" className="link" onClick={() => setShowAll(true)}>Show all {items.length} categories observed among neighbours</button>}
+        </>)}
+
+      <h3 className="h3">Recommended actions for this encounter's open issues</h3>
+      {(s.recommendations || []).length === 0 ? <p className="small">No open issues on this encounter.</p> : (
+        <ul className="preds">{s.recommendations.map((r: any) => (
+          <li key={r.code} className="card pred">
+            <div className="im-head"><b>{r.title}</b><span className={`chip sm tone-${r.status === 'RECOMMENDED' ? 'complete' : 'info'}`}>{r.status === 'RECOMMENDED' ? 'Evidence-based recommendation' : 'Insufficient data'}</span></div>
+            {r.status === 'RECOMMENDED'
+              ? <p className="small"><b>{humanize(r.action.op)}</b> on {dom(r.action.domain)}. {r.explanation}</p>
+              : <p className="small">{r.reason}</p>}
+            <p className="small"><span className="faint">{r.rule_guidance_label}:</span> {r.rule_guidance}</p>
+            <p className="fine">Similar encounters with this issue: {r.n_similar_with_issue} · {r.outcomes.resolved} resolved · {r.outcomes.dismissed} dismissed · {r.outcomes.confirmed_blocked} confirmed blocking · {r.outcomes.unreviewed} never reviewed · {r.outcomes.unknown} unknown.
+              {r.evidence.length ? ` Cases: ${r.evidence.slice(0, 5).map((e: any) => `${e.case_ref} (${e.similarity.toFixed(2)})`).join(', ')}.` : ''}</p>
+          </li>))}</ul>)}
+
+      <details open><summary>Method and limitations</summary>
+        <p className="small">{s.method.name}. {s.method.profile_basis}.</p>
+        <ul className="checks">{s.limitations.map((x: string) => <li key={x}>{x}</li>)}</ul>
+      </details>
+    </>
+  );
+}
+
+function PeerScreen({ c }: { c: C }) {
+  const h = c.hist;
   if (!h) return <p className="muted" role="status">Loading historical peers…</p>;
   const thr = h.method.z_threshold;
   const p = c.peer !== null ? h.peers[c.peer] : null;
@@ -492,7 +652,8 @@ function VerifyRun({ c }: { c: C }) {
 /* ============================================================ 8. audit & research */
 export function AuditPanel({ c }: { c: C }) {
   const [res, setRes] = useState<any>(null);
-  useEffect(() => { api.intelResearch().then(setRes).catch(() => setRes(null)); }, []);
+  const [ext, setExt] = useState<any>(null);
+  useEffect(() => { api.intelResearch().then(setRes).catch(() => setRes(null)); api.extensionResults().then(setExt).catch(() => setExt(null)); }, []);
   const ev: any[] = c.auditEv || [];
   const sel = ev.find((e) => e.id === c.auditSel);
   const M = (arm: any, k: string, pct = false) => (arm?.[k] ? (pct ? `${(arm[k].mean * 100).toFixed(1)}%` : n(arm[k].mean, 1)) : '—');
@@ -520,6 +681,21 @@ export function AuditPanel({ c }: { c: C }) {
               <td>{M(B, 'loop_unnecessary_executions')} → {M(Cc, 'loop_unnecessary_executions')}</td><td>{M(r.arms.C_minus_root_routing, 'tasks_created_total')} → {M(Cc, 'tasks_created_total')}</td>
               <td>{M(Cc, 'issue_coverage_by_tasks.recall', true)}</td><td>{r.verification ? `${r.verification.mismatches} mismatches` : 'not verified'}</td></tr>;
           })}</tbody></table></div>)}
+      {ext?.available && (() => {
+        const a = ext.aggregate?.all || {};
+        const m = (k: string, p = false) => (a[k]?.mean == null ? '—' : p ? `${(a[k].mean * 100).toFixed(1)}%` : n(a[k].mean, a[k].mean % 1 ? 3 : 0));
+        return (
+          <section className="card" aria-label="Extension evaluation">
+            <div className="eyebrow">Historical intelligence &amp; issue memory · {ext.path}</div>
+            <KV rows={[['Issue prediction F1 · random baseline', `${m('intel.prediction.f1')} · ${m('intel.prediction.random_baseline.f1')}`],
+              ['Precision@5 (proxy) · random', `${m('intel.precision_at_5.similar', true)} · ${m('intel.precision_at_5.random', true)}`],
+              ['Recommendation coverage', m('intel.recommendation.evidence_coverage', true)],
+              ['Duplicate open tasks after reruns', m('memory.open_task_duplicates')],
+              ['Reappearances reopened as the same issue', m('memory.reappearance.reopened_same_issue')],
+              ['False suppression: before → after', `${m('memory.dismissal.without_fp.false_suppression')} → ${m('memory.dismissal.with_fp.false_suppression')}`]]} />
+            <p className="fine">Mean per seed over {(ext.config?.runs || []).length} synthetic cohorts. History outcomes come from the experiment's oracle reviewer, not people.</p>
+          </section>);
+      })()}
       {res && <p className="fine">B = {res.arms_legend.B_sequential_full}. C = {res.arms_legend.C_parallel_targeted}. All-findings = {res.arms_legend.C_minus_root_routing}. Loop = the correction loop after the first pass; unnecessary = re-executions whose output did not change. {res.notes.join(' ')} Full analysis: docs/research/EXPERIMENT_RESULTS.md.</p>}
     </>
   );
